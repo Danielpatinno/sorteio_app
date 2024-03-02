@@ -46,7 +46,6 @@ export function Compradores() {
     try {
       await deleteClient.mutateAsync({clientId: cliId})
 
-      window.location.reload()
     } catch (error) {
       console.log(error)
     }

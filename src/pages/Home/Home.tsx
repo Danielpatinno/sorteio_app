@@ -4,6 +4,9 @@ import { Alert } from "../../components/Alert";
 import { ModalSelect } from "../../components/ModalSelect";
 import { ActionContainer, ButtonsContainer, CasaContainer, Container, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
 
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
+
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
 import { useClientsQuery } from "../../hooks/useClientsQuery";
@@ -149,16 +152,19 @@ export function Home() {
 
        <NumbersContainer>
         {Array.from({ length: 100 }, (_, i) => i + 1).map((n) => (
-          <CasaContainer key={n} >
-            <NumberContainer 
-              key={n} 
-              ispurchased={
-               numbers.includes(n)
-              }
-              isselected={selectedNumber.includes(n)}
-              onClick={() => select(n)}>
-                <p>{n}</p>
-            </NumberContainer>
+          <CasaContainer key={n}>
+            <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
+              <NumberContainer 
+                key={n} 
+                ispurchased={
+                  numbers.includes(n)
+                }
+                isselected={selectedNumber.includes(n)}
+                onClick={() => select(n)}>
+                  <p>{n}</p>
+              </NumberContainer>              
+            </StyleSheetManager>
+
             {seeName && data?.clients.map((cliente) => {
               if (cliente.numbers.includes(n)){
                 return <p className="nameC">{cliente.name}</p>
@@ -190,7 +196,7 @@ export function Home() {
         <ObservationContainer>
           <h3>Observação</h3>
           <p>
-            <div className="quadrado indisponivel">0</div>
+            <span className="quadrado indisponivel">0</span>
             Números indisponiveis
           </p>
           <p>Números disponiveis: {100 - numbers.length}</p>

@@ -78,16 +78,18 @@ export function Compradores() {
           )}
                 
           <ClientContainer>
-            <table>
-              <thead>
+          <table>
+            <thead>
+              <tr>
                 <th>Nome</th>
-                <th>Telefóne</th>
+                <th>Telefone</th>
                 <th>Números</th>
                 <th className="action"></th>
-              </thead>
-           {data?.clients.map((cliente) => (      
-              <tbody>
-                <tr>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.clients.map((cliente) => (      
+                <tr key={cliente._id}>
                   <td className="tdName">{cliente.name}</td>
                   <td className="tdPhone">{cliente.phone}</td>
                   <td className="tdNumbers">{cliente.numbers.join(', ')}</td>
@@ -102,11 +104,10 @@ export function Compradores() {
                     />
                   </td>  
                 </tr>    
-              </tbody>
-            ))}
-            </table>
+              ))}
+            </tbody>
+          </table>
           </ClientContainer>
       </Container>
-    
   )
 }

@@ -7,6 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from "../Input/Input";
 
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
+
 export interface ModalSelectProps {
   closeModal: () => void
   buyNumbers: number[]
@@ -66,41 +69,41 @@ export function ModalSelect({ closeModal, buyNumbers}: ModalSelectProps) {
 
 
   return (
+    <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
     <Container>
       <h3>Números selecionados</h3>
       <NumberContainer>
       {buyNumbers.map((n) => (
-          <p>{n}</p> 
+          <p key={n}> {n}</p> 
         ))
       }
       </NumberContainer>
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>Preencha os dados abaixo</p>
-        <InputContainer>
-          <Input 
-            id='name'
-            mask=""
-            placeholder="Digite o nome do cliente"
-            type='text'
-            error={errors.name?.message}
-            label="Nome"
-            {...register('name')}
-          />        
-        </InputContainer>
+          <InputContainer>
+              <Input 
+                id='name'
+                mask=""
+                placeholder="Digite o nome do cliente"
+                type='text'
+                error={errors.name?.message}
+                label="Nome"
+                {...register('name')}
+              />
+          </InputContainer>
 
-        <InputContainer>
-          <Input 
-            id='phone'
-            mask="(99) 99999-9999"
-            placeholder="Digite o telefóne do cliente"
-            type='text'
-            error={errors.phone?.message}
-            label="Telefone"
-            {...register('phone')}
-          />        
-        </InputContainer>
-
-        <button className="btnConfirm">Comprar</button>
+          <InputContainer>
+            <Input 
+              id='phone'
+              mask="(99) 99999-9999"
+              placeholder="Digite o telefóne do cliente"
+              type='text'
+              error={errors.phone?.message}
+              label="Telefone"
+              {...register('phone')}
+            /> 
+          </InputContainer>
+          <button className="btnConfirm">Comprar</button>
         </form>
       <button 
         onClick={closeModal}
@@ -109,5 +112,6 @@ export function ModalSelect({ closeModal, buyNumbers}: ModalSelectProps) {
       </button>
 
     </Container>
+    </StyleSheetManager>
   )
 }

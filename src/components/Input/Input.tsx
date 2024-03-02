@@ -12,20 +12,20 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export default forwardRef<HTMLInputElement, InputProps>(
   function Input({id, error,placeholder,mask, label,type, ...props}, ref:ForwardedRef<HTMLInputElement>) {
     return (
-            <Container error={Boolean(error)}>
-              <label htmlFor={id}>{label}</label>
+      <Container error={Boolean(error)}>
+        <label htmlFor={id}>{label}</label>
 
-              <InputMask 
-                {...props}
-                placeholder={placeholder} 
-                type={type} 
-                id={id} 
-                inputRef={ref} 
-                mask={mask}
-                maskChar="_" 
-              />
-              {error && <p>{error}</p>}
-            </Container>
+        <InputMask 
+          {...props}
+          placeholder={placeholder} 
+          type={type} 
+          id={id} 
+          inputRef={ref} 
+          mask={mask}
+          maskChar="_" 
+        />
+        {error && <p>{error}</p>}
+      </Container>
         )
     }
 )

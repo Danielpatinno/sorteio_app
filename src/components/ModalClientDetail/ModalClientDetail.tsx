@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { ButtonsContainer, Container, HeadContainer, LabelContainer, NumberContainer } from "./ModalClientDetail.styles";
-
-import { useAddClient } from "../../hooks/useAddClient";
-
-import { z } from "zod";
-import { zodResolver } from '@hookform/resolvers/zod'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import Input from "../Input/Input";
 import { useClientDetails } from "../../hooks/useClientDetails";
 import { useEditClient } from "../../hooks/useEditClient";
+
+import {
+  ButtonsContainer,
+  Container,
+  HeadContainer,
+  NumberContainer
+} from "./ModalClientDetail.styles";
 
 import { MdCancel } from "react-icons/md"
 
@@ -32,7 +31,7 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
 
   const handleEdit = async () => {
     try {
-      
+            
       const data = {
         clientId:clientId,
         numbers: numerosComprados
@@ -51,21 +50,14 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
     setNumerosComprados(novosNumeros)
   }
 
-  const handleDeleteEvery = () => {
-    setNumerosComprados([])
-    closeModal()
-  }
-
   return (
     <Container>
       <HeadContainer>
         <h3>Alterar Compra</h3>
       </HeadContainer>
       <p>Comprador: {clientDetail.data?.name}</p>
-{/*       
-      
-      <p>Telefóne: {clientDetail.data?.phone}</p> */}
-      {editar ? (
+
+      {editar && numerosComprados.length > 1 ? (
         <button onClick={() => setEditar(false)}>Cancelar alteração</button>
       ):(
         <button onClick={() => setEditar(true)}>Alterar pedido</button>
@@ -76,7 +68,7 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
           <div key={i}>
             <p className="numberP">{numero}</p>
 
-            {editar && <MdCancel 
+            {editar && numerosComprados.length > 1 && <MdCancel 
               onClick={() => handleDeleteAlone(i)}
             />}
           </div>
@@ -89,13 +81,11 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
           >Confirmar
         </button>
 
-
         <button 
           onClick={closeModal}
           >Cancelar
         </button>        
       </ButtonsContainer>
-
     </Container>
   )
 }

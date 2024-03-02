@@ -13,7 +13,6 @@ export const Container = styled.div`
 `
 
 export const ContainerModal = styled.div`
-  /* border: 2px solid red; */
   width: 450px;
   height: 200px;
   margin: auto;
@@ -23,7 +22,6 @@ export const ContainerModal = styled.div`
   color: black;
 
   h2 {
-    /* background-color: red; */
     font-weight: normal;
     color: black;
     text-align: left;
@@ -41,7 +39,6 @@ export const ContainerModal = styled.div`
 
 export const ButtonsContainer = styled.div`
   margin-left: 280px;
-  /* margin-right: 0px; */
 
   button {
     cursor: pointer;

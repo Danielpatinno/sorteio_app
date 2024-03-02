@@ -8,8 +8,7 @@ interface ModalDeleteClientProps {
 
 export function ModalDeleteClient({ 
   onCloseDelete,
-  onDelete,
-  name
+  onDelete
 }: ModalDeleteClientProps) {
   return (
     <Container>

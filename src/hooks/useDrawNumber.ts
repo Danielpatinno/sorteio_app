@@ -11,7 +11,6 @@ export function useDrawNumber() {
         const indiceSorteado: number = Math.floor(Math.random() * numeros.length);
         const numeroSorteado: number = numeros[indiceSorteado];
         setNumeroSorteado(numeroSorteado);
-        return numeroSorteado; // Retorna o número sorteado imediatamente
     };
 
     return { numeroSorteado, sortearNumero };

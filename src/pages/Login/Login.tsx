@@ -37,6 +37,7 @@ export function Login() {
 
   const onSubmit: SubmitHandler<SignInForm> = async(data) => {
     try {
+      clearError()
       await signIn(data)
 
       navigate(from)
@@ -71,7 +72,7 @@ export function Login() {
             {...register('email')}
           />        
         </InputContainer>
-
+        
         <InputContainer>
           <Input 
             label="Senha"
@@ -83,9 +84,6 @@ export function Login() {
             {...register('password')}
           />        
         </InputContainer>
-
-
-
         <button>Login</button>        
       </form>
     </FormContainer>

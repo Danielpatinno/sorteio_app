@@ -25,7 +25,6 @@ export default forwardRef<HTMLInputElement, InputProps>(
                 maskChar="_" 
               />
               {error && <p>{error}</p>}
-              {/* <p>E-mail é obrigatorio</p> */}
             </Container>
         )
     }

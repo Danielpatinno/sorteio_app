@@ -31,7 +31,6 @@ export const ActionContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  /* border: 2px solid white; */
   align-items: center;
 
   .btnLogin {
@@ -48,9 +47,7 @@ export const ActionContainer = styled.div`
       color: white;
 
     }
-  }
-
-  
+  } 
 
   div {
 
@@ -63,13 +60,11 @@ export const NumbersContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 2px;
   height: 500px;
-  /* border: 2px solid red; */
   overflow-y: scroll;
   scrollbar-width: thin;
   width: 100%;
 
   @media (max-width: 800px) {
-    /* width: 100%; */
     margin: auto;
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   }
@@ -132,10 +127,8 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   width: 400px;
-  /* width: 300px; */
   margin: auto;
   
-  /* border: 2px solid red; */
  
   a {
     text-decoration: none;
@@ -152,13 +145,10 @@ export const ButtonsContainer = styled.div`
     color: white;
     align-items: center;
     justify-content: center;
-    /* font-weight: lighter; */
     height: 40px;
     width: 150px;
     border-radius: 50px;
     background: #243441;
-    /* box-shadow:  1px 1px 1px #101010,
-             -5px -5px 5px #383838; */
 
     &:hover {
     box-shadow:  1px 1px 1px #101010,

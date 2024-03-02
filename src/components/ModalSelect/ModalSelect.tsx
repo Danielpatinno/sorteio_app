@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Container, InputContainer, NumberContainer } from "./ModalSelect.styles";
 
 import { useAddClient } from "../../hooks/useAddClient";

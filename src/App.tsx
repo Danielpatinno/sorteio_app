@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { InfoClient } from './components/ModalSelect/ModalSelect'
 import { Compradores } from './pages/Compradores'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
@@ -11,7 +9,6 @@ import { RequireAuth } from './components/RequireAuth/RequireAuth'
 const queryClient = new QueryClient()
 
 function App() {
-  const [numeros, setNumeros] = useState<InfoClient[]>([])
 
   return (
     <BrowserRouter>
@@ -20,14 +17,14 @@ function App() {
           <Routes>
             <Route 
               path='/' 
-              element={<Home state={numeros} setState={setNumeros}/>}
+              element={<Home/>}
             />
 
             <Route 
               path='/compradores' 
               element={
                 <RequireAuth>
-                  <Compradores state={numeros} />
+                  <Compradores />
                 </RequireAuth>}
             />
 

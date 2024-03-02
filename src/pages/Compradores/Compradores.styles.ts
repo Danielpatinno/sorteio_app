@@ -24,7 +24,6 @@ export const ClientContainer = styled.div`
     
     th {
       background-color: #494949;
-      /* border: 1px solid #dddddd; */
       padding: 5px;
       text-align: left;
     }
@@ -48,8 +47,8 @@ export const ClientContainer = styled.div`
     }
 
     .action {
-        display: flex;
-        border: none;
+      display: flex;
+      border: none;
     }
 
     @media (max-width: 800px) {

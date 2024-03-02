@@ -2,20 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "../../components/Alert";
 import { ModalSelect } from "../../components/ModalSelect";
-import { InfoClient } from "../../components/ModalSelect/ModalSelect";
 import { ActionContainer, ButtonsContainer, CasaContainer, Container, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
 
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
-interface HomeProps {
-  state: InfoClient[]
-  setState: React.Dispatch<React.SetStateAction<InfoClient[]>>
-}
-
 import { useClientsQuery } from "../../hooks/useClientsQuery";
 import { useAuth } from "../../hooks/useAuth";
 
-export function Home({state, setState}: HomeProps) {
+export function Home() {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [openAlert, setOpenAlert] = useState<boolean>(false)
   const [openAlertError, setOpenAlertError] = useState<boolean>(false)
@@ -106,8 +100,6 @@ export function Home({state, setState}: HomeProps) {
                 >LOGIN
                 </button>
               </Link>
-              // <button className="btnLogin">
-              //   </button>
           )}              
         </div>
 
@@ -197,10 +189,6 @@ export function Home({state, setState}: HomeProps) {
 
         <ObservationContainer>
           <h3>Observação</h3>
-          {/* <p>
-            <div className="quadrado disponivel"></div>
-            Números disponiveis
-          </p> */}
           <p>
             <div className="quadrado indisponivel">0</div>
             Números indisponiveis

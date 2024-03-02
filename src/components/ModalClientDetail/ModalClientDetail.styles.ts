@@ -26,8 +26,6 @@ export const Container = styled.div`
 
   button {
     display: flex;
-    /* flex-direction: column; */
-    /* margin: auto; */
     margin-top: 10px;
     letter-spacing: 0.1em;
     cursor: pointer;
@@ -44,10 +42,6 @@ export const Container = styled.div`
              -5px -5px 5px #383835;
     }
   }
-/* 
-  @media (max-width: 600px) {
-    left: 10%;
-  } */
 `
 
 export const HeadContainer = styled.div`
@@ -60,18 +54,15 @@ export const NumberContainer = styled.div`
   position: relative;
   height: 70px;
   margin-top: 20px;
-  /* border: 2px solid white; */
-  /* justify-content: center; */
-  /* align-items: center; */
 
   div {
     display: flex;
 
     svg {
       color: red;
-      position: absolute;
+      position: relative;
       top: 55px;
-      right: 20px;
+      right: 34px;
       cursor: pointer;
     }
 
@@ -84,13 +75,11 @@ export const NumberContainer = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    /* margin-bottom: 10px; */
     margin-top: 0px;
     border: 2px solid blue;
     color: white;
     font-size: 30px;
     font-weight: bold;
-    /* text-align: center; */
   }
 `
 
@@ -111,7 +100,6 @@ export const ButtonsContainer = styled.div`
 
   button {
     display: flex;
-    /* flex-direction: column; */
     margin: auto;
     margin-top: 10px;
     letter-spacing: 0.1em;

@@ -11,7 +11,6 @@ export const Container = styled.div`
   width: 390px;
   height: 450px;
   margin-left: 230px;
-  /* margin-top: 0px; */
   background: white;
   background-color: #494949;
   color: white;
@@ -39,13 +38,9 @@ export const Container = styled.div`
     color: white;
     align-items: center;
     justify-content: center;
-    /* height: 30px; */
     width: 120px;
     border-radius: 50px;
     background: #243441;
-
-    /* box-shadow:  1px 1px 1px #101010,
-             -5px -5px 5px #383838; */
 
     &:hover {
     box-shadow:  1px 1px 1px #101010,
@@ -100,7 +95,6 @@ export const InputContainer = styled.label`
   margin-bottom: -30px;
 
   input {
-    /* margin-bottom: -50px; */
     width: 300px;
     padding: 10px;
     border-radius: 10px;

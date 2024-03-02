@@ -19,8 +19,8 @@ interface SignInAdm {
 }
 
 interface Session {
-    adm: Adm
-    token: string
+  adm: Adm
+  token: string
 }
 
 interface AuthContextType {
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const localSession = localStorage.getItem(SORTEIO_SESSION_KEY)
 
     if(localSession) {
-        return JSON.parse(localSession)
+      return JSON.parse(localSession)
     }
 
     return null

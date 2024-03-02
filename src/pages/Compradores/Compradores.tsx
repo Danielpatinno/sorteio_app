@@ -46,6 +46,7 @@ export function Compradores() {
     try {
       await deleteClient.mutateAsync({clientId: cliId})
 
+      setOpenModalDelete(false)
     } catch (error) {
       console.log(error)
     }

@@ -1,7 +1,8 @@
 import { styled } from "styled-components"
 
 export const InputContainer = styled.div`
-  width: 500px;
+  width: 100%;
+  /* border: 2px solid red; */
 `
 
 export const Container = styled.div`
@@ -12,13 +13,16 @@ export const Container = styled.div`
   align-items: center;
   padding: 4.0rem;
   height: 60vh;
+  /* border: 2px solid white; */
 
   @media (max-width: 800px) {
     width: 470px;
   }
 
   @media (max-width: 500px) {
-    width: 400px;
+    width: 360px;
+    padding: 2.0rem;
+    margin: auto;
   }
 
 
@@ -29,9 +33,10 @@ export const FormContainer = styled.div`
   flex-direction: column;
   max-width: 50rem;
   width: 100%;
+  /* border: 2px solid blue; */
 
   form {
-    margin: auto;
+    /* margin: auto; */
   }
 
   button {

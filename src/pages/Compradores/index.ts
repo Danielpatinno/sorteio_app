@@ -1,0 +1,1 @@
+export { Compradores } from './Compradores'

@@ -1,0 +1,1 @@
+export { ModalDeleteClient } from './ModalDeleteClient'

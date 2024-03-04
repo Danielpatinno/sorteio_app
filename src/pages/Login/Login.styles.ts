@@ -68,6 +68,5 @@ export const  HeaderContainer = styled.div`
   h1 {
     margin-bottom: 1.6rem;
     text-align: center;
-    color: red;
   }
 `

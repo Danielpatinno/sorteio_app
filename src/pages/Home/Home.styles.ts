@@ -6,6 +6,7 @@ export const Container = styled.div`
 
   h1 {
     text-align: center;
+    color: red;
   }
 
   .verNome {
@@ -23,7 +24,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 400px;
+    max-width: 320px;
   }
 `
 
@@ -45,8 +46,12 @@ export const ActionContainer = styled.div`
     a {
       text-decoration: none;
       color: white;
-
     }
+
+    @media (max-width: 500px) {
+      width: 90px;
+      height: 22px;
+    }   
   } 
 
   div {
@@ -128,6 +133,7 @@ export const ButtonsContainer = styled.div`
   justify-content: space-around;
   width: 400px;
   margin: auto;
+  border: 2px solid red;
   
  
   a {
@@ -154,11 +160,16 @@ export const ButtonsContainer = styled.div`
     box-shadow:  1px 1px 1px #101010,
              -5px -5px 5px #383835;
     }
+    
 }
 
 
   @media (max-width: 810px) {
     width: 400px;
+  }
+
+  @media (max-width: 500px) {
+    max-width: 320px;
   }
 `
 

@@ -11,6 +11,10 @@ export const Container = styled.div`
   @media (max-width: 800px) {
     width: 450px;
   }
+
+  @media (max-width: 500px) {
+    width: 365px;
+  }
 `
 
 export const ClientContainer = styled.div`
@@ -50,11 +54,6 @@ export const ClientContainer = styled.div`
       display: flex;
       border: none;
     }
-
-    @media (max-width: 800px) {
-       
-    }
-
   }
 
   .btnAlterar {

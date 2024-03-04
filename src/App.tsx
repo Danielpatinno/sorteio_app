@@ -23,10 +23,9 @@ function App() {
             <Route 
               path='/compradores' 
               element={
-                <Compradores />
-                // <RequireAuth>
-                //   <Compradores />
-                // </RequireAuth>
+                <RequireAuth>
+                  <Compradores />
+                </RequireAuth>
               }
             />
 

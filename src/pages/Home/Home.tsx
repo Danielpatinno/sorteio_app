@@ -188,10 +188,6 @@ export function Home() {
             <button className="btnConfirm">Ver compradores</button> 
           </Link>          
         )}
-        <Link to='/compradores'>
-            <button className="btnConfirm">Ver compradores</button> 
-        </Link> 
-
                
        </ButtonsContainer>
 

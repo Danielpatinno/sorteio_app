@@ -83,6 +83,10 @@ export const CasaContainer = styled.div`
   
   ${( props ) => css`
     height: 124px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 
     p {
       text-align: center;
@@ -90,7 +94,16 @@ export const CasaContainer = styled.div`
 
     .nameC {
       width: 100px;
-      margin-right: 250px;
+      
+
+      @media (max-width: 500px) {
+        margin-top: -5px;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+
     }
   `}
 

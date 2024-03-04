@@ -170,6 +170,7 @@ export function Home() {
                 return <p className="nameC">{cliente.name}</p>
               } 
             })}
+            {seeName && <p className="nameC">Fidel</p>}
           </CasaContainer>
         )
         )}

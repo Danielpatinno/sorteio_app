@@ -6,6 +6,7 @@ export const Container = styled.div`
 
   h1 {
     text-align: center;
+    color: blue;
   }
 
   .verNome {

@@ -4,12 +4,14 @@ export const Container = styled.div`
   position: absolute;
   width: 900px;
   margin: auto;
-  margin-top: auto;
 
   @media (max-width: 800px) {
     width: 480px;
   }
 
+  @media (max-width: 500px) {
+    width: 320px;
+  }
 `
 
 export const ContainerModal = styled.div`
@@ -21,10 +23,22 @@ export const ContainerModal = styled.div`
   background-color: white;
   color: black;
 
+  @media (max-width: 500px) {
+    width: 340px;
+    height: 150px;
+    margin-top: 60px;
+  }
+
   h2 {
     font-weight: normal;
     color: black;
     text-align: left;
+
+    @media (max-width: 500px) {
+      margin-top: 0px;
+      margin-bottom: -10px;      
+    }
+ 
   }
 
   p {
@@ -62,5 +76,10 @@ export const ButtonsContainer = styled.div`
       background-color: gray;
       color: white;
     }
+  }
+
+  @media (max-width: 500px) {
+    margin-left: 170px;
+    margin-top: -25px;
   }
 `

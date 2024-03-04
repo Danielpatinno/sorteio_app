@@ -14,7 +14,7 @@ export function ModalDeleteClient({
     <Container>
       <ContainerModal>
         <h2>Cancelamento</h2>
-        <p>Deseja cancelar a compra ?</p>
+        <p>Deseja excluir a compra ?</p>
         <ButtonsContainer>
           <button className="btnDelete" onClick={onDelete}>
             Confirmar

@@ -37,7 +37,6 @@ function App() {
         </AuthProvider>
       
       </QueryClientProvider>
-
     </BrowserRouter>
     
   )

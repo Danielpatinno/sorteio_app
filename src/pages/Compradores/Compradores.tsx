@@ -88,22 +88,7 @@ export function Compradores() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                  <td className="tdName">Daniel</td>
-                  <td className="tdPhone">(44) 99845-1188</td>
-                  <td className="tdNumbers">12,15</td>
-                  <td className="action">
-                    <FaRegEdit 
-                      title="Alterar pedido"
-                      onClick={() => openM("1")}
-                    />   
-                    <MdDeleteOutline 
-                      title="Deletar pedido"
-                      onClick={() => openModalD("1")}
-                    />
-                  </td>  
-                </tr> 
-              {/* {data?.clients.map((cliente) => (      
+              {data?.clients.map((cliente) => (      
                 <tr key={cliente._id}>
                   <td className="tdName">{cliente.name}</td>
                   <td className="tdPhone">{cliente.phone}</td>
@@ -119,7 +104,7 @@ export function Compradores() {
                     />
                   </td>  
                 </tr>    
-              ))} */}
+              ))}
             </tbody>
           </table>
           </ClientContainer>

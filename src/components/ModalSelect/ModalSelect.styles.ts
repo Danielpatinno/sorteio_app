@@ -29,6 +29,12 @@ export const Container = styled.div`
     margin-left: 40px;
   }
 
+  @media (max-width: 500px) {
+    width: 330px;
+    margin: auto;
+    margin-left: 10px;
+  }
+
   button {
     display: flex;
     margin: auto;
@@ -46,11 +52,19 @@ export const Container = styled.div`
     box-shadow:  1px 1px 1px #101010,
              -5px -5px 5px #383835;
     }
+
+    @media (max-width: 500px) {
+      width: 100px;
+    }
   }
 
    .btnConfirm {
       margin-left: 20px;
       height: 30px;
+
+      @media (max-width: 500px) {
+         margin-left: 30px;
+      }
    }
 
    .btnCancel {
@@ -58,11 +72,15 @@ export const Container = styled.div`
       right: 82px;
       height: 30px;
       bottom: 66px;
+
+      @media (max-width: 500px) {
+        right: 50px;
+      }
    }
 
-  @media (max-width:520px) {
+  /* @media (max-width:520px) {
     margin-left: 20px;
-  }
+  } */
 `
 
 export const NumberContainer = styled.div`
@@ -98,6 +116,11 @@ export const InputContainer = styled.label`
     width: 300px;
     padding: 10px;
     border-radius: 10px;
+
+    @media (max-width: 500px) {
+      width: 270px;
+      padding: 8px;
+    }
   }
 `
 

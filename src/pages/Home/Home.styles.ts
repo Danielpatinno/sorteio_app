@@ -6,7 +6,6 @@ export const Container = styled.div`
 
   h1 {
     text-align: center;
-    color: red;
   }
 
   .verNome {
@@ -24,7 +23,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 500px) {
-    max-width: 320px;
+    max-width: 345px;
   }
 `
 
@@ -74,6 +73,10 @@ export const NumbersContainer = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   }
 
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+
 `
 
 export const CasaContainer = styled.div`
@@ -117,6 +120,11 @@ export const NumberContainer = styled.button<{ isselected: boolean; ispurchased:
       font-size: 35px;
     }
 
+    @media (max-width: 500px) {
+      width: 70px;
+      height: 70px;
+    }
+
     p {
       margin-top: 40px;
       display: flex;
@@ -133,8 +141,6 @@ export const ButtonsContainer = styled.div`
   justify-content: space-around;
   width: 400px;
   margin: auto;
-  border: 2px solid red;
-  
  
   a {
     text-decoration: none;

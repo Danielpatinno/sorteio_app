@@ -1,16 +1,19 @@
+// Hooks
 import { useState } from "react";
-import { ModalClientDetail } from "../../components/ModalClientDetail";
 import { useClientsQuery } from '../../hooks/useClientsQuery'
-
 import { useDeleteClient } from '../../hooks/useDeleteClients'
 
+// Components
+import { ModalClientDetail } from "../../components/ModalClientDetail";
+import { ModalDeleteClient } from "../../components/ModalDeleteClient";
+
+// Icons
 import { MdDeleteOutline } from "react-icons/md"
 import { FaRegEdit } from "react-icons/fa";
 
-
+// Styles
 import { ClientContainer, Container } from "./Compradores.styles";
-import { ModalDeleteClient } from "../../components/ModalDeleteClient";
-
+import { Alert } from "../../components/Alert";
 
 export function Compradores() {
   const { data } = useClientsQuery()
@@ -47,13 +50,15 @@ export function Compradores() {
       await deleteClient.mutateAsync({clientId: cliId})
 
       setOpenModalDelete(false)
+      setAlertOpen(true)
     } catch (error) {
       console.log(error)
     }
   }
 
-  return (
-    
+  const [alertOpen, setAlertOpen] = useState<boolean>(false)
+
+  return ( 
       <Container>
         {openModalDetail && 
           <ModalClientDetail 
@@ -67,6 +72,13 @@ export function Compradores() {
              name={nameD}
              onCloseDelete={closeModalD}
              onDelete={handleDeleteClient}
+          />
+        }
+
+        {alertOpen && 
+          <Alert 
+            closeAlert={() => setAlertOpen(false)} type="error" 
+            msg="Compra excluida"
           />
         }
 

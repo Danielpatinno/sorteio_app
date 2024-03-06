@@ -188,7 +188,6 @@ export function Home() {
             <button className="btnConfirm">Ver compradores</button> 
           </Link>          
         )}
-               
        </ButtonsContainer>
 
 

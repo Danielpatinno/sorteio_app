@@ -15,7 +15,7 @@ const validationSchema = z.object({
     .email({message: 'Insira um email válido.'}),
   password: z
     .string()
-    .min(5, { message: 'A senha deve ter no mínimo 9 caracteres.' })
+    .min(5, { message: 'A senha deve ter no mínimo 5 caracteres.' })
 })
 
 type SignInForm = z.infer<typeof validationSchema>

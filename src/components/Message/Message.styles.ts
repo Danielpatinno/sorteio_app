@@ -21,15 +21,10 @@ export const Container = styled.div<ContainerProps>`
     gap: 1;
     padding: 5px;
     width: 100%;
-    height: 35px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 10px;
     font-weight: normal;
     text-align: center;
-
-    p {
-      margin-top: -7px;
-    }
 
     ${alertMessageType[type]}
   `}

@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import  Input from "../../components/Input/Input";
+import { Message } from "../../components/Message";
 import { useAuth } from "../../hooks/useAuth";
 import { useError } from "../../hooks/useError";
 import { Container, FormContainer, HeaderContainer, InputContainer } from "./Login.styles";
@@ -84,7 +85,9 @@ export function Login() {
             {...register('password')}
           />        
         </InputContainer>
-        <button>Login</button>        
+        <button>Login</button>    
+        {error && <Message msg={error} type="error"/> }
+
       </form>
     </FormContainer>
     </Container>

@@ -1,5 +1,5 @@
 // Hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useClientsQuery } from '../../hooks/useClientsQuery'
 import { useDeleteClient } from '../../hooks/useDeleteClients'
 
@@ -24,6 +24,8 @@ export function Compradores() {
 
   const [cliId, setCliId] = useState<string>('')
   const [nameD, setNameD] = useState<string>('')
+
+  useEffect(() => {}, [])
 
   const openM = (n: string) => {
     setCliId(n)

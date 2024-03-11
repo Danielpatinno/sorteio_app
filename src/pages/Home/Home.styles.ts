@@ -93,7 +93,7 @@ export const CasaContainer = styled.div`
     }
 
     .nameC {
-      width: 100px;
+      width: 100%;
       margin-top: 0px;
 
       @media (max-width: 500px) {

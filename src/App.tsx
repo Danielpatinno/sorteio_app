@@ -5,6 +5,7 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { AuthProvider } from './context/AuthContext/AuthContext'
 import { RequireAuth } from './components/RequireAuth/RequireAuth'
+import { PainelControle } from './pages/PainelControle'
 
 const queryClient = new QueryClient()
 
@@ -26,6 +27,16 @@ function App() {
                 <RequireAuth>
                   <Compradores />
                 </RequireAuth>
+              }
+            />
+
+            <Route 
+              path='/painelControle' 
+              element={
+                <PainelControle />
+                // <RequireAuth>
+                //   <PainelControle />
+                // </RequireAuth>
               }
             />
 

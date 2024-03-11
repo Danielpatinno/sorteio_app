@@ -1,4 +1,5 @@
 import { css, styled } from "styled-components";
+import { preprocess, promise } from "zod";
 
 export const Container = styled.div`
   width: 900px;
@@ -87,7 +88,6 @@ export const CasaContainer = styled.div`
     flex-direction: column;
     align-items: center;
     
-
     p {
       text-align: center;
     }
@@ -111,21 +111,34 @@ export const CasaContainer = styled.div`
 
 export const NumberContainer = styled.button<{ isselected: boolean; ispurchased: boolean }>`
  ${(props) => css`
-    color: ${props.ispurchased ? '#04D939' :props.isselected ? '#FFFFFF': '#7C858D'};
+    color: ${props.ispurchased ? '#0AFFEF' :props.isselected ? '#fff': '#7C858D'};
     
     display: flex;
     font-weight: bold;
     font-size: 40px;
     align-items: center;
     justify-content: center; 
-    border: ${props.isselected ? '1px solid #242424' : ''};
+    border: none;
+    /* border: ${props.isselected ? '1px solid #242424' : ''}; */
     border-radius: 50%;
     width: 90px;
     height: 85px;
     margin: 10px;
     cursor: pointer;
-    box-shadow: ${props.isselected ? '7px 7px 10px #0e0e0e,0px 0px 0px #242421;' :props.ispurchased ? '7px 7px 17px #0e0e0e,-7px -7px 17px #242421;' : '0px 0px 7px #0e0e0e,0px 0px 0px #3a3a3a;' };
-    background-color: ${props.ispurchased ? '#242424' :props.isselected ? '#243441': '#243441'};
+    background: linear-gradient(145deg, #273846, #202f3b);
+    box-shadow: ${props.isselected ? '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;' : props.ispurchased ? 'inset 5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;' : '5px 5px 8px #0e151a,-3px -3px 8px #3a5368;'} 
+
+    /* '5px 5px 8px #0e151a,-3px -3px 8px #3a5368; */
+
+    &:hover {
+      box-shadow: ${props.isselected ? '' : '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;'} 
+    }
+
+    
+
+
+    /* box-shadow: ${props.isselected ? '7px 7px 10px #0e0e0e,0px 0px 0px #242421;' :props.ispurchased ? '7px 7px 17px #0e0e0e,-7px -7px 17px #242421;' : '0px 0px 7px #0e0e0e,0px 0px 0px #3a3a3a;' }; */
+    /* background-color: ${props.ispurchased ? '#242424' :props.isselected ? '#243441': '#243441'}; */
 
     @media (max-width:800px) {
       width: 80px;

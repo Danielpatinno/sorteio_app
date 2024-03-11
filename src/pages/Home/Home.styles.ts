@@ -131,7 +131,7 @@ export const NumberContainer = styled.button<{ isselected: boolean; ispurchased:
     /* '5px 5px 8px #0e151a,-3px -3px 8px #3a5368; */
 
     &:hover {
-      box-shadow: ${props.isselected ? '' : '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;'} 
+      box-shadow: ${props.ispurchased ? '' : '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;'} 
     }
 
     

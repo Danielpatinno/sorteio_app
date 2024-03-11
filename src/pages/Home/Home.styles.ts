@@ -6,6 +6,7 @@ export const Container = styled.div`
 
   h1 {
     text-align: center;
+    color: blue;
   }
 
   .verNome {
@@ -118,13 +119,13 @@ export const NumberContainer = styled.button<{ isselected: boolean; ispurchased:
     font-size: 40px;
     align-items: center;
     justify-content: center; 
-    border: none;
+    border: ${props.isselected ? '1px solid #242424' : ''};
     border-radius: 50%;
     width: 90px;
     height: 85px;
     margin: 10px;
     cursor: pointer;
-    box-shadow: ${props.isselected ? '7px 7px 17px #0e0e0e,-7px -7px 17px #242421;' :props.ispurchased ? '7px 7px 17px #0e0e0e,-7px -7px 17px #242421;' : '' };
+    box-shadow: ${props.isselected ? '7px 7px 10px #0e0e0e,0px 0px 0px #242421;' :props.ispurchased ? '7px 7px 17px #0e0e0e,-7px -7px 17px #242421;' : '0px 0px 7px #0e0e0e,0px 0px 0px #3a3a3a;' };
     background-color: ${props.ispurchased ? '#242424' :props.isselected ? '#243441': '#243441'};
 
     @media (max-width:800px) {

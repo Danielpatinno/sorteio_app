@@ -28,6 +28,7 @@ export const Container = styled.div<ContainerProps>`
       background-color: #242424;
       box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
       transition: 300ms ease-in-out;
+      color: white;
     }
 
     p {

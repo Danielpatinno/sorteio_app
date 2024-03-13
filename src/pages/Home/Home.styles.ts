@@ -129,7 +129,7 @@ export const NumberContainer = styled.button<{ isselected: boolean; ispurchased:
 
     &:hover {
       box-shadow: ${props.ispurchased ? '' : '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;'};
-      color: ${props.isselected ? '' : '#fff'} ;
+      color: ${props.ispurchased ? '#0AFFEF' : props.isselected ? '' : '#fff'} ;
     }
 
     @media (max-width:800px) {

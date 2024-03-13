@@ -62,7 +62,7 @@ export const ContainerModal = styled.div`
 `
 
 export const ButtonsContainer = styled.div`
-  margin-left: 280px;
+  margin-left: 250px;
   width: 200px;
   display: flex;
 
@@ -91,16 +91,11 @@ export const ButtonsContainer = styled.div`
   }
 
   @media (max-width: 500px) {
-    margin-left: 170px;
-    margin-top: -25px;
-  }
-
-  @media (max-width: 800px) {
-    margin-left: 250px;
-    margin-top: 25px;
+    margin-left: 150px;
+    margin-top: -50px;
   }
   
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
     margin-left: 140px;
     margin-top: -45px;
   }

@@ -39,6 +39,7 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
       
       await editClient.mutateAsync(data)
       closeModal()
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }

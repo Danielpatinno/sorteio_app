@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const ContainerModal = styled.div`
   width: 450px;
-  height: 200px;
+  height: 245px;
   margin: auto;
   padding: 8px;
   margin-top: 40px;
@@ -25,7 +25,7 @@ export const ContainerModal = styled.div`
 
   @media (max-width: 500px) {
     width: 340px;
-    height: 150px;
+    height: 190px;
     margin-top: 60px;
   }
 
@@ -33,6 +33,7 @@ export const ContainerModal = styled.div`
     font-weight: normal;
     color: black;
     text-align: left;
+    text-align: center;
 
     @media (max-width: 500px) {
       margin-top: 0px;
@@ -49,19 +50,28 @@ export const ContainerModal = styled.div`
     font-size: x-large;
     text-align: left;
   }
+
+  .pObservation {
+    padding: 0px;
+    border: none;
+    margin-top: -15px;
+    font-size: 20px;
+  }
+
+
 `
 
 export const ButtonsContainer = styled.div`
-  margin-left: 245px;
-  width: 180px;
+  margin-left: 280px;
+  width: 200px;
   display: flex;
 
   button {
     cursor: pointer;
     width: 80px;
-    /* margin: auto; */
     height: 25px;
     border-radius: 10px;
+    margin: auto;
     margin-top: 20px;
     align-items: center;
   }
@@ -81,12 +91,17 @@ export const ButtonsContainer = styled.div`
   }
 
   @media (max-width: 500px) {
-    margin-left: 100px;
+    margin-left: 170px;
     margin-top: -25px;
   }
 
-  @media (max-width: 380px) {
-    margin-left: 170px;
+  @media (max-width: 800px) {
+    margin-left: 250px;
+    margin-top: 25px;
   }
-
+  
+  @media (max-width: 380px) {
+    margin-left: 140px;
+    margin-top: -45px;
+  }
 `

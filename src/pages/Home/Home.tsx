@@ -20,8 +20,6 @@ export function Home() {
   const [seeName, setSeeName] = useState<boolean>(false)
   
   const { isAuthenticated, signOut } = useAuth()
-
-
   const { data } = useClientsQuery()
 
   const select = (n: number) => {
@@ -65,11 +63,10 @@ export function Home() {
 
   const closeModal = () => {
     setOpenModal(false)
-    setSelectedNumber([])
     window.location.reload()
+    // setSelectedNumber([])
+    // 
   }
-
-
   const [numbers, setNumbers] = useState<number[]>([])
 
   useEffect(() => {

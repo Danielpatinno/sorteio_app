@@ -14,18 +14,28 @@ import { FaRegEdit } from "react-icons/fa";
 // Styles
 import { ClientContainer, Container } from "./Compradores.styles";
 import { Alert } from "../../components/Alert";
+import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
+import { ModalDeleteAllClients } from "../../components/ModalDeleteAllClients";
+
+interface Client {
+  _id: string
+  name: string
+  phone: number
+  numbers: number[]    
+}
 
 export function Compradores() {
-  const { data } = useClientsQuery()
-  const deleteClient = useDeleteClient()
+  const { data } = useClientsQuery();
+  const deleteClient = useDeleteClient();
+  const deleteAllClients = useDeleteAllClients()
 
   const [openModalDetail, setOpenModalDetail] = useState<boolean>(false)
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false)
+  const [openModalDeleteAll, setOpenModalDeleteAll] = useState<boolean>(false)
+  const [alertOpen, setAlertOpen] = useState<boolean>(false)
 
   const [cliId, setCliId] = useState<string>('')
   const [nameD, setNameD] = useState<string>('')
-
-  useEffect(() => {}, [])
 
   const openM = (n: string) => {
     setCliId(n)
@@ -47,10 +57,16 @@ export function Compradores() {
     setOpenModalDelete(false)
     setCliId('')
   }
+
+  const closeModalAll = () => {
+    setOpenModalDeleteAll(false)
+
+  }
+
   const handleDeleteClient = async () => {
     try {
       await deleteClient.mutateAsync({clientId: cliId})
-
+      
       setOpenModalDelete(false)
       setAlertOpen(true)
     } catch (error) {
@@ -58,7 +74,15 @@ export function Compradores() {
     }
   }
 
-  const [alertOpen, setAlertOpen] = useState<boolean>(false)
+  const handleDeleteAllClients = async() => {
+    try {
+      await deleteAllClients.mutateAsync()
+
+      alert('Reiniciado')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return ( 
       <Container>
@@ -77,9 +101,22 @@ export function Compradores() {
           />
         }
 
+         {openModalDeleteAll && 
+          <ModalDeleteAllClients 
+             name={nameD}
+             onCloseDelete={closeModalAll}
+             onDelete={handleDeleteAllClients}
+          />
+        }
+
+
         {alertOpen && 
           <Alert 
-            closeAlert={() => setAlertOpen(false)} type="error" 
+            closeAlert={() => {
+              setAlertOpen(false)
+              window.location.reload()
+            }} 
+            type="error" 
             msg="Compra excluida"
           />
         }
@@ -88,7 +125,11 @@ export function Compradores() {
         {data?.totalClients === 0 ? (
           <p>Nenhum número vendido</p>
           ):(
-            <p>Número compradores: {data?.totalClients}</p>
+            <div>
+              <p>Número compradores: {data?.totalClients}</p>
+              <button onClick={() => setOpenModalDeleteAll(true)}>Reiniciar sorteio</button>
+            </div>
+            
           )}
                 
           <ClientContainer>
@@ -102,6 +143,7 @@ export function Compradores() {
               </tr>
             </thead>
             <tbody>
+            
               {data?.clients.map((cliente) => (      
                 <tr key={cliente._id}>
                   <td className="tdName">{cliente.name}</td>

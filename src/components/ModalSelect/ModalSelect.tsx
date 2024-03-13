@@ -78,6 +78,7 @@ export function ModalSelect({ closeModal, buyNumbers}: ModalSelectProps) {
         ))
       }
       </NumberContainer>
+      {buyNumbers.length >= 5 && <p>Vermais</p>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>Preencha os dados abaixo</p>
           <InputContainer>

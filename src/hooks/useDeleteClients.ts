@@ -1,6 +1,5 @@
 import { useMutation } from "react-query"
 import { api } from "../services/projetoSorteioApi"
-import { Client } from '../hooks/useClientsQuery'
 
 export interface deleteClientProps {
   clientId: string

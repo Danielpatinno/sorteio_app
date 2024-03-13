@@ -15,6 +15,24 @@ export const Container = styled.div`
   @media (max-width: 500px) {
     width: 365px;
   }
+
+  button {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    background: #243441;
+
+    &:hover {
+    box-shadow:  1px 1px 1px #101010,
+             -0px -0px 0px #383835;
+    }
+  }
 `
 
 export const ClientContainer = styled.div`
@@ -44,6 +62,15 @@ export const ClientContainer = styled.div`
     
     .tdPhone {
       width: 35%;
+
+      @media (max-width: 800px) {
+        font-size: 15px;
+      }
+
+      @media (max-width: 500px) {
+        font-size: 14px;
+        width: 47%;
+      }
     }
 
     .tdNumbers {

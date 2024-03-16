@@ -10,7 +10,6 @@ import isPropValid from '@emotion/is-prop-valid';
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
 import Logo from '../../imagens/LogoSorteio.png'
-// import Logo from '../../../dist/assets/LogoSorteio-9geY8CfI.png'
 
 import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
 import { useAuth } from "../../hooks/useAuth";

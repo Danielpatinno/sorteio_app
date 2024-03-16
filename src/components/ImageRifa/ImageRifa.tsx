@@ -22,7 +22,7 @@ export function ImageRifa({ urlImage, closeRifa }: ImageRifaProps) {
         <MdCancel onClick={closeRifa} />
         <ContainerImage>
             <img
-              src={`http://localhost:3000/uploads/${currentImage}`} 
+              src={`https://api-rifa-tupperware.vercel.app/uploads/${currentImage}`} 
               alt='Imagem ainda não disponivel'  
             />  
         </ContainerImage>

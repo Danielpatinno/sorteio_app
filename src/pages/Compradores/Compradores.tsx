@@ -12,10 +12,13 @@ import { MdDeleteOutline } from "react-icons/md"
 import { FaRegEdit } from "react-icons/fa";
 
 // Styles
-import { ClientContainer, Container } from "./Compradores.styles";
+import { ClientContainer, Container, OptionsContainer } from "./Compradores.styles";
 import { Alert } from "../../components/Alert";
 import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
 import { ModalDeleteAllClients } from "../../components/ModalDeleteAllClients";
+import { Link } from "react-router-dom";
+import { useDeleteImage } from "../../hooks/useDeleteImage";
+import { useRifaQuery } from "../../hooks/useRifaQuery";
 
 interface Client {
   _id: string
@@ -25,14 +28,22 @@ interface Client {
 }
 
 export function Compradores() {
-  const { data } = useClientsQuery();
+  const { data, refetchClients } = useClientsQuery();
+
   const deleteClient = useDeleteClient();
   const deleteAllClients = useDeleteAllClients()
+
+  const [dataItems, setDataItems] = useState<Client[] | undefined>([])
+
+  useEffect(() => {
+    setDataItems(data?.clients)
+  },[data])
 
   const [openModalDetail, setOpenModalDetail] = useState<boolean>(false)
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false)
   const [openModalDeleteAll, setOpenModalDeleteAll] = useState<boolean>(false)
   const [alertOpen, setAlertOpen] = useState<boolean>(false)
+  const [alertOpenDelete, setAlertOpenDelete] = useState<boolean>(false)
 
   const [cliId, setCliId] = useState<string>('')
   const [nameD, setNameD] = useState<string>('')
@@ -42,26 +53,30 @@ export function Compradores() {
     setOpenModalDetail(true)
   }
 
-  const closeModal = () => {
-    setOpenModalDetail(false)
-    setCliId('')
-  }
-
   const openModalD = (clientId: string) => {
     setCliId(clientId)
     setNameD('')
     setOpenModalDelete(true)
-  }
+  }  
 
-  const closeModalD = () => {
-    setOpenModalDelete(false)
-    setCliId('')
-  }
+  // const closeModal = () => {
+  //   setOpenModalDetail(false)
+  //   refetchClients()
+  //   setCliId('')
+  // }
 
-  const closeModalAll = () => {
-    setOpenModalDeleteAll(false)
 
-  }
+
+  // const closeModalD = () => {
+  //   setOpenModalDelete(false)
+  //   refetchClients()
+  //   setCliId('')
+  // }
+
+  // const closeModalAll = () => {
+  //   setOpenModalDeleteAll(false)
+  //   refetchClients()
+  // }
 
   const handleDeleteClient = async () => {
     try {
@@ -74,11 +89,14 @@ export function Compradores() {
     }
   }
 
+  const deleteImage = useDeleteImage()
+
   const handleDeleteAllClients = async() => {
     try {
       await deleteAllClients.mutateAsync()
 
-      alert('Reiniciado')
+      setOpenModalDeleteAll(false)
+      setAlertOpenDelete(true)
     } catch (error) {
       console.log(error)
     }
@@ -89,14 +107,22 @@ export function Compradores() {
         {openModalDetail && 
           <ModalClientDetail 
             clientId={cliId} 
-            closeModal={closeModal}
+            closeModal={() => {
+              setOpenModalDetail(false)
+              refetchClients()
+              setCliId('')
+            }}
           />
         }
 
         {openModalDelete && 
           <ModalDeleteClient 
              name={nameD}
-             onCloseDelete={closeModalD}
+             onCloseDelete={() => {
+              setOpenModalDelete(false)
+              refetchClients()
+              setCliId('')
+             }}
              onDelete={handleDeleteClient}
           />
         }
@@ -104,7 +130,10 @@ export function Compradores() {
          {openModalDeleteAll && 
           <ModalDeleteAllClients 
              name={nameD}
-             onCloseDelete={closeModalAll}
+             onCloseDelete={() => {
+               setOpenModalDeleteAll(false)
+               refetchClients()
+             }}
              onDelete={handleDeleteAllClients}
           />
         }
@@ -114,25 +143,44 @@ export function Compradores() {
           <Alert 
             closeAlert={() => {
               setAlertOpen(false)
-              window.location.reload()
+              refetchClients()
             }} 
             type="error" 
             msg="Compra excluida"
           />
         }
 
-        <h1>Compradores</h1>
-        {data?.totalClients === 0 ? (
-          <p>Nenhum número vendido</p>
-          ):(
-            <div>
-              <p>Número compradores: {data?.totalClients}</p>
-              <button onClick={() => setOpenModalDeleteAll(true)}>Reiniciar sorteio</button>
-            </div>
-            
-          )}
+        {alertOpenDelete && 
+          <Alert 
+            closeAlert={() => {
+              setAlertOpenDelete(false)
+              refetchClients()
+            }} 
+            type="success" 
+            msg="Sorteio reiniciado"
+          />
+        }
+
+        <h1>Administração</h1>
+        <OptionsContainer>
+          {data?.totalClients === 0 ? (
+            <p>Nenhum número vendido</p>
+            ):(
+              <div>
+                <p>Número compradores: {data?.totalClients}</p>
+                <button onClick={() => setOpenModalDeleteAll(true)}>Reiniciar sorteio</button>
                 
+              </div>
+              
+            )}
+            
+            <Link to='/painelControle'>
+              <button>Imagem da Rifa</button>
+            </Link>               
+        </OptionsContainer>
+ 
           <ClientContainer>
+            <h3>Lista de compradores</h3>
           <table>
             <thead>
               <tr>
@@ -144,7 +192,7 @@ export function Compradores() {
             </thead>
             <tbody>
             
-              {data?.clients.map((cliente) => (      
+              {dataItems?.map((cliente) => (      
                 <tr key={cliente._id}>
                   <td className="tdName">{cliente.name}</td>
                   <td className="tdPhone">{cliente.phone}</td>

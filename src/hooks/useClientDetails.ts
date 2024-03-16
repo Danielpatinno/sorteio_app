@@ -14,8 +14,21 @@ async function fetchClientDetails({clientId}: ClientDetailsQueryArgs) {
 }
 
 export function useClientDetails({ clientId }: ClientDetailsQueryArgs) {
-    return useQuery({
-        queryKey: ['client-details', clientId],
-        queryFn: async () => fetchClientDetails({clientId})
-    })
+  const { data, refetch } = useQuery<Client, Error, Client>(
+    ['client-details', clientId],
+    () => fetchClientDetails({ clientId }),
+    {
+      staleTime: Infinity
+    }
+  );
+
+  return { data, refetchClientDetails: refetch };
 }
+
+// export function useClientDetails({ clientId }: ClientDetailsQueryArgs) {
+//   return useQuery({
+//     queryKey: ['client-details', clientId],
+//     queryFn: async () => fetchClientDetails({clientId}),
+//     staleTime: Infinity
+//   })
+// }

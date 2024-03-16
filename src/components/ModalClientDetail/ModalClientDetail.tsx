@@ -10,6 +10,7 @@ import {
 } from "./ModalClientDetail.styles";
 
 import { MdCancel } from "react-icons/md"
+import { Client } from "../../hooks/useClientsQuery";
 
 interface ModalClientDetailsProps {
   clientId: string
@@ -17,17 +18,22 @@ interface ModalClientDetailsProps {
 }
 
 export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps) {  
-  const clientDetail = useClientDetails({clientId:clientId})
+  const { data } = useClientDetails({clientId:clientId})
   const editClient = useEditClient()
 
   const [numerosComprados, setNumerosComprados] = useState<number[]>([])
   const [editar, setEditar] = useState<boolean>(false)
+  const [dataItems, setDataItems] = useState<Client[]>([])
  
   useEffect(() => {
-    if (clientDetail.data?.numbers) {
-      setNumerosComprados(prev => [...new Set([...prev, ...clientDetail.data.numbers])]);
+    if (data?.numbers) {
+      setNumerosComprados(prev => [...new Set([...prev, ...data.numbers])]);
     }
-  }, [clientDetail.data?.numbers])
+  }, [data?.numbers])
+
+  // useEffect(() => {
+  //   setDataItems
+  // }, [data])
 
   const handleEdit = async () => {
     try {
@@ -39,7 +45,6 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
       
       await editClient.mutateAsync(data)
       closeModal()
-      window.location.reload()
     } catch (error) {
       console.log(error)
     }
@@ -56,7 +61,7 @@ export function ModalClientDetail({clientId, closeModal}:ModalClientDetailsProps
       <HeadContainer>
         <h3>Alterar Compra</h3>
       </HeadContainer>
-      <p>Comprador: {clientDetail.data?.name}</p>
+      <p>Comprador: {data?.name}</p>
 
       {editar && numerosComprados.length > 1 ? (
         <button onClick={() => setEditar(false)}>Cancelar alteração</button>

@@ -13,13 +13,28 @@ interface ClientQueryResponse {
   clients: Client[]
 }
 
-async function fethClients():Promise<ClientQueryResponse> {
+async function fetchClients():Promise<ClientQueryResponse> {
     const { data } = await api.get('/clients')
     return data
 }
 
 export function useClientsQuery() {
-  return useQuery({
-    queryFn: async () => await fethClients()
-  })
+  const { data, refetch } = useQuery<ClientQueryResponse, Error, ClientQueryResponse>(
+    ['clients'],
+    () => fetchClients(),
+    {
+      staleTime: Infinity
+    }
+  );
+
+  return { data, refetchClients: refetch };
 }
+
+
+// export function useClientsQuery() {
+//   return useQuery({
+//     queryKey: ['clients'],
+//     queryFn: async () => await fethClients(),
+//     staleTime: Infinity
+//   })
+// }

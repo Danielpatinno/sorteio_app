@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "../../components/Alert";
 import { ModalSelect } from "../../components/ModalSelect";
-import { ActionContainer, ButtonsContainer, CasaContainer, Container, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
+import { ActionContainer, ButtonsContainer, CasaContainer, Container, HeaderContainer, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
 
 import { StyleSheetManager } from 'styled-components';
 import isPropValid from '@emotion/is-prop-valid';
 
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
-import { useClientsQuery } from "../../hooks/useClientsQuery";
+import Logo from '../../imagens/logoSorteio.png'
+
+import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
 import { useAuth } from "../../hooks/useAuth";
+import { ImageRifa } from "../../components/ImageRifa";
 
 export function Home() {
   const [openModal, setOpenModal] = useState<boolean>(false)
@@ -18,9 +21,26 @@ export function Home() {
   const [openAlertError, setOpenAlertError] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>(false)
-  
+  const [seeRifa, setSeeRifa] = useState<boolean>(false)
+  const [numbers, setNumbers] = useState<number[]>([])
   const { isAuthenticated, signOut } = useAuth()
-  const { data } = useClientsQuery()
+  const { data, refetchClients } = useClientsQuery()
+  const [dataItems, setDataItems] = useState<Client[] | undefined>([])
+
+  useEffect(() => {
+    if (data && data.clients) {
+      setNumbers([]);
+      setDataItems(data?.clients)
+
+      data?.clients.forEach(client => {
+        setNumbers(prevNumbers => [...prevNumbers, ...client.numbers]);
+      }); 
+    }
+  }, [data])
+  
+  const refetch = () => {
+    refetchClients()
+  }
 
   const select = (n: number) => {
     if (numbers.includes(n)) {
@@ -44,10 +64,6 @@ export function Home() {
     }
   }
 
-  const closeAlert = () => {
-    setOpenAlert(false)
-  }
-
   const abrirModal = () => {
     if(!selectedNumber.length) {
       setOpenAlertError(true)
@@ -57,34 +73,23 @@ export function Home() {
     }
   }
 
-  const closeAlertError = () => {
-    setOpenAlertError(false)
-  }
-
-  const closeModal = () => {
-    setOpenModal(false)
-    window.location.reload()
-    // setSelectedNumber([])
-    // 
-  }
-  const [numbers, setNumbers] = useState<number[]>([])
-
-  useEffect(() => {
-    if (data && data.clients) {
-      setNumbers([]);
-
-      data.clients.forEach(client => {
-        setNumbers(prevNumbers => [...prevNumbers, ...client.numbers]);
-      }); 
-    }
-  }, [data]);
-
+  
   return (
     <Container>
-      <h1>Sorteio</h1> 
+      <HeaderContainer>
+        <img src={Logo} alt="Logo" 
+        />        
+      </HeaderContainer>
+
+      {seeRifa && 
+        <ImageRifa 
+          closeRifa={() => setSeeRifa(false)} 
+          urlImage="vv"
+        />
+      }
+
       <ActionContainer>
         
-
         <div>
           {isAuthenticated ? 
             (
@@ -104,6 +109,11 @@ export function Home() {
         </div>
 
         <div>
+          <button 
+            className="btnRifa"
+            onClick={() => setSeeRifa(true)}
+            >Ver rifa
+          </button>
           {seeName ? (
             <p className="verNome">
               <IoIosEye 
@@ -123,18 +133,24 @@ export function Home() {
           )
           }          
         </div>
+
       </ActionContainer>
        {openModal && 
          <ModalSelect
+         refetch={refetch}
+         setState={setDataItems}
            buyNumbers={selectedNumber}
-           closeModal={closeModal}
+           closeModal={() => {
+             setOpenModal(false)
+             setSelectedNumber([])
+           }}
           />
         }
 
         {openAlert && 
           <Alert 
             type="error"
-            closeAlert={closeAlert}
+            closeAlert={() => setOpenAlert(false)}
             msg='Número indisponivel, selecione outro por favor.'
           />
         }
@@ -142,7 +158,7 @@ export function Home() {
         {openAlertError && 
           <Alert 
             type="error"
-            closeAlert={closeAlertError}
+            closeAlert={() => setOpenAlertError(false)}
             msg='Por favor, selecione os números.'
           />
         }
@@ -162,9 +178,9 @@ export function Home() {
               </NumberContainer>              
             </StyleSheetManager>
 
-            {seeName && data?.clients.map((cliente) => {
+            {seeName && dataItems?.map((cliente) => {
               if (cliente.numbers.includes(n)){
-                return <p className="nameC">{cliente.name}</p>
+                return <p key={n} className="nameC">{cliente.name}</p>
               } 
             })}
           </CasaContainer>
@@ -179,14 +195,12 @@ export function Home() {
          >Comprar números
        </button>
 
-        
         {isAuthenticated && (
           <Link to='/compradores'>
-            <button className="btnConfirm">Ver compradores</button> 
+            <button className="btnConfirm">Administração</button> 
           </Link>          
         )}
        </ButtonsContainer>
-
 
         <ObservationContainer>
           <h3>Observação</h3>
@@ -196,8 +210,6 @@ export function Home() {
           </p>
           <p>Números disponiveis: {100 - numbers.length}</p>
         </ObservationContainer>
-
-       
     </Container>
   )
 }

@@ -35,10 +35,41 @@ export const Container = styled.div`
   }
 `
 
+export const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    width: 200px;
+    margin: 3px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
+
+`
+
 export const ClientContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: -20px;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 0px;
+  }
 
   table {
     margin: auto;

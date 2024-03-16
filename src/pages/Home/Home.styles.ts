@@ -1,5 +1,4 @@
 import { css, styled } from "styled-components";
-import { preprocess, promise } from "zod";
 
 export const Container = styled.div`
   width: 900px;
@@ -7,11 +6,13 @@ export const Container = styled.div`
 
   h1 {
     text-align: center;
+    margin-bottom: 0px;
   }
 
   .verNome {
     display: flex;
     align-items: center;
+    margin-right: 15px;
     height: 10px;
   }
 
@@ -28,6 +29,21 @@ export const Container = styled.div`
   }
 `
 
+export const HeaderContainer = styled.div`
+  display: flex;
+  /* border: 2px solid red; */
+  height: 60px;
+  margin-bottom: 10px;
+  /* margin-top: 1px; */
+
+  img {
+    margin: auto;
+    margin-top: -45px;
+    width: 450px;
+    height: 180px;
+  }
+`
+
 export const ActionContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -36,8 +52,9 @@ export const ActionContainer = styled.div`
 
   .btnLogin {
     cursor: pointer;
-    width: 120px;
+    width: 130px;
     height: 25px;
+    color: #0AFFEF;
     border-radius: 50px;
     background: #243441;
     box-shadow:  1px 1px 1px #101010,
@@ -45,7 +62,7 @@ export const ActionContainer = styled.div`
 
     a {
       text-decoration: none;
-      color: white;
+      color: #0AFFEF;
     }
 
     @media (max-width: 500px) {
@@ -54,6 +71,18 @@ export const ActionContainer = styled.div`
     }   
   } 
 
+  .btnRifa {
+    cursor: pointer;
+    width: 110px;
+    height: 25px;
+    margin-right: 25px;
+    color: #0AFFEF;
+    border-radius: 50px;
+    background: #243441;
+    box-shadow:  1px 1px 1px #101010,
+             -5px -5px 5px #383838;
+
+  }
   div {
 
   }
@@ -109,6 +138,7 @@ export const CasaContainer = styled.div`
 
 `
 
+
 export const NumberContainer = styled.button<{ isselected: boolean; ispurchased: boolean }>`
  ${(props) => css`
     color: ${props.ispurchased ? '#0AFFEF' :props.isselected ? '#0AFFEF': '#7C858D'};
@@ -160,7 +190,7 @@ export const ButtonsContainer = styled.div`
  
   a {
     text-decoration: none;
-    color: white;
+    color: #0AFFEF;
     
   }
 
@@ -170,7 +200,7 @@ export const ButtonsContainer = styled.div`
     margin-top: 10px;
     letter-spacing: 0.1em;
     cursor: pointer;
-    color: white;
+    color: #0AFFEF;
     align-items: center;
     justify-content: center;
     height: 40px;

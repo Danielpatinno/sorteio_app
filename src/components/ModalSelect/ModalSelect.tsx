@@ -9,10 +9,14 @@ import Input from "../Input/Input";
 
 import { StyleSheetManager } from 'styled-components';
 import isPropValid from '@emotion/is-prop-valid';
+import { useState } from "react";
+import { Client } from "../../hooks/useClientsQuery";
 
 export interface ModalSelectProps {
   closeModal: () => void
   buyNumbers: number[]
+  setState: React.Dispatch<React.SetStateAction<Client[] | undefined>>
+  refetch: () => void
 }
 
 export interface DataClientProps {
@@ -36,8 +40,9 @@ const validationClient = z.object({
 type SignInForm = z.infer<typeof validationClient>
 
 
-export function ModalSelect({ closeModal, buyNumbers}: ModalSelectProps) {  
+export function ModalSelect({ closeModal, buyNumbers, setState, refetch}: ModalSelectProps) {  
   const addClient = useAddClient()
+  const [verTodos, setVerTodos ] = useState<boolean>(false)
 
   const {
     register,
@@ -57,14 +62,14 @@ export function ModalSelect({ closeModal, buyNumbers}: ModalSelectProps) {
       }
       
       await addClient.mutateAsync(clientData)
+      
       console.log('Compra com sucesso')
-
       reset()
+      refetch()
       closeModal()
     } catch (error) {
       console.log(`Erro ao fazer o POST: ${error}`)
     }
-
   }
 
 
@@ -72,13 +77,22 @@ export function ModalSelect({ closeModal, buyNumbers}: ModalSelectProps) {
     <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
     <Container>
       <h3>Números selecionados</h3>
-      <NumberContainer>
-      {buyNumbers.map((n) => (
+      <NumberContainer verTodos={verTodos}>
+      {verTodos ? (
+        buyNumbers.map((n) => (
           <p key={n}> {n}</p> 
-        ))
+        ))) : (
+          buyNumbers.slice(0, 5).map((n) => (
+            <p key={n}> {n}</p> 
+          ))
+        )
       }
       </NumberContainer>
-      {buyNumbers.length >= 5 && <p>Vermais</p>}
+
+      {buyNumbers.length > 5 && 
+        <button onClick={() => setVerTodos(true)} className="btnVerMais">Ver todos</button>
+      }
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>Preencha os dados abaixo</p>
           <InputContainer>

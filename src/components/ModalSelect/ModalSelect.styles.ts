@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
@@ -58,6 +58,11 @@ export const Container = styled.div`
     }
   }
 
+   .btnVerMais {
+     margin-bottom: 5px;
+     margin-top: 5px;
+   }
+
    .btnConfirm {
       margin-left: 20px;
       height: 30px;
@@ -77,33 +82,54 @@ export const Container = styled.div`
         right: 50px;
       }
    }
-
-  /* @media (max-width:520px) {
-    margin-left: 20px;
-  } */
 `
 
-export const NumberContainer = styled.div`
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  p {
+const exibirType = {
+  default: () => css`
     display: flex;
-    justify-content: space-around;
+  `,
+  secondary: () => css`
+    display: grid; 
+    position: absolute;
+    top: 55px;
+    background-color: #243441;
+    border-radius: 10px;
+    padding: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 1px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  `
+}
+
+
+export const NumberContainer = styled.div<{verTodos: boolean}>`
+  ${({ verTodos }) => css`
+    height: ${verTodos ? '170' : '70px'};
+    max-width: 340px;
+    justify-content: center;
     align-items: center;
-    background-color: #242424;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    margin-top: -10px;
-    border: 2px solid #243441;
-    color: white;
-    font-size: 35px;
-    font-weight: bold;
-  }
+    
+    ${exibirType[verTodos ? 'secondary' : 'default']}
+
+    p {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #242424;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      margin: auto;
+      border: 2px solid #243441;
+      color: #0AFFEF;
+      font-size: 35px;
+      font-weight: bold;
+      box-shadow: inset 5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;
+    }  
+  `}
+
 `
 
 export const InputContainer = styled.label`

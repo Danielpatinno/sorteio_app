@@ -86,7 +86,7 @@ export function PainelControle() {
                       alt="Preview" 
                     />
                 ): (
-                  <img src={`http://localhost:3000/uploads/${currentImage}`} alt="Imagem rifa" />
+                  <img src={`https://api-rifa-tupperware.vercel.app/${currentImage}`} alt="Imagem rifa" />
                 )}
             </PreviewImageContainer>
           ) : (
@@ -116,8 +116,6 @@ export function PainelControle() {
                 <input type="submit" value="Adicionar" />
             </form>            
           </div>
-       
-
       </Container>
     )
 }

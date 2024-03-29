@@ -1,32 +1,56 @@
-import { Container, ContainerImage } from "./ImageRifa.styles";
+import { Container, ContainerImage, MensagemContainer } from "./ImageRifa.styles";
 
 import { MdCancel } from "react-icons/md"
-import { useRifaQuery } from "../../hooks/useRifaQuery";
 import { useEffect, useState } from "react";
 
 interface ImageRifaProps {
-  urlImage: string
   closeRifa: () => void
 }
 
-export function ImageRifa({ urlImage, closeRifa }: ImageRifaProps) {
-  const { data } = useRifaQuery()
-  const [currentImage, setCurrentImage] = useState<string>()
+export function ImageRifa({ closeRifa }: ImageRifaProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showNoImageMessage, setShowNoImageMessage] = useState(false);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    setCurrentImage(data?.rifaImage)
-  }, [data])
+    const timer = setTimeout(() => {
+      if (isLoading) {
+        setShowNoImageMessage(true);
+        setIsLoading(false)
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   return (
     <Container>
-        <MdCancel onClick={closeRifa} />
-        <ContainerImage>
-            <img
-              src={`https://api-rifa-tupperware.vercel.app/uploads/${currentImage}`} 
-              alt='Imagem ainda não disponivel'  
-            />  
-        </ContainerImage>
+      <MdCancel onClick={closeRifa} />
+      <ContainerImage>
+        {isLoading && !showNoImageMessage && 
+          <MensagemContainer>
+            <p>Loading...</p>
+          </MensagemContainer>
+        }
         
+        {!isLoading && showNoImageMessage && 
+          <MensagemContainer>
+            <p>Imagem não disponivel ainda</p>
+          </MensagemContainer>
+        }
+        
+        {!showNoImageMessage && 
+          <img
+            src={'http://localhost:3000/getImage'}
+            alt='Imagem Rifa'
+            onLoad={handleImageLoad}
+            style={{ display: isLoading ? 'none' : 'block' }}
+          />
+        }
+      </ContainerImage>
     </Container>
-  )
+  );
 }

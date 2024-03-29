@@ -30,7 +30,21 @@ export const ContainerImage = styled.div`
     margin: auto;
   
   img {
+    border: 2px solid #0AFFEF;
     border-radius: 10px;
     width: 380px;
   }
+`
+
+export const MensagemContainer = styled.div`
+  border: 2px solid #0AFFEF;
+  width: 300px;
+  background-color: #243441;
+
+
+  p {
+    text-align: center;
+    color:#0AFFEF;
+  }
+
 `

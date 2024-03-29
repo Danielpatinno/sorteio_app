@@ -10,22 +10,36 @@ export interface Rifa {
 //   rifa: Rifa[]
 // }
 
-async function fethRifa(): Promise<Rifa> {
-  const { data } = await api.get('/getRifa')
+
+
+async function fethRifa(): Promise<void> {
+  const { data } = await api.get('/getImage')
   return data
 }
 
 export function useRifaQuery() {
-  const { data, refetch } = useQuery<Rifa, Error, Rifa>(
+  const { data } = useQuery(
     ['rifa'],
     () => fethRifa(),
     {
       staleTime: Infinity
     }
-  );
+  )
 
-  return { data, refetchRifa: refetch };
+    return { data }
 }
+
+// export function useRifaQuery() {
+//   const { data, refetch } = useQuery<Rifa, Error, Rifa>(
+//     ['rifa'],
+//     () => fethRifa(),
+//     {
+//       staleTime: Infinity
+//     }
+//   );
+
+//   return { data, refetchRifa: refetch };
+// }
 
 // export function useRifaQuery() {
 //   return useQuery({

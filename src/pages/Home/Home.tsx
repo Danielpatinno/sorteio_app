@@ -73,7 +73,6 @@ export function Home() {
     }
   }
 
-  
   return (
     <Container>
       <HeaderContainer>
@@ -84,7 +83,6 @@ export function Home() {
       {seeRifa && 
         <ImageRifa 
           closeRifa={() => setSeeRifa(false)} 
-          urlImage="vv"
         />
       }
 

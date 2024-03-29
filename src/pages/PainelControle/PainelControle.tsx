@@ -40,7 +40,7 @@ export function PainelControle() {
         const formData = new FormData()
         formData.append("image", image)
 
-      await axios.post('http://localhost:3000/registerImage', formData, {
+      await axios.post('https://api-sorteio-ha14.vercel.app/registerImage', formData, {
         headers:{
           'Content-Type': 'multipart/form-data'
         }

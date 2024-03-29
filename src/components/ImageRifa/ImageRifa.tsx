@@ -41,10 +41,10 @@ export function ImageRifa({ closeRifa }: ImageRifaProps) {
             <p>Imagem não disponivel ainda</p>
           </MensagemContainer>
         }
-        
+
         {!showNoImageMessage && 
           <img
-            src={'http://localhost:3000/getImage'}
+            src={'https://api-sorteio-ha14.vercel.app/getImage'}
             alt='Imagem Rifa'
             onLoad={handleImageLoad}
             style={{ display: isLoading ? 'none' : 'block' }}

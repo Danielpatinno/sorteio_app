@@ -144,7 +144,7 @@ export function PainelControle() {
 
             {!showNoImageMessage && 
               <img
-                src={'http://localhost:3000/getImage'}
+                src={'https://api-sorteio-ha14.vercel.app/getImage'}
                 alt='Imagem ainda não disponivel'
                 onLoad={handleImageLoad} 
                 style={{ display: isLoading ? 'none' : 'block' }}

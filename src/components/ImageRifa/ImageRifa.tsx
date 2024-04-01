@@ -16,10 +16,6 @@ export function ImageRifa({ closeRifa }: ImageRifaProps) {
   };
 
   useEffect(() => {
-    setIsLoading(true)
-  }, [])
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       if (isLoading) {
         setShowNoImageMessage(true);
@@ -34,7 +30,7 @@ export function ImageRifa({ closeRifa }: ImageRifaProps) {
     <Container>
       <MdCancel onClick={closeRifa} />
       <ContainerImage>
-        {isLoading && !showNoImageMessage && 
+        {isLoading && 
           <MensagemContainer>
             <p>Loading...</p>
           </MensagemContainer>

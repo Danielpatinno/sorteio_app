@@ -14,7 +14,6 @@ export const Container = styled.div`
     align-items: center;
     margin-right: 15px;
     height: 10px;
-    color: red;
   }
 
   svg {

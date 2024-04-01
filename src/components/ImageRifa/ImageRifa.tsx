@@ -16,12 +16,16 @@ export function ImageRifa({ closeRifa }: ImageRifaProps) {
   };
 
   useEffect(() => {
+    setIsLoading(true)
+  }, [])
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       if (isLoading) {
         setShowNoImageMessage(true);
         setIsLoading(false)
       }
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [isLoading]);
@@ -36,30 +40,20 @@ export function ImageRifa({ closeRifa }: ImageRifaProps) {
           </MensagemContainer>
         }
         
-        {!isLoading && showNoImageMessage ? 
-          (
-            <MensagemContainer>
-              <p>Imagem não disponivel ainda</p>
-            </MensagemContainer>
-          ):
-          (
-          <img
-            src={'https://api-sorteio-ha14.vercel.app/getImage'}
-            alt='Imagem Rifa'
-            onLoad={handleImageLoad}
-            style={{ display: isLoading ? 'none' : 'block' }}
-          />
-          )
+        {!isLoading && showNoImageMessage && 
+          <MensagemContainer>
+            <p>Imagem não disponivel ainda</p>
+          </MensagemContainer>
         }
 
-        {/* {!showNoImageMessage && 
+        {!showNoImageMessage && 
           <img
             src={'https://api-sorteio-ha14.vercel.app/getImage'}
             alt='Imagem Rifa'
             onLoad={handleImageLoad}
             style={{ display: isLoading ? 'none' : 'block' }}
           />
-        } */}
+        }
       </ContainerImage>
     </Container>
   );

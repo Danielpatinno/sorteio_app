@@ -36,20 +36,30 @@ export function ImageRifa({ closeRifa }: ImageRifaProps) {
           </MensagemContainer>
         }
         
-        {!isLoading && showNoImageMessage && 
-          <MensagemContainer>
-            <p>Imagem não disponivel ainda</p>
-          </MensagemContainer>
-        }
-
-        {!showNoImageMessage && 
+        {!isLoading && showNoImageMessage ? 
+          (
+            <MensagemContainer>
+              <p>Imagem não disponivel ainda</p>
+            </MensagemContainer>
+          ):
+          (
           <img
             src={'https://api-sorteio-ha14.vercel.app/getImage'}
             alt='Imagem Rifa'
             onLoad={handleImageLoad}
             style={{ display: isLoading ? 'none' : 'block' }}
           />
+          )
         }
+
+        {/* {!showNoImageMessage && 
+          <img
+            src={'https://api-sorteio-ha14.vercel.app/getImage'}
+            alt='Imagem Rifa'
+            onLoad={handleImageLoad}
+            style={{ display: isLoading ? 'none' : 'block' }}
+          />
+        } */}
       </ContainerImage>
     </Container>
   );

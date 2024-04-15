@@ -190,7 +190,6 @@ export function Home() {
                 return <p key={n} className="text-white">{cliente.name}</p>
               } 
             })}
-            {seeName && <p className="text-white">Daniel Patino</p>}
           </CasaContainer>
         )
         )}

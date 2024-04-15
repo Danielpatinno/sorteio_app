@@ -112,8 +112,7 @@ export const NumberContainer = styled.button<{ isselected: boolean; ispurchased:
     font-weight: bold;
     font-size: 40px;
     align-items: center;
-    justify-content: center; 
-    /* border: 2px solid red ; */
+    justify-content: center;
     border-radius: 50%;
     width: 90px;
     height: 85px;

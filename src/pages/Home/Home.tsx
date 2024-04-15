@@ -81,7 +81,7 @@ export function Home() {
     <div className=" m-auto w-10/12">
       <div className="flex justify-center">
         <h1 
-          className="text-white text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2"
+          className="text-white text-center text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl mt-2"
           style={{ 
             textShadow: '0px 3px 6px #0AFFEF',
             fontFamily: 'Great Vibes'
@@ -187,9 +187,10 @@ export function Home() {
 
             {seeName && dataItems?.map((cliente) => {
               if (cliente.numbers.includes(n)){
-                return <p key={n} className="nameC text-white">{cliente.name}</p>
+                return <p key={n} className="text-white">{cliente.name}</p>
               } 
             })}
+            {seeName && <p className="text-white">Daniel Patino</p>}
           </CasaContainer>
         )
         )}

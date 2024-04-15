@@ -70,7 +70,7 @@ export function Login() {
       
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className="max-w-xl m-auto">
           <Input 
             label="E-mail"
             placeholder="Digite seu e-mail"
@@ -82,7 +82,7 @@ export function Login() {
           />        
         </div>
         
-        <div>
+        <div className="max-w-xl m-auto">
           <Input 
             label="Senha"
             placeholder="Digite a senha"

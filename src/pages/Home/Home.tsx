@@ -187,7 +187,8 @@ export function Home() {
 
             {seeName && dataItems?.map((cliente) => {
               if (cliente.numbers.includes(n)){
-                return <p key={n} className="text-white">{cliente.name}</p>
+                const firstName = cliente.name.split(' ')[0];
+                return <p key={n} className="text-white">{firstName}</p>
               } 
             })}
           </CasaContainer>

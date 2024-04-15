@@ -55,7 +55,7 @@ export function Login() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen m-auto p-4 w-6/12 text-white">
+    <div className="flex justify-center items-center h-screen m-auto p-4 w-10/12 text-white">
       <div className="flex flex-col w-full ">
 
       <div className="mb-10">

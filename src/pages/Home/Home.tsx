@@ -78,7 +78,7 @@ export function Home() {
   }
 
   return (
-    <div className=" m-auto w-9/12">
+    <div className=" m-auto w-10/12">
       <div className="flex justify-center">
         <h1 
           className="text-white text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2"

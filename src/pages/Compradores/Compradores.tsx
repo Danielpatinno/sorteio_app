@@ -82,7 +82,7 @@ export function Compradores() {
   }
 
   return ( 
-      <div className="m-auto w-6/12 text-center text-white">
+      <div className="m-auto w-10/12 text-center text-white">
         {openModalDetail && 
           <ModalClientDetail 
             clientId={cliId} 

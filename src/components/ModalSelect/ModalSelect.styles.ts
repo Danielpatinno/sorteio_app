@@ -12,17 +12,12 @@ export const Container = styled.div`
   height: 450px;
   margin-left: 230px;
   background: white;
-  background-color: #494949;
+  background-color: #101019;
   color: white;
   border-radius: 15px;
 
-  h3 {
-    margin-top: -60px;
-  }
-
   p {
     margin-top: -5px;
-    color: white;
   }
 
   @media (max-width:900px) {
@@ -35,7 +30,7 @@ export const Container = styled.div`
     margin-left: 10px;
   }
 
-  button {
+  /* button {
     display: flex;
     margin: auto;
     margin-top: 10px;
@@ -56,7 +51,7 @@ export const Container = styled.div`
     @media (max-width: 500px) {
       width: 100px;
     }
-  }
+  } */
 
    .btnVerMais {
      margin-bottom: 5px;
@@ -104,15 +99,15 @@ const exibirType = {
 
 
 export const NumberContainer = styled.div<{verTodos: boolean}>`
-  ${({ verTodos }) => css`
+  /* ${({ verTodos }) => css`
     height: ${verTodos ? '170' : '70px'};
     max-width: 340px;
     justify-content: center;
     align-items: center;
     
     ${exibirType[verTodos ? 'secondary' : 'default']}
-
-    p {
+`} */
+    /* p {
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -127,8 +122,8 @@ export const NumberContainer = styled.div<{verTodos: boolean}>`
       font-size: 35px;
       font-weight: bold;
       box-shadow: inset 5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;
-    }  
-  `}
+    }   */
+  
 
 `
 
@@ -136,7 +131,7 @@ export const InputContainer = styled.label`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: -30px;
+  margin-bottom: -20px;
 
   input {
     width: 300px;

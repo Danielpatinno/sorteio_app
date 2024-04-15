@@ -31,10 +31,17 @@ export const Container = styled.div`
 
 export const HeaderContainer = styled.div`
   display: flex;
-  /* border: 2px solid red; */
   height: 60px;
   margin-bottom: 10px;
-  /* margin-top: 1px; */
+
+  h1 {
+    font-size: 60px;
+    text-align: center;
+    width: 100%;
+    color: #FFF;
+    text-shadow: 0px 3px 6px #0AFFEF;
+    font-family: 'Great Vibes';
+  }
 
   img {
     margin: auto;
@@ -49,43 +56,6 @@ export const ActionContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-
-  .btnLogin {
-    cursor: pointer;
-    width: 130px;
-    height: 25px;
-    color: #0AFFEF;
-    border-radius: 50px;
-    background: #243441;
-    box-shadow:  1px 1px 1px #101010,
-             -5px -5px 5px #383838;
-
-    a {
-      text-decoration: none;
-      color: #0AFFEF;
-    }
-
-    @media (max-width: 500px) {
-      width: 90px;
-      height: 22px;
-    }   
-  } 
-
-  .btnRifa {
-    cursor: pointer;
-    width: 110px;
-    height: 25px;
-    margin-right: 25px;
-    color: #0AFFEF;
-    border-radius: 50px;
-    background: #243441;
-    box-shadow:  1px 1px 1px #101010,
-             -5px -5px 5px #383838;
-
-  }
-  div {
-
-  }
 
 `
 
@@ -116,10 +86,6 @@ export const CasaContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    p {
-      text-align: center;
-    }
 
     .nameC {
       width: 100%;
@@ -141,14 +107,13 @@ export const CasaContainer = styled.div`
 
 export const NumberContainer = styled.button<{ isselected: boolean; ispurchased: boolean }>`
  ${(props) => css`
-    color: ${props.ispurchased ? '#0AFFEF' :props.isselected ? '#0AFFEF': '#7C858D'};
-    
+    color: ${props.ispurchased ? '#0AFFEF' :props.isselected ? '#0AFFEF': '#7C858D'};   
     display: flex;
     font-weight: bold;
     font-size: 40px;
     align-items: center;
     justify-content: center; 
-    border: none;
+    /* border: 2px solid red ; */
     border-radius: 50%;
     width: 90px;
     height: 85px;
@@ -174,7 +139,6 @@ export const NumberContainer = styled.button<{ isselected: boolean; ispurchased:
     }
 
     p {
-      margin-top: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -191,30 +155,7 @@ export const ButtonsContainer = styled.div`
   a {
     text-decoration: none;
     color: #0AFFEF;
-    
   }
-
-  button {
-    display: flex;
-    margin: auto;
-    margin-top: 10px;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    color: #0AFFEF;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    width: 150px;
-    border-radius: 50px;
-    background: #243441;
-
-    &:hover {
-    box-shadow:  1px 1px 1px #101010,
-             -5px -5px 5px #383835;
-    }
-    
-}
-
 
   @media (max-width: 810px) {
     width: 400px;
@@ -228,7 +169,6 @@ export const ButtonsContainer = styled.div`
 export const ObservationContainer = styled.div`
  
   p {
-    margin-top: -15px;
     display: flex;
     align-items: center;
   }
@@ -243,16 +183,13 @@ export const ObservationContainer = styled.div`
     justify-content: center;
     font-size: 10px;
     align-items: center;
-    color: #04D939;
+    color: #0AFFEF;
+    border: 2px solid #0AFFEF;
   }
 
   .disponivel {
     background-color: black;
-    border: 1px solid red;
-  }
-
-  .indisponivel {
-    background-color: #242424;
+    
   }
 
 `

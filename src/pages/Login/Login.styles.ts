@@ -1,10 +1,5 @@
 import { styled } from "styled-components"
 
-export const InputContainer = styled.div`
-  width: 100%;
-  /* border: 2px solid red; */
-`
-
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -13,7 +8,6 @@ export const Container = styled.div`
   align-items: center;
   padding: 4.0rem;
   height: 60vh;
-  /* border: 2px solid white; */
 
   @media (max-width: 800px) {
     width: 470px;
@@ -33,11 +27,6 @@ export const FormContainer = styled.div`
   flex-direction: column;
   max-width: 50rem;
   width: 100%;
-  /* border: 2px solid blue; */
-
-  form {
-    /* margin: auto; */
-  }
 
   button {
     display: flex;

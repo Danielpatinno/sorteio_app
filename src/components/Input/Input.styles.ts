@@ -17,7 +17,7 @@ export const Container = styled.div<ContainerProps>`
     }
 
     input {
-      height: 1.3rem;
+      height: 2.2rem;
       border-radius: 0.8rem;
       padding: 0.8rem;
       font-size: 1rem;
@@ -32,8 +32,8 @@ export const Container = styled.div<ContainerProps>`
     }
 
     p {
-      margin-top: 0.6rem;
-      color: #d74544;
+      margin-top: 0.1rem;
+      color: #d74544 !important;
     }
   
 `}

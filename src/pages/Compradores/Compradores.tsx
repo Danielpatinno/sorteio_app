@@ -18,7 +18,7 @@ import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
 import { ModalDeleteAllClients } from "../../components/ModalDeleteAllClients";
 import { Link } from "react-router-dom";
 import { useDeleteImage } from "../../hooks/useDeleteImage";
-import { useRifaQuery } from "../../hooks/useRifaQuery";
+import { Button } from "@/components/Button";
 
 interface Client {
   _id: string
@@ -59,25 +59,6 @@ export function Compradores() {
     setOpenModalDelete(true)
   }  
 
-  // const closeModal = () => {
-  //   setOpenModalDetail(false)
-  //   refetchClients()
-  //   setCliId('')
-  // }
-
-
-
-  // const closeModalD = () => {
-  //   setOpenModalDelete(false)
-  //   refetchClients()
-  //   setCliId('')
-  // }
-
-  // const closeModalAll = () => {
-  //   setOpenModalDeleteAll(false)
-  //   refetchClients()
-  // }
-
   const handleDeleteClient = async () => {
     try {
       await deleteClient.mutateAsync({clientId: cliId})
@@ -88,8 +69,6 @@ export function Compradores() {
       console.log(error)
     }
   }
-
-  const deleteImage = useDeleteImage()
 
   const handleDeleteAllClients = async() => {
     try {
@@ -103,7 +82,7 @@ export function Compradores() {
   }
 
   return ( 
-      <Container>
+      <div className="m-auto w-6/12 text-center text-white">
         {openModalDetail && 
           <ModalClientDetail 
             clientId={cliId} 
@@ -162,27 +141,26 @@ export function Compradores() {
         }
 
         <h1>Administração</h1>
-        <OptionsContainer>
+        <div className="flex flex-col">
           {data?.totalClients === 0 ? (
-            <p>Nenhum número vendido</p>
+            <p className="text-left">Nenhum número vendido</p>
             ):(
-              <div>
-                <p>Número compradores: {data?.totalClients}</p>
-                <button onClick={() => setOpenModalDeleteAll(true)}>Reiniciar sorteio</button>
-                
+              <div className="flex flex-col">
+                <p className="text-left">Número compradores: {data?.totalClients}</p>
+                <Button 
+                  buttonFunction={() => setOpenModalDeleteAll(true)}
+                  labelButton='Reiniciar Sorteio'
+                  variantSize="large"
+                />                
               </div>
               
-            )}
-            
-            <Link to='/painelControle'>
-              <button>Imagem da Rifa</button>
-            </Link>               
-        </OptionsContainer>
+            )} 
+        </div>
  
-          <ClientContainer>
+          <div className="flex flex-col align-center w-full">
             <h3>Lista de compradores</h3>
           <table>
-            <thead>
+            <thead className="bg-blackSec text-left">
               <tr>
                 <th>Nome</th>
                 <th>Telefone</th>
@@ -190,19 +168,20 @@ export function Compradores() {
                 <th className="action"></th>
               </tr>
             </thead>
-            <tbody>
-            
+            <tbody>     
               {dataItems?.map((cliente) => (      
                 <tr key={cliente._id}>
-                  <td className="tdName">{cliente.name}</td>
-                  <td className="tdPhone">{cliente.phone}</td>
-                  <td className="tdNumbers">{cliente.numbers.join(', ')}</td>
-                  <td className="action">
+                  <td className="text-left w-2/6 border-2">{cliente.name}</td>
+                  <td className="text-left w-2/6 border-2">{cliente.phone}</td>
+                  <td className="text-left w-2/6 border-2">{cliente.numbers.join(', ')}</td>
+                  <td className="flex">
                     <FaRegEdit 
+                      size={25}
                       title="Alterar pedido"
                       onClick={() => openM(cliente._id)}
                     />   
                     <MdDeleteOutline 
+                      size={25}
                       title="Deletar pedido"
                       onClick={() => openModalD(cliente._id)}
                     />
@@ -211,7 +190,7 @@ export function Compradores() {
               ))}
             </tbody>
           </table>
-          </ClientContainer>
-      </Container>
+          </div>
+      </div>
   )
 }

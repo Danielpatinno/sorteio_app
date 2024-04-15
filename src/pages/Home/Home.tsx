@@ -9,18 +9,22 @@ import isPropValid from '@emotion/is-prop-valid';
 
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label"
+
 import Logo from '../../imagens/LogoSorteio.png'
 
 import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
 import { useAuth } from "../../hooks/useAuth";
 import { ImageRifa } from "../../components/ImageRifa";
+import { Button } from "../../components/Button";
 
 export function Home() {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [openAlert, setOpenAlert] = useState<boolean>(false)
   const [openAlertError, setOpenAlertError] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
-  const [seeName, setSeeName] = useState<boolean>(false)
+  const [seeName, setSeeName] = useState<boolean>()
   const [seeRifa, setSeeRifa] = useState<boolean>(false)
   const [numbers, setNumbers] = useState<number[]>([])
   const { isAuthenticated, signOut } = useAuth()
@@ -76,8 +80,7 @@ export function Home() {
   return (
     <Container>
       <HeaderContainer>
-        <img src={Logo} alt="Logo" 
-        />        
+        <h1>Rifas Tupperware</h1>
       </HeaderContainer>
 
       {seeRifa && 
@@ -91,29 +94,25 @@ export function Home() {
         <div>
           {isAuthenticated ? 
             (
-              <button 
-                className="btnLogin"
-                onClick={handleLogout}
-                >Sair
-              </button>
+              <Button
+                variantSize="normal"
+                labelButton="Sair"
+                buttonFunction={handleLogout}
+              />
             ) : (
               <Link to='/loginAdm'>
-                <button 
-                  className="btnLogin"
-                >LOGIN
-                </button>
+                <Button 
+                  variantSize="normal"
+                  labelButton="LOGIN"
+                />
               </Link>
           )}              
         </div>
 
         <div>
-          <button 
-            className="btnRifa"
-            onClick={() => setSeeRifa(true)}
-            >Ver rifa
-          </button>
+
           {seeName ? (
-            <p className="verNome">
+            <p className="verNome text-white">
               <IoIosEye 
                 size={25} 
                 onClick={() => setSeeName(false)}
@@ -121,7 +120,7 @@ export function Home() {
               Ver nomes
             </p>
           ) : (
-            <p className="verNome">
+            <p className="verNome text-white">
               <IoIosEyeOff 
                 size={25} 
                 onClick={() => setSeeName(true)}
@@ -165,47 +164,48 @@ export function Home() {
         {Array.from({ length: 100 }, (_, i) => i + 1).map((n) => (
           <CasaContainer key={n}>
             <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
-              <NumberContainer 
+              <NumberContainer
+                
                 key={n} 
                 ispurchased={
                   numbers.includes(n)
                 }
                 isselected={selectedNumber.includes(n)}
                 onClick={() => select(n)}>
-                  <p>{n}</p>
+                  <p className='bg-color-black flex' >{n}</p>
               </NumberContainer>              
             </StyleSheetManager>
 
             {seeName && dataItems?.map((cliente) => {
               if (cliente.numbers.includes(n)){
-                return <p key={n} className="nameC">{cliente.name}</p>
+                return <p key={n} className="nameC text-white">{cliente.name}</p>
               } 
             })}
+            {seeName && <p className="text-white">Daniel</p>}
           </CasaContainer>
         )
         )}
        </NumbersContainer>
 
        <ButtonsContainer>
-       <button 
-         className="btnConfirm"
-         onClick={abrirModal}
-         >Comprar números
-       </button>
+        <Button 
+          variantSize="large"
+          labelButton="Comprar números"
+          buttonFunction={abrirModal}
+        />
 
         {isAuthenticated && (
           <Link to='/compradores'>
-            <button className="btnConfirm">Administração</button> 
+            <Button 
+              variantSize="large"
+              labelButton="Administração"
+            />
           </Link>          
         )}
        </ButtonsContainer>
 
-        <ObservationContainer>
-          <h3>Observação</h3>
-          <p>
-            <span className="quadrado indisponivel">0</span>
-            Números indisponiveis
-          </p>
+        <ObservationContainer className="text-white">
+          <h3 className="">Observação</h3>
           <p>Números disponiveis: {100 - numbers.length}</p>
         </ObservationContainer>
     </Container>

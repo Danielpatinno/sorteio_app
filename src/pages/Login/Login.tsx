@@ -1,12 +1,14 @@
+import { Button } from "@/components/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import  Input from "../../components/Input/Input";
+
 import { Message } from "../../components/Message";
 import { useAuth } from "../../hooks/useAuth";
 import { useError } from "../../hooks/useError";
-import { Container, FormContainer, HeaderContainer, InputContainer } from "./Login.styles";
+
 
 const validationSchema = z.object({
   email: z
@@ -53,16 +55,22 @@ export function Login() {
   }
 
   return (
-    <Container>
-      <FormContainer>
+    <div className="flex justify-center items-center h-screen m-auto p-4 w-6/12 text-white">
+      <div className="flex flex-col w-full ">
 
-      <HeaderContainer>
-        <h1>Login</h1>
-      </HeaderContainer>
+      <div className="mb-10">
+        <h1 
+          className="text-4xl text-center text-greenWater" 
+          style={{ 
+            textShadow: '0px 1px 6px #0AFFEF',
+            fontFamily: 'Roboto Serif' 
+          }} 
+        >Login</h1>
+      </div>
       
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <InputContainer>
+        <div>
           <Input 
             label="E-mail"
             placeholder="Digite seu e-mail"
@@ -72,9 +80,9 @@ export function Login() {
             error={errors.email?.message}
             {...register('email')}
           />        
-        </InputContainer>
+        </div>
         
-        <InputContainer>
+        <div>
           <Input 
             label="Senha"
             placeholder="Digite a senha"
@@ -84,12 +92,20 @@ export function Login() {
             error={errors.password?.message}
             {...register('password')}
           />        
-        </InputContainer>
-        <button>Login</button>    
+        </div>
+        
+        <div className="flex justify-center">
+          <Button 
+            variantSize="normal" 
+            labelButton="Entrar"
+            type="submit"
+          />  
+        </div>
+          
         {error && <Message msg={error} type="error"/> }
 
       </form>
-    </FormContainer>
-    </Container>
+    </div>
+    </div>
   )
 }

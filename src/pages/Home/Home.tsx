@@ -78,10 +78,19 @@ export function Home() {
   }
 
   return (
-    <Container>
-      <HeaderContainer>
-        <h1>Rifas Tupperware</h1>
-      </HeaderContainer>
+    <div className=" m-auto w-8/12">
+      <div className="flex justify-center">
+        <h1 
+          className="text-white text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2"
+          style={{ 
+            textShadow: '0px 3px 6px #0AFFEF',
+            fontFamily: 'Great Vibes'
+          }} 
+        >
+          Rifas Tupperware
+        </h1>
+      </div>
+
 
       {seeRifa && 
         <ImageRifa 
@@ -187,7 +196,7 @@ export function Home() {
         )}
        </NumbersContainer>
 
-       <ButtonsContainer>
+       <div className="flex justify-around m-auto">
         <Button 
           variantSize="large"
           labelButton="Comprar números"
@@ -202,12 +211,12 @@ export function Home() {
             />
           </Link>          
         )}
-       </ButtonsContainer>
+       </div>
 
         <ObservationContainer className="text-white">
           <h3 className="">Observação</h3>
           <p>Números disponiveis: {100 - numbers.length}</p>
         </ObservationContainer>
-    </Container>
+    </div>
   )
 }

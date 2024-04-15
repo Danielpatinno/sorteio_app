@@ -47,9 +47,9 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
           background: #243438;
     }
 
-    @media (max-width: 500px) {
+    /* @media (max-width: 500px) {
       width: 90px;
       height: 22px;
-    } 
+    }  */
   `}
 `

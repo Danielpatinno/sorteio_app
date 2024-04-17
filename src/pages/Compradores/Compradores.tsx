@@ -73,6 +73,11 @@ export function Compradores() {
     setOpenModalDelete(true)
   }  
 
+  const handleBeforeDelete = (clientId:string) => {
+    setCliId(clientId)
+    handleDeleteClient()
+  }
+
   const handleDeleteClient = async () => {
     try {
       await deleteClient.mutateAsync({clientId: cliId})
@@ -228,7 +233,7 @@ export function Compradores() {
 
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                          <AlertDialogAction onClick={handleDeleteClient}>Deletar</AlertDialogAction>
+                          <AlertDialogAction onClick={handleBeforeDelete(cliente._id)}>Deletar</AlertDialogAction>
                         </AlertDialogFooter>
                         
                       </AlertDialogContent>

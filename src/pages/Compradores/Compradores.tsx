@@ -164,33 +164,30 @@ export function Compradores() {
                 <p className="text-left">Número compradores: {data?.totalClients}</p>
                 
                 <div className="text-left"> 
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button
+                        labelButton='Reiniciar Sorteio'
+                        variantSize="large"
+                      /> 
+                    </AlertDialogTrigger>
 
-                
-                <AlertDialog>
-                  <AlertDialogTrigger>
-                    <Button
-                      labelButton='Reiniciar Sorteio'
-                      variantSize="large"
-                    /> 
-                  </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Atenção</AlertDialogTitle>
 
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Atenção</AlertDialogTitle>
+                        <AlertDialogDescription>Deseja reiniciar o sorteio ?</AlertDialogDescription>
+                      </AlertDialogHeader>
 
-                      <AlertDialogDescription>Deseja reiniciar o sorteio ?</AlertDialogDescription>
-                    </AlertDialogHeader>
-
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleDeleteAllClients}>Reiniciar</AlertDialogAction>
-                    </AlertDialogFooter>
-                    
-                  </AlertDialogContent>
-                </AlertDialog>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleDeleteAllClients}>Reiniciar</AlertDialogAction>
+                      </AlertDialogFooter>
+                      
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>     
               </div>
-              
             )} 
         </div>
  
@@ -216,12 +213,32 @@ export function Compradores() {
                       size={25}
                       title="Alterar pedido"
                       onClick={() => openM(cliente._id)}
-                    />   
-                    <MdDeleteOutline 
+                    />  
+                    <AlertDialog>
+                      <AlertDialogTrigger>
+                      <MdDeleteOutline size={25}/>
+                      </AlertDialogTrigger>
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Atenção</AlertDialogTitle>
+
+                          <AlertDialogDescription>Deseja excluir a compra ?</AlertDialogDescription>
+                        </AlertDialogHeader>
+
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                          <AlertDialogAction onClick={handleDeleteClient}>Deletar</AlertDialogAction>
+                        </AlertDialogFooter>
+                        
+                      </AlertDialogContent>
+                    </AlertDialog>
+
+                    {/* <MdDeleteOutline 
                       size={25}
                       title="Deletar pedido"
                       onClick={() => openModalD(cliente._id)}
-                    />
+                    /> */}
                   </td>  
                 </tr>    
               ))}

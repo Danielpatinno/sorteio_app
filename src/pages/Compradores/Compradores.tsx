@@ -20,6 +20,20 @@ import { Link } from "react-router-dom";
 import { useDeleteImage } from "../../hooks/useDeleteImage";
 import { Button } from "@/components/Button";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+
+
 interface Client {
   _id: string
   name: string
@@ -106,7 +120,8 @@ export function Compradores() {
           />
         }
 
-         {openModalDeleteAll && 
+
+         {/* {openModalDeleteAll && 
           <ModalDeleteAllClients 
              name={nameD}
              onCloseDelete={() => {
@@ -115,7 +130,7 @@ export function Compradores() {
              }}
              onDelete={handleDeleteAllClients}
           />
-        }
+        } */}
 
 
         {alertOpen && 
@@ -147,11 +162,33 @@ export function Compradores() {
             ):(
               <div className="flex flex-col">
                 <p className="text-left">Número compradores: {data?.totalClients}</p>
-                <Button 
-                  buttonFunction={() => setOpenModalDeleteAll(true)}
-                  labelButton='Reiniciar Sorteio'
-                  variantSize="large"
-                />                
+                
+                <div className="text-left"> 
+
+                
+                <AlertDialog>
+                  <AlertDialogTrigger>
+                    <Button
+                      labelButton='Reiniciar Sorteio'
+                      variantSize="large"
+                    /> 
+                  </AlertDialogTrigger>
+
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Atenção</AlertDialogTitle>
+
+                      <AlertDialogDescription>Deseja reiniciar o sorteio ?</AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={handleDeleteAllClients}>Reiniciar</AlertDialogAction>
+                    </AlertDialogFooter>
+                    
+                  </AlertDialogContent>
+                </AlertDialog>
+                </div>     
               </div>
               
             )} 

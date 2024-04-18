@@ -74,15 +74,16 @@ export function Compradores() {
   }  
 
   const handleBeforeDelete = (clientId:string) => {
-    setCliId(clientId)
-    handleDeleteClient()
+    // setCliId(clientId)
+    alert(clientId)
+    // handleDeleteClient()
   }
 
   const handleDeleteClient = async () => {
     try {
       await deleteClient.mutateAsync({clientId: cliId})
       
-      setOpenModalDelete(false)
+      // setOpenModalDelete(false)
       setAlertOpen(true)
     } catch (error) {
       console.log(error)
@@ -197,11 +198,11 @@ export function Compradores() {
         </div>
  
           <div className="flex flex-col align-center w-full">
-            <h3>Lista de compradores</h3>
+            <h3 className="">Lista de compradores</h3>
           <table>
             <thead className="bg-blackSec text-left">
               <tr>
-                <th>Nome</th>
+                <th className="bg-white">Nome</th>
                 <th>Telefone</th>
                 <th>Números</th>
                 <th className="action"></th>
@@ -209,7 +210,7 @@ export function Compradores() {
             </thead>
             <tbody>     
               {dataItems?.map((cliente) => (      
-                <tr key={cliente._id}>
+                 <tr key={cliente._id}>
                   <td className="text-left w-2/6 border-2">{cliente.name}</td>
                   <td className="text-left w-2/6 border-2">{cliente.phone}</td>
                   <td className="text-left w-2/6 border-2">{cliente.numbers.join(', ')}</td>
@@ -219,9 +220,10 @@ export function Compradores() {
                       title="Alterar pedido"
                       onClick={() => openM(cliente._id)}
                     />  
-                    <AlertDialog>
+                    
+                    <AlertDialog>z
                       <AlertDialogTrigger>
-                      <MdDeleteOutline size={25}/>
+                        <MdDeleteOutline size={25}/>
                       </AlertDialogTrigger>
 
                       <AlertDialogContent>
@@ -233,20 +235,15 @@ export function Compradores() {
 
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                          <AlertDialogAction onClick={handleBeforeDelete(cliente._id)}>Deletar</AlertDialogAction>
+                          <AlertDialogAction onClick={() => handleBeforeDelete(cliente._id)}>Deletar</AlertDialogAction>
                         </AlertDialogFooter>
                         
                       </AlertDialogContent>
                     </AlertDialog>
 
-                    {/* <MdDeleteOutline 
-                      size={25}
-                      title="Deletar pedido"
-                      onClick={() => openModalD(cliente._id)}
-                    /> */}
                   </td>  
                 </tr>    
-              ))}
+                ))} 
             </tbody>
           </table>
           </div>

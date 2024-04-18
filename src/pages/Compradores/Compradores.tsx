@@ -5,20 +5,22 @@ import { useDeleteClient } from '../../hooks/useDeleteClients'
 
 // Components
 import { ModalClientDetail } from "../../components/ModalClientDetail";
-import { ModalDeleteClient } from "../../components/ModalDeleteClient";
+// import { ModalDeleteClient } from "../../components/ModalDeleteClient";
 
 // Icons
 import { MdDeleteOutline } from "react-icons/md"
 import { FaRegEdit } from "react-icons/fa";
 
 // Styles
-import { ClientContainer, Container, OptionsContainer } from "./Compradores.styles";
+// import { ClientContainer, Container, OptionsContainer } from "./Compradores.styles";
 import { Alert } from "../../components/Alert";
 import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
-import { ModalDeleteAllClients } from "../../components/ModalDeleteAllClients";
-import { Link } from "react-router-dom";
-import { useDeleteImage } from "../../hooks/useDeleteImage";
+// import { ModalDeleteAllClients } from "../../components/ModalDeleteAllClients";
+// import { Link } from "react-router-dom";
+// import { useDeleteImage } from "../../hooks/useDeleteImage";
 import { Button } from "@/components/Button";
+
+import { AiFillDelete } from "react-icons/ai"
 
 import {
   AlertDialog,
@@ -31,6 +33,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { ClientRequest } from "http";
 
 
 
@@ -54,36 +57,30 @@ export function Compradores() {
   },[data])
 
   const [openModalDetail, setOpenModalDetail] = useState<boolean>(false)
-  const [openModalDelete, setOpenModalDelete] = useState<boolean>(false)
-  const [openModalDeleteAll, setOpenModalDeleteAll] = useState<boolean>(false)
+  // const [openModalDelete, setOpenModalDelete] = useState<boolean>(false)
+  // const [openModalDeleteAll, setOpenModalDeleteAll] = useState<boolean>(false)
   const [alertOpen, setAlertOpen] = useState<boolean>(false)
   const [alertOpenDelete, setAlertOpenDelete] = useState<boolean>(false)
 
   const [cliId, setCliId] = useState<string>('')
-  const [nameD, setNameD] = useState<string>('')
+  // const [nameD, setNameD] = useState<string>('')
 
   const openM = (n: string) => {
     setCliId(n)
     setOpenModalDetail(true)
   }
 
-  const openModalD = (clientId: string) => {
-    setCliId(clientId)
-    setNameD('')
-    setOpenModalDelete(true)
-  }  
+  // const openModalD = (clientId: string) => {
+  //   setCliId(clientId)
+  //   setNameD('')
+  //   setOpenModalDelete(true)
+  // }  
 
-  // const handleBeforeDelete = (clientId:string) => {
-  //   // setCliId(clientId)
-  //   alert(clientId)
-  //   // handleDeleteClient()
-  // }
 
   const handleDeleteClient = async (clientId:string) => {
     try {
       await deleteClient.mutateAsync({clientId: clientId})
-      
-      // setOpenModalDelete(false)
+ 
       setAlertOpen(true)
     } catch (error) {
       console.log(error)
@@ -94,7 +91,6 @@ export function Compradores() {
     try {
       await deleteAllClients.mutateAsync()
 
-      setOpenModalDeleteAll(false)
       setAlertOpenDelete(true)
     } catch (error) {
       console.log(error)
@@ -113,31 +109,6 @@ export function Compradores() {
             }}
           />
         }
-
-        {/* {openModalDelete && 
-          <ModalDeleteClient 
-             name={nameD}
-             onCloseDelete={() => {
-              setOpenModalDelete(false)
-              refetchClients()
-              setCliId('')
-             }}
-             onDelete={handleDeleteClient}
-          />
-        } */}
-
-
-         {/* {openModalDeleteAll && 
-          <ModalDeleteAllClients 
-             name={nameD}
-             onCloseDelete={() => {
-               setOpenModalDeleteAll(false)
-               refetchClients()
-             }}
-             onDelete={handleDeleteAllClients}
-          />
-        } */}
-
 
         {alertOpen && 
           <Alert 
@@ -220,10 +191,48 @@ export function Compradores() {
                       title="Alterar pedido"
                       onClick={() => openM(cliente._id)}
                     />  
+                  {/* <tr >
+                  <td className="text-left w-2/6 border-2">Daniel</td>
+                  <td className="text-left w-2/6 border-2">(44) 99845-1188</td>
+                  <td className="text-left w-2/6 border-2">12,25,15</td>
+                  <td className="flex"> */}
 
-                    <AlertDialog>z
+                    <AlertDialog>
                       <AlertDialogTrigger>
-                        <MdDeleteOutline size={25}/>
+                        <FaRegEdit title="Editar compra" size={25}/>
+                      </AlertDialogTrigger>
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Alterar compra</AlertDialogTitle>
+
+                          <AlertDialogDescription>
+                            <p>Números comprados</p>
+
+                            {cliente.numbers.map((numero) => (
+                              <div className="flex justify-center">
+                                  <div className="flex flex-col">
+                                    <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3">{numero}</p>
+                                    <AiFillDelete className="m-auto" size={15}/>
+                                  </div>
+                                </div>
+                            ))}
+                            
+                          </AlertDialogDescription>
+
+                        </AlertDialogHeader>
+                        
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                          <AlertDialogAction>Confirmar</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+
+
+                    <AlertDialog>
+                      <AlertDialogTrigger>
+                        <MdDeleteOutline title="Deletar compra" size={25}/>
                       </AlertDialogTrigger>
 
                       <AlertDialogContent>
@@ -235,7 +244,7 @@ export function Compradores() {
 
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                          <AlertDialogAction onClick={() => handleDeleteClient(cliente._id)}>Deletar</AlertDialogAction>
+                          {/* <AlertDialogAction onClick={() => handleDeleteClient(cliente._id)}>Deletar</AlertDialogAction> */}
                         </AlertDialogFooter>
                         
                       </AlertDialogContent>

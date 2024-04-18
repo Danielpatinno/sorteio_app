@@ -186,11 +186,11 @@ export function Compradores() {
                   <td className="text-left w-2/6 border-2">{cliente.phone}</td>
                   <td className="text-left w-2/6 border-2">{cliente.numbers.join(', ')}</td>
                   <td className="flex">
-                    <FaRegEdit 
+                    {/* <FaRegEdit 
                       size={25}
                       title="Alterar pedido"
                       onClick={() => openM(cliente._id)}
-                    />  
+                    />   */}
                   {/* <tr >
                   <td className="text-left w-2/6 border-2">Daniel</td>
                   <td className="text-left w-2/6 border-2">(44) 99845-1188</td>

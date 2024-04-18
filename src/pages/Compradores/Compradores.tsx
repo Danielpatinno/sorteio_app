@@ -208,16 +208,14 @@ export function Compradores() {
 
                           <AlertDialogDescription>
                             <p>Números comprados</p>
-
-                            {cliente.numbers.map((numero) => (
-                              <div className="flex justify-center">
-                                  <div className="flex flex-col">
-                                    <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3">{numero}</p>
-                                    <AiFillDelete className="m-auto" size={15}/>
-                                  </div>
+                            <div className="flex justify-center">
+                              {cliente.numbers.map((numero) => (
+                                <div className="flex flex-col">
+                                  <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3">{numero}</p>
+                                  <AiFillDelete className="m-auto" size={15}/>
                                 </div>
-                            ))}
-                            
+                              ))}
+                            </div>
                           </AlertDialogDescription>
 
                         </AlertDialogHeader>

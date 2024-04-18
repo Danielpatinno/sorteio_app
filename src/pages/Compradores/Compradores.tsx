@@ -73,15 +73,15 @@ export function Compradores() {
     setOpenModalDelete(true)
   }  
 
-  const handleBeforeDelete = (clientId:string) => {
-    // setCliId(clientId)
-    alert(clientId)
-    // handleDeleteClient()
-  }
+  // const handleBeforeDelete = (clientId:string) => {
+  //   // setCliId(clientId)
+  //   alert(clientId)
+  //   // handleDeleteClient()
+  // }
 
-  const handleDeleteClient = async () => {
+  const handleDeleteClient = async (clientId:string) => {
     try {
-      await deleteClient.mutateAsync({clientId: cliId})
+      await deleteClient.mutateAsync({clientId: clientId})
       
       // setOpenModalDelete(false)
       setAlertOpen(true)
@@ -114,7 +114,7 @@ export function Compradores() {
           />
         }
 
-        {openModalDelete && 
+        {/* {openModalDelete && 
           <ModalDeleteClient 
              name={nameD}
              onCloseDelete={() => {
@@ -124,7 +124,7 @@ export function Compradores() {
              }}
              onDelete={handleDeleteClient}
           />
-        }
+        } */}
 
 
          {/* {openModalDeleteAll && 
@@ -202,7 +202,7 @@ export function Compradores() {
           <table>
             <thead className="bg-blackSec text-left">
               <tr>
-                <th className="bg-white">Nome</th>
+                <th>Nome</th>
                 <th>Telefone</th>
                 <th>Números</th>
                 <th className="action"></th>
@@ -220,7 +220,7 @@ export function Compradores() {
                       title="Alterar pedido"
                       onClick={() => openM(cliente._id)}
                     />  
-                    
+
                     <AlertDialog>z
                       <AlertDialogTrigger>
                         <MdDeleteOutline size={25}/>
@@ -235,7 +235,7 @@ export function Compradores() {
 
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                          <AlertDialogAction onClick={() => handleBeforeDelete(cliente._id)}>Deletar</AlertDialogAction>
+                          <AlertDialogAction onClick={() => handleDeleteClient(cliente._id)}>Deletar</AlertDialogAction>
                         </AlertDialogFooter>
                         
                       </AlertDialogContent>

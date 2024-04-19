@@ -15,13 +15,16 @@ import { AiFillDelete } from "react-icons/ai"
 import { useEffect, useState } from "react";
 
 interface EditProductProps {
-  numbersComprado: number[]
+  numbersComprado: number[],
+  clientId: string
 }
 
+import { useEditClient } from "@/hooks/useEditClient";
 
-export function EditPedido({numbersComprado}:EditProductProps) {
+
+export function EditPedido({numbersComprado, clientId}:EditProductProps) {
   const [numeros, setNumeros] = useState<number[]>([])
-
+  const editClient = useEditClient()
 
   useEffect(() => {
     setNumeros(numbersComprado)
@@ -31,6 +34,20 @@ export function EditPedido({numbersComprado}:EditProductProps) {
     const novosNumeros = [...numeros]
     novosNumeros.splice(index, 1)
     setNumeros(novosNumeros)
+  }
+
+  const handleEdit = async () => {
+    try {
+            
+      const data = {
+        clientId:clientId,
+        numbers: numeros
+      }
+      
+      await editClient.mutateAsync(data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
@@ -65,7 +82,9 @@ export function EditPedido({numbersComprado}:EditProductProps) {
         
         <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction>Confirmar</AlertDialogAction>
+            <AlertDialogAction 
+              onClick={handleEdit}>Confirmar
+            </AlertDialogAction>
         </AlertDialogFooter>
         </AlertDialogContent>
     </AlertDialog>

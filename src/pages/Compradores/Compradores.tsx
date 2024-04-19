@@ -215,7 +215,10 @@ export function Compradores() {
                   <td className="text-left w-2/6 border-2">12,25,15</td>
                   <td className="flex"> */}
 
-                  <EditPedido numbersComprado={cliente.numbers}/>
+                  <EditPedido 
+                    clientId={cliente._id} 
+                    numbersComprado={cliente.numbers}
+                  />
 
                     {/* <AlertDialog>
                       <AlertDialogTrigger>

@@ -27,6 +27,12 @@ export function EditPedido({numbersComprado}:EditProductProps) {
     setNumeros(numbersComprado)
   }, [])
 
+  const removeOneNumber = (index:number) => {    
+    const novosNumeros = [...numeros]
+    novosNumeros.splice(index, 1)
+    setNumeros(novosNumeros)
+  }
+
 
   return (
     <AlertDialog>
@@ -42,10 +48,14 @@ export function EditPedido({numbersComprado}:EditProductProps) {
             <p>Números comprados</p>
             <div className="flex justify-center">
                 {
-                numeros.map((numero) => (
+                numeros.map((numero, i) => (
                 <div className="flex flex-col">
                     <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3">{numero}</p>
-                    <AiFillDelete className="m-auto" size={15}/>
+
+                    <AiFillDelete 
+                      onClick={() => removeOneNumber(i)} className="m-auto" 
+                      size={15}
+                    />
                 </div>
                 ))}
             </div>

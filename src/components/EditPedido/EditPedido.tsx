@@ -12,6 +12,7 @@ import {
 
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai"
+import { useEffect, useState } from "react";
 
 interface EditProductProps {
   numbersComprado: number[]
@@ -19,6 +20,14 @@ interface EditProductProps {
 
 
 export function EditPedido({numbersComprado}:EditProductProps) {
+  const [numeros, setNumeros] = useState<number[]>([])
+
+
+  useEffect(() => {
+    setNumeros(numbersComprado)
+  }, [])
+
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -27,13 +36,13 @@ export function EditPedido({numbersComprado}:EditProductProps) {
 
       <AlertDialogContent>
         <AlertDialogHeader>
-            <AlertDialogTitle>Alterar compra</AlertDialogTitle>
+            <AlertDialogTitle>Alterar números comprados</AlertDialogTitle>
 
             <AlertDialogDescription>
             <p>Números comprados</p>
             <div className="flex justify-center">
                 {
-                numbersComprado.map((numero) => (
+                numeros.map((numero) => (
                 <div className="flex flex-col">
                     <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3">{numero}</p>
                     <AiFillDelete className="m-auto" size={15}/>

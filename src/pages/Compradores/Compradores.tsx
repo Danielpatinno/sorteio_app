@@ -34,6 +34,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { ClientRequest } from "http";
+import { useEditClient } from "@/hooks/useEditClient";
+import { EditPedido } from "@/components/EditPedido";
 
 
 
@@ -56,6 +58,7 @@ export function Compradores() {
     setDataItems(data?.clients)
   },[data])
 
+  const editClient = useEditClient()
   const [openModalDetail, setOpenModalDetail] = useState<boolean>(false)
   // const [openModalDelete, setOpenModalDelete] = useState<boolean>(false)
   // const [openModalDeleteAll, setOpenModalDeleteAll] = useState<boolean>(false)
@@ -92,6 +95,21 @@ export function Compradores() {
       await deleteAllClients.mutateAsync()
 
       setAlertOpenDelete(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleEdit = async () => {
+    try {
+            
+      const data = {
+        // clientId:clientId,
+        // numbers: numerosComprados
+      }
+      
+      // await editClient.mutateAsync(data)
+      // closeModal()
     } catch (error) {
       console.log(error)
     }
@@ -197,7 +215,9 @@ export function Compradores() {
                   <td className="text-left w-2/6 border-2">12,25,15</td>
                   <td className="flex"> */}
 
-                    <AlertDialog>
+                  <EditPedido numbersComprado={cliente.numbers}/>
+
+                    {/* <AlertDialog>
                       <AlertDialogTrigger>
                         <FaRegEdit title="Editar compra" size={25}/>
                       </AlertDialogTrigger>
@@ -209,7 +229,8 @@ export function Compradores() {
                           <AlertDialogDescription>
                             <p>Números comprados</p>
                             <div className="flex justify-center">
-                              {cliente.numbers.map((numero) => (
+                              {
+                              cliente.numbers.map((numero) => (
                                 <div className="flex flex-col">
                                   <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3">{numero}</p>
                                   <AiFillDelete className="m-auto" size={15}/>
@@ -225,7 +246,7 @@ export function Compradores() {
                           <AlertDialogAction>Confirmar</AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
-                    </AlertDialog>
+                    </AlertDialog> */}
 
 
                     <AlertDialog>

@@ -1,0 +1,1 @@
+export { EditPedido } from './EditPedido'

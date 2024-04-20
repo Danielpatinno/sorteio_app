@@ -33,6 +33,10 @@ export function Home() {
 
   useEffect(() => {
     setDataItems(data?.clients)
+
+    data?.clients.forEach(client => {
+      setNumbers(prevNumbers => [...prevNumbers, ...client.numbers]);
+    }); 
   },[])
 
   useEffect(() => {

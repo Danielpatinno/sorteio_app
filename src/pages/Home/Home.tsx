@@ -40,7 +40,7 @@ export function Home() {
       setNumbers([]);
       setDataItems(data?.clients)
 
-      dataItems?.forEach(client => {
+      data?.clients.forEach(client => {
         setNumbers(prevNumbers => [...prevNumbers, ...client.numbers]);
       }); 
     }

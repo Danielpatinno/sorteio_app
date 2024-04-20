@@ -1,1 +1,0 @@
-export { ModalClientDetail } from './ModalClientDetail'

@@ -5,7 +5,6 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { AuthProvider } from './context/AuthContext/AuthContext'
 import { RequireAuth } from './components/RequireAuth/RequireAuth'
-import { PainelControle } from './pages/PainelControle'
 
 const queryClient = new QueryClient()
 
@@ -15,7 +14,7 @@ function App() {
     <BrowserRouter basename="/">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <div className="bg-black min-h-screen">
+          <div className="bg-black min-h-screen flex justify-center items-center">
           <Routes>
             <Route 
               path='/' 
@@ -25,20 +24,9 @@ function App() {
             <Route 
               path='/compradores' 
               element={
-                <Compradores />
-                // <RequireAuth>
-                //   <Compradores />
-                // </RequireAuth>
-              }
-            />
-
-            <Route 
-              path='/painelControle' 
-              element={
-                <PainelControle />
-                // <RequireAuth>
-                //   <PainelControle />
-                // </RequireAuth>
+                <RequireAuth>
+                  <Compradores />
+                </RequireAuth>
               }
             />
 

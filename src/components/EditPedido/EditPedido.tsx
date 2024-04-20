@@ -13,43 +13,32 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai"
 import { useEffect, useState } from "react";
+import { editPedidoProps } from "@/pages/Compradores/Compradores";
 
 interface EditProductProps {
   numbersComprado: number[],
   clientId: string
+  handleEdit: (data: editPedidoProps) => Promise<void>
 }
 
-import { useEditClient } from "@/hooks/useEditClient";
 
-
-export function EditPedido({numbersComprado, clientId}:EditProductProps) {
+export function EditPedido({numbersComprado, clientId, handleEdit}:EditProductProps) {
 const [numeros, setNumeros] = useState<number[]>([])
-const editClient = useEditClient()
 
 useEffect(() => {
-setNumeros(numbersComprado)
+  setNumeros(numbersComprado)
 }, [])
 
 const removeOneNumber = (index:number) => {    
-const novosNumeros = [...numeros]
-novosNumeros.splice(index, 1)
-setNumeros(novosNumeros)
+  const novosNumeros = [...numeros]
+  novosNumeros.splice(index, 1)
+  setNumeros(novosNumeros)
 }
 
-const handleEdit = async () => {
-try {
-        
-    const data = {
-    clientId:clientId,
-    numbers: numeros
-    }
-    
-    await editClient.mutateAsync(data)
-} catch (error) {
-    console.log(error)
+const data = {
+  clientId: clientId,
+  numbers: numeros
 }
-}
-
 
 return (
 <AlertDialog>
@@ -83,7 +72,7 @@ return (
     <AlertDialogFooter>
         <AlertDialogCancel>Cancelar</AlertDialogCancel>
         <AlertDialogAction 
-            onClick={handleEdit}>Confirmar
+            onClick={() => handleEdit(data)}>Confirmar
         </AlertDialogAction>
     </AlertDialogFooter>
     </AlertDialogContent>

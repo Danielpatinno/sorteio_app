@@ -22,6 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { useEditClient } from "@/hooks/useEditClient";
 
 
 interface Client {
@@ -31,17 +32,23 @@ interface Client {
   numbers: number[]    
 }
 
+export interface editPedidoProps {
+  clientId: string
+  numbers: number[]
+}
+
 export function Compradores() {
   const { data } = useClientsQuery();
 
   const deleteClient = useDeleteClient();
   const deleteAllClients = useDeleteAllClients()
+  const editClient = useEditClient()
 
   const [dataItems, setDataItems] = useState<Client[] | undefined>([])
 
-  useEffect(() => {
-    setDataItems(data?.clients)
-  },[data])
+  // useEffect(() => {
+  //   setDataItems(data?.clients)
+  // },[data])
 
   const handleDeleteClient = async (clientId:string) => {
     try {
@@ -61,6 +68,16 @@ export function Compradores() {
       
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const handleEdit = async (dataEdit: editPedidoProps) => {
+    try {        
+      await editClient.mutateAsync(dataEdit)
+
+      setDataItems(data?.clients)
+    } catch (error) {
+        console.log(error)
     }
   }
 
@@ -124,6 +141,7 @@ export function Compradores() {
                     <EditPedido 
                       clientId={cliente._id} 
                       numbersComprado={cliente.numbers}
+                      handleEdit={handleEdit}
                     />
 
                     <DeletePedido 

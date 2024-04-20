@@ -104,7 +104,7 @@ export function Compradores() {
             <p className="text-left">Nenhum número vendido</p>
             ):(
               <div className="flex flex-col">
-                <p className="text-left">Número compradores: {data?.totalClients}</p>
+                <p className="text-left">Número compradores: {dataItems?.length}</p>
                 
                 <div className="text-left"> 
                   <AlertDialog>

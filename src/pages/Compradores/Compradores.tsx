@@ -100,7 +100,7 @@ export function Compradores() {
 
         <h1>Administração</h1>
         <div className="flex flex-col">
-          {data?.totalClients === 0 ? (
+          {dataItems ? (
             <p className="text-left">Nenhum número vendido</p>
             ):(
               <div className="flex flex-col">

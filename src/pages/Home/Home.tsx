@@ -32,6 +32,12 @@ export function Home() {
   const [dataItems, setDataItems] = useState<Client[] | undefined>([])
 
   useEffect(() => {
+    data?.clients.forEach(client => {
+      setNumbers(prevNumbers => [...prevNumbers, ...client.numbers]);
+    }); 
+  },[])
+
+  useEffect(() => {
     if (data && data.clients) {
       setNumbers([]);
       setDataItems(data?.clients)

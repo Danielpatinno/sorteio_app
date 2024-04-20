@@ -88,8 +88,8 @@ export function Compradores() {
             };
           }
           return client;
-        });
-      });
+        })
+      })
     } catch (error) {
         console.log(error)
     }
@@ -134,7 +134,7 @@ export function Compradores() {
             )} 
         </div>
  
-          <div className="flex flex-col align-center w-full">
+          <div className="flex flex-col align-center mt-2 w-full">
             <h3 className="">Lista de compradores</h3>
           <table>
             <thead className="bg-blackSec text-left">

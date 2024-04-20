@@ -46,9 +46,9 @@ export function Compradores() {
 
   const [dataItems, setDataItems] = useState<Client[] | undefined>([])
 
-  // useEffect(() => {
-  //   setDataItems(data?.clients)
-  // },[data])
+  useEffect(() => {
+    setDataItems(data?.clients)
+  },[data])
 
   const handleDeleteClient = async (clientId:string) => {
     try {

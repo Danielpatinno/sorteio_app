@@ -15,19 +15,12 @@ import { MdDeleteOutline } from "react-icons/md"
 
 interface DeletePedidoProps {
   clientId: string
+  handleDelete: (clientId:string) => Promise<void>
 }
 
-export function DeletePedido({clientId}:DeletePedidoProps) {
-  const deleteClient = useDeleteClient()
-
-  const handleDeleteClient = async (clientId:string) => {
-    try {
-      await deleteClient.mutateAsync({clientId: clientId})
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
+export function DeletePedido(
+  {clientId, handleDelete }:DeletePedidoProps) 
+{
 
 return (
     <AlertDialog>
@@ -44,7 +37,7 @@ return (
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleDeleteClient(clientId)}>Deletar</AlertDialogAction>
+          <AlertDialogAction onClick={() => handleDelete(clientId)}>Deletar</AlertDialogAction>
         </AlertDialogFooter>
         
         </AlertDialogContent>

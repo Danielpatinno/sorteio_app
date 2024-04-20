@@ -73,6 +73,8 @@ export function Compradores() {
     }
   }
 
+
+
   return ( 
       <div className="m-auto w-10/12 text-center text-white">
         {/* {openModalDetail && 
@@ -167,7 +169,10 @@ export function Compradores() {
                       numbersComprado={cliente.numbers}
                     />
 
-                    <DeletePedido clientId={cliente._id} />
+                    <DeletePedido 
+                      clientId={cliente._id} 
+                      handleDelete={handleDeleteClient}
+                    />
                   </td>  
                 </tr>    
                 ))} 

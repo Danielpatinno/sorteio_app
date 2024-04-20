@@ -1,1 +1,0 @@
-export { ImageRifa } from './ImageRifa'

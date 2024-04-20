@@ -82,23 +82,15 @@ export const NumbersContainer = styled.div`
 export const CasaContainer = styled.div`
   
   ${( props ) => css`
-    height: 124px;
+    height: 130px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    .nameC {
-      width: 100%;
-      margin-top: 0px;
-
-      @media (max-width: 500px) {
-        margin-top: -5px;
-        width: 100%;
-      }
-    }
+    margin: -5px 0;
 
     @media (max-width: 500px) {
-
+      height: 124px;
+      margin: -8px 0;
     }
   `}
 

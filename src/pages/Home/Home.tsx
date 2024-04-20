@@ -2,21 +2,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "../../components/Alert";
 import { ModalSelect } from "../../components/ModalSelect";
-import { ActionContainer, ButtonsContainer, CasaContainer, Container, HeaderContainer, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
+import { ActionContainer,  CasaContainer, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
 
 import { StyleSheetManager } from 'styled-components';
 import isPropValid from '@emotion/is-prop-valid';
 
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label"
-
-import Logo from '../../imagens/LogoSorteio.png'
 
 import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
 import { useAuth } from "../../hooks/useAuth";
-import { ImageRifa } from "../../components/ImageRifa";
 import { Button } from "../../components/Button";
 
 export function Home() {
@@ -25,7 +20,6 @@ export function Home() {
   const [openAlertError, setOpenAlertError] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>()
-  const [seeRifa, setSeeRifa] = useState<boolean>(false)
   const [numbers, setNumbers] = useState<number[]>([])
   const { isAuthenticated, signOut } = useAuth()
   const { data, refetchClients } = useClientsQuery()
@@ -94,13 +88,6 @@ export function Home() {
           Rifas Tupperware
         </h1>
       </div>
-
-
-      {seeRifa && 
-        <ImageRifa 
-          closeRifa={() => setSeeRifa(false)} 
-        />
-      }
 
       <ActionContainer>
         
@@ -178,7 +165,6 @@ export function Home() {
           <CasaContainer key={n}>
             <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
               <NumberContainer
-                
                 key={n} 
                 ispurchased={
                   numbers.includes(n)

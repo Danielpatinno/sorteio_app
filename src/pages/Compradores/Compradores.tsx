@@ -96,7 +96,7 @@ export function Compradores() {
   }
 
   return ( 
-      <div className="m-auto w-10/12 text-center text-white">
+      <div className="m-auto mt-4 w-10/12 text-center text-white">
 
         <h1>Administração</h1>
         <div className="flex flex-col">

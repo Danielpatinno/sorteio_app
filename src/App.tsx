@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter basename="/">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <div className="bg-black min-h-screen">
+          <div className="bg-black min-h-screen flex justify-center items-center">
           <Routes>
             <Route 
               path='/' 
@@ -24,9 +24,9 @@ function App() {
             <Route 
               path='/compradores' 
               element={
-                <RequireAuth>
+                // <RequireAuth>
                   <Compradores />
-                </RequireAuth>
+                // </RequireAuth>
               }
             />
 
@@ -36,6 +36,7 @@ function App() {
             />
           </Routes>                 
           </div>
+          
        
         </AuthProvider>
       

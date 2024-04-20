@@ -3,16 +3,13 @@ import { useEffect, useState } from "react";
 import { useClientsQuery } from '../../hooks/useClientsQuery'
 import { useDeleteClient } from '../../hooks/useDeleteClients'
 
-// Icons
-import { MdDeleteOutline } from "react-icons/md"
-
 // Styles
-import { Alert } from "../../components/Alert";
 import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
 
+// Components
 import { Button } from "@/components/Button";
-
-import { AiFillDelete } from "react-icons/ai"
+import { EditPedido } from "@/components/EditPedido";
+import { DeletePedido } from "@/components/DeletePedido";
 
 import {
   AlertDialog,
@@ -25,8 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { EditPedido } from "@/components/EditPedido";
-import { DeletePedido } from "@/components/DeletePedido";
+
 
 interface Client {
   _id: string
@@ -36,7 +32,7 @@ interface Client {
 }
 
 export function Compradores() {
-  const { data, refetchClients } = useClientsQuery();
+  const { data } = useClientsQuery();
 
   const deleteClient = useDeleteClient();
   const deleteAllClients = useDeleteAllClients()
@@ -47,17 +43,11 @@ export function Compradores() {
     setDataItems(data?.clients)
   },[data])
 
-  const [openModalDetail, setOpenModalDetail] = useState<boolean>(false)
-  const [alertOpen, setAlertOpen] = useState<boolean>(false)
-  const [alertOpenDelete, setAlertOpenDelete] = useState<boolean>(false)
-
-  const [cliId, setCliId] = useState<string>('')
-
   const handleDeleteClient = async (clientId:string) => {
     try {
       await deleteClient.mutateAsync({clientId: clientId})
  
-      setAlertOpen(true)
+      setDataItems(prevData => prevData?.filter(client => client._id !== clientId))
     } catch (error) {
       console.log(error)
     }
@@ -67,48 +57,15 @@ export function Compradores() {
     try {
       await deleteAllClients.mutateAsync()
 
-      setAlertOpenDelete(true)
+      setDataItems([])
+      
     } catch (error) {
       console.log(error)
     }
   }
 
-
-
   return ( 
       <div className="m-auto w-10/12 text-center text-white">
-        {/* {openModalDetail && 
-          <ModalClientDetail 
-            clientId={cliId} 
-            closeModal={() => {
-              setOpenModalDetail(false)
-              refetchClients()
-              setCliId('')
-            }}
-          />
-        }
-
-        {alertOpen && 
-          <Alert 
-            closeAlert={() => {
-              setAlertOpen(false)
-              refetchClients()
-            }} 
-            type="error" 
-            msg="Compra excluida"
-          />
-        }
-
-        {alertOpenDelete && 
-          <Alert 
-            closeAlert={() => {
-              setAlertOpenDelete(false)
-              refetchClients()
-            }} 
-            type="success" 
-            msg="Sorteio reiniciado"
-          />
-        } */}
 
         <h1>Administração</h1>
         <div className="flex flex-col">
@@ -176,7 +133,6 @@ export function Compradores() {
                   </td>  
                 </tr>    
                 ))} 
-
             </tbody>
           </table>
           </div>

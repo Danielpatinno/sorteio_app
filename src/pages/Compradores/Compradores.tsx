@@ -75,7 +75,21 @@ export function Compradores() {
     try {        
       await editClient.mutateAsync(dataEdit)
 
-      setDataItems(data?.clients)
+      setDataItems(prevData => {
+        if (!prevData) return prevData;
+  
+        return prevData.map(client => {
+          if (client._id === dataEdit.clientId) {
+            return {
+              ...client,
+              name: client.name,
+              phone: client.phone,
+              numbers: dataEdit.numbers
+            };
+          }
+          return client;
+        });
+      });
     } catch (error) {
         console.log(error)
     }

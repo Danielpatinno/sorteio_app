@@ -25,10 +25,3 @@ export function useClientDetails({ clientId }: ClientDetailsQueryArgs) {
   return { data, refetchClientDetails: refetch };
 }
 
-// export function useClientDetails({ clientId }: ClientDetailsQueryArgs) {
-//   return useQuery({
-//     queryKey: ['client-details', clientId],
-//     queryFn: async () => fetchClientDetails({clientId}),
-//     staleTime: Infinity
-//   })
-// }

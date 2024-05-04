@@ -12,7 +12,7 @@ interface SignInAdm {
   password: string
 }
 
-interface SignInResponse {
+export interface SignInResponse {
   adm: Adm
   token: string
 }

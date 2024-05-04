@@ -1,6 +1,7 @@
 import { 
   createContext,
   PropsWithChildren,
+  useEffect,
   useState
 } from "react"
 
@@ -26,6 +27,7 @@ interface Session {
 interface AuthContextType {
   adm?: Adm
   isAuthenticated: boolean
+  admId: string | undefined
   signIn: (adm: SignInAdm) => Promise<void>
   signOut: () => Promise<void>
 }
@@ -33,6 +35,9 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 export function AuthProvider({ children }: PropsWithChildren) {
+  const [ idSession, setIdSession ] = useState<string>()
+  const signInMutation = useSignIn()
+
   const [session, setSession] = useState<Session | null>(() => {
     const localSession = localStorage.getItem(SORTEIO_SESSION_KEY)
 
@@ -43,7 +48,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
     return null
   })
 
-  const signInMutation = useSignIn()
+  
+  useEffect(() => {
+    const _idLocalStorage = localStorage.getItem(SORTEIO_SESSION_KEY)
+    
+    if(_idLocalStorage) {
+      const { _id } = JSON.parse(_idLocalStorage)
+      setIdSession(_id)
+    }
+
+  }, [])
+
 
   const signIn = async (adm: SignInAdm): Promise<void> => {
     await signInMutation.mutateAsync(adm, {
@@ -56,7 +71,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
         )
       }
     })
-  }
+    
+  }   
 
   const signOut = async (): Promise<void> => {
     try {
@@ -66,11 +82,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
       console.log('Erro ao fazer logout:' + error)
     }
   }
+
+
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated: Boolean(session),
         adm: session?.adm,
+        admId: idSession,
         signIn,
         signOut
       }}

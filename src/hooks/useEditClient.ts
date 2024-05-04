@@ -8,9 +8,9 @@ interface updateClientProps {
 
 async function updateClient({numbers,clientId}:updateClientProps) {
     try {
-        await api.put(`/clientUpdate/${clientId}`, {
-            numbers
-        })
+      await api.put(`/clientUpdate/${clientId}`, {
+        numbers
+      })
     } catch (error) {
         console.log(error)
     }

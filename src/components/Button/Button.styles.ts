@@ -26,7 +26,7 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
   ${({ variantSize }) => css`
     cursor: pointer;
     color: #0AFFEF;
-    border-radius: 50px;
+    border-radius: 10px;
     background: #243441;
     margin-top: 5px;
     margin-bottom: -5px;
@@ -46,10 +46,5 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
           -2px -2px 2px #0AFFEF;
           background: #243438;
     }
-
-    /* @media (max-width: 500px) {
-      width: 90px;
-      height: 22px;
-    }  */
   `}
 `

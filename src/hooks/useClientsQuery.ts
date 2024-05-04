@@ -29,12 +29,3 @@ export function useClientsQuery() {
 
   return { data, refetchClients: refetch };
 }
-
-
-// export function useClientsQuery() {
-//   return useQuery({
-//     queryKey: ['clients'],
-//     queryFn: async () => await fethClients(),
-//     staleTime: Infinity
-//   })
-// }

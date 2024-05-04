@@ -1,21 +1,23 @@
 import { InputContainer } from "./ModalSelect.styles";
 
 import { useAddClient } from "../../hooks/useAddClient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Input from "../Input/Input";
 import { Button } from "../Button";
-import { Client } from "../../hooks/useClientsQuery";
+import { Toaster, toast } from 'sonner'
+import { useError } from "@/hooks/useError";
 
-export interface ModalSelectProps {
-  closeModal: () => void
-  buyNumbers: number[]
-  setState: React.Dispatch<React.SetStateAction<Client[] | undefined>>
-  refetch: () => void
-}
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog"
 
 export interface DataClientProps {
   nameP: string
@@ -32,62 +34,84 @@ export interface InfoClient {
 
 const validationClient = z.object({
   name: z.string().min(1, { message: 'Nome é obrigatório.' }),
-  phone: z.string().min(9, {message: 'Insira um telefóne válido.'})
+  phone: z.string().min(14, {message: 'Insira um telefóne válido.'})
 })
 
 type SignInForm = z.infer<typeof validationClient>
 
+interface ModalSelectProps {
+  numbers: number[]
+  resetNumbers: () => void
+  refetch: () => void
+}
 
-export function ModalSelect({ closeModal, buyNumbers, setState, refetch}: ModalSelectProps) {  
+export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {  
   const addClient = useAddClient()
+  const { error, handleErrorEdit, clearError } = useError()
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors, isValid }
    } = useForm<SignInForm>({
     resolver: zodResolver(validationClient)
   })
 
   const onSubmit: SubmitHandler<SignInForm> = async (data:SignInForm) => {
     try {
+      clearError()
+
       const clientData = {
         name: data.name,
         phone:data.phone,
-        numbers: buyNumbers
+        numbers: numbers
       }
       
       await addClient.mutateAsync(clientData)
       
-      console.log('Compra com sucesso')
+      toast.success('Comprado com sucesso')
+      resetNumbers()
       reset()
       refetch()
-      closeModal()
     } catch (error) {
+      handleErrorEdit(error)
       console.log(`Erro ao fazer o POST: ${error}`)
     }
   }
 
+  useEffect(() => {
+    if(error) {
+      toast.error(error)
+    }
+  }, [error])
+
   return (
-    <div className="flex flex-col absolute h-120 bg-black m-auto z-1 justify-center mt-2 w-240 text-white border-2  rounded-2xl p-6 top-1/2 transform -translate-y-1/2 -translate-x-1/2 left-1/2">
-      <h3 className="flex m-auto mb-2 mt-0">Números selecionados</h3>
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <Button variantSize="large"
+          labelButton="Comprar números"/>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+
+      {numbers.length ? (<h3 className="flex m-auto mt-0 text-white">Números selecionados</h3>) :(<h3 className="flex m-auto mt-0 text-white">Nenhum número selecionado</h3>)}
  
-      {buyNumbers.length > 5 ? (
+      {numbers.length > 5 ? (
         <div className="grid grid-cols-5 overflow-y-auto h-16 scrollbar-thin">
-        {buyNumbers.map((n) => (
+        {numbers.map((n) => (
           <p key={n} className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md mr-2">{n}</p>
         ))}
       </div>
       ):(
         <div className="flex justify-center">
-          {buyNumbers.slice(0, 5).map((n) => (
+          {numbers.slice(0, 5).map((n) => (
               <p className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md  inset-y-3 inset-x-3"> {n}</p>
           ))}
          </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+
+      <form className="flex flex-col h-130 w-full items-center bg-black m-auto z-1 justify-center text-white rounded-2xl top-1/2 " onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col">
           <p className="text-center">Preencha os dados abaixo</p>
             <InputContainer>
@@ -113,20 +137,22 @@ export function ModalSelect({ closeModal, buyNumbers, setState, refetch}: ModalS
                 {...register('phone')}
               /> 
             </InputContainer>
+            
             <div className="flex m-auto">
-              <Button
-                labelButton="Comprar"
-                variantSize="normal"
-                type='submit'
-              /> 
-              <Button 
-                labelButton="Cancelar"
-                buttonFunction={closeModal}
-                variantSize='normal'
-              />              
+              <AlertDialogAction 
+                disabled={!isValid} 
+                type='submit'>
+                Comprar
+              </AlertDialogAction>
+              <AlertDialogCancel 
+                className="text-black">
+                Cancelar
+              </AlertDialogCancel>
             </div>    
           </div>
         </form>
-    </div>
+    </AlertDialogContent>
+    <Toaster />
+    </AlertDialog>
   )
 }

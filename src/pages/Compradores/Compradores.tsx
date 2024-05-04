@@ -2,28 +2,17 @@
 import { useEffect, useState } from "react";
 import { useClientsQuery } from '../../hooks/useClientsQuery'
 import { useDeleteClient } from '../../hooks/useDeleteClients'
-
-// Styles
 import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
+import { useError } from "@/hooks/useError";
 
 // Components
-import { Button } from "@/components/Button";
 import { EditPedido } from "@/components/EditPedido";
 import { DeletePedido } from "@/components/DeletePedido";
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import { useEditClient } from "@/hooks/useEditClient";
+import { EditPassword } from "@/components/EditPassword";
+import { ReiniciarSorteio } from "@/components/ReiniciarSorteio";
 
+import { Toaster, toast } from 'sonner'
 
 interface Client {
   _id: string
@@ -39,12 +28,13 @@ export interface editPedidoProps {
 
 export function Compradores() {
   const { data } = useClientsQuery();
+  const [dataItems, setDataItems] = useState<Client[] | undefined>([])
 
   const deleteClient = useDeleteClient();
   const deleteAllClients = useDeleteAllClients()
   const editClient = useEditClient()
 
-  const [dataItems, setDataItems] = useState<Client[] | undefined>([])
+  const { handleErrorEdit, error, clearError} = useError()
 
   useEffect(() => {
     setDataItems(data?.clients)
@@ -52,20 +42,23 @@ export function Compradores() {
 
   const handleDeleteClient = async (clientId:string) => {
     try {
+      clearError()
       await deleteClient.mutateAsync({clientId: clientId})
  
       setDataItems(prevData => prevData?.filter(client => client._id !== clientId))
+      toast.success("Compra excluida.")
     } catch (error) {
-      console.log(error)
+      handleErrorEdit(error)
     }
   }
 
   const handleDeleteAllClients = async() => {
     try {
+      clearError()
       await deleteAllClients.mutateAsync()
 
       setDataItems([])
-      
+      toast.success("Sorteio reiniciado.")
     } catch (error) {
       console.log(error)
     }
@@ -73,6 +66,7 @@ export function Compradores() {
 
   const handleEdit = async (dataEdit: editPedidoProps) => {
     try {        
+      clearError()
       await editClient.mutateAsync(dataEdit)
 
       setDataItems(prevData => {
@@ -90,45 +84,39 @@ export function Compradores() {
           return client;
         })
       })
+
+      toast.success('Número alterado')
     } catch (error) {
-        console.log(error)
+        handleErrorEdit(error)
     }
   }
+
+  useEffect(() => {
+    if(error) {
+      toast.error(error)
+    }
+  }, [error])
 
   return ( 
       <div className="m-auto mt-4 w-10/12 text-center text-white">
 
         <h1>Administração</h1>
         <div className="flex flex-col">
+          <div className="flex">
+            <EditPassword />
+          </div>
+          
+
           {dataItems?.length === 0 ? (
             <p className="text-left">Nenhum número vendido</p>
             ):(
               <div className="flex flex-col">
-                <p className="text-left">Número compradores: {dataItems?.length}</p>
-                
+              
                 <div className="text-left"> 
-                  <AlertDialog>
-                    <AlertDialogTrigger>
-                      <Button
-                        labelButton='Reiniciar Sorteio'
-                        variantSize="large"
-                      /> 
-                    </AlertDialogTrigger>
-
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Atenção</AlertDialogTitle>
-
-                        <AlertDialogDescription>Deseja reiniciar o sorteio ?</AlertDialogDescription>
-                      </AlertDialogHeader>
-
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleDeleteAllClients}>Reiniciar</AlertDialogAction>
-                      </AlertDialogFooter>
-                      
-                    </AlertDialogContent>
-                  </AlertDialog>
+                  <ReiniciarSorteio 
+                    handleReiniciar={handleDeleteAllClients}
+                  />
+                  <p className="text-left">Número compradores: {dataItems?.length}</p>
                 </div>     
               </div>
             )} 
@@ -168,6 +156,7 @@ export function Compradores() {
             </tbody>
           </table>
           </div>
+          <Toaster />
       </div>
   )
 }

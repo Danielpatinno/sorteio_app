@@ -1,1 +1,1 @@
-export { ModalSelect } from './ModalSelect'
+export { BuyNumbers } from './BuyNumbers'

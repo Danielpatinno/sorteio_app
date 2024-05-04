@@ -23,6 +23,9 @@ module.exports = {
       'blackSec': '#494949'
     },
     extend: {
+      spacing: {
+        '500':'500px'
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

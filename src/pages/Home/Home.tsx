@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Alert } from "../../components/Alert";
-import { ModalSelect } from "../../components/ModalSelect";
-import { ActionContainer,  CasaContainer, NumberContainer, NumbersContainer, ObservationContainer } from "./Home.styles";
+import { BuyNumbers } from "../../components/ModalSelect";
+
+import { NumberContainer } from "./Home.styles";
 
 import { StyleSheetManager } from 'styled-components';
 import isPropValid from '@emotion/is-prop-valid';
 
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
+import { Toaster, toast } from "sonner"
 
 import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
 import { useAuth } from "../../hooks/useAuth";
 import { Button } from "../../components/Button";
 
 export function Home() {
-  const [openModal, setOpenModal] = useState<boolean>(false)
-  const [openAlert, setOpenAlert] = useState<boolean>(false)
-  const [openAlertError, setOpenAlertError] = useState<boolean>(false)
+  // const [openModal, setOpenModal] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>()
   const [numbers, setNumbers] = useState<number[]>([])
@@ -46,7 +45,7 @@ export function Home() {
 
   const select = (n: number) => {
     if (numbers.includes(n)) {
-      setOpenAlert(true)
+      toast.error('Número indisponivel.')
       return
     }    
     setSelectedNumber((prev) => {
@@ -66,14 +65,15 @@ export function Home() {
     }
   }
 
-  const abrirModal = () => {
-    if(!selectedNumber.length) {
-      setOpenAlertError(true)
-      
-    } else {
-      setOpenModal(true)
-    }
-  }
+  // const abrirModal = () => {
+  //   if(!selectedNumber.length) {
+  //     toast.error('Selecione um número por favor')
+
+  //   } else {
+  //     setOpenModal(true)
+  //   }
+  // }
+  
 
   return (
     <div className="m-auto w-10/12">
@@ -89,8 +89,7 @@ export function Home() {
         </h1>
       </div>
 
-      <ActionContainer>
-        
+      <div className="flex justify-between w-full items-center">
         <div>
           {isAuthenticated ? 
             (
@@ -130,39 +129,11 @@ export function Home() {
           )
           }          
         </div>
+        </div>
 
-      </ActionContainer>
-       {openModal && 
-         <ModalSelect
-         refetch={refetch}
-         setState={setDataItems}
-           buyNumbers={selectedNumber}
-           closeModal={() => {
-             setOpenModal(false)
-             setSelectedNumber([])
-           }}
-          />
-        }
-
-        {openAlert && 
-          <Alert 
-            type="error"
-            closeAlert={() => setOpenAlert(false)}
-            msg='Número indisponivel, selecione outro por favor.'
-          />
-        }
-
-        {openAlertError && 
-          <Alert 
-            type="error"
-            closeAlert={() => setOpenAlertError(false)}
-            msg='Por favor, selecione os números.'
-          />
-        }
-
-       <NumbersContainer>
+       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto h-500">
         {Array.from({ length: 100 }, (_, i) => i + 1).map((n) => (
-          <CasaContainer key={n}>
+          <div className="flex flex-col items-center h-32">
             <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
               <NumberContainer
                 key={n} 
@@ -181,17 +152,17 @@ export function Home() {
                 return <p key={n} className="text-white">{firstName}</p>
               } 
             })}
-          </CasaContainer>
+            </div>
         )
         )}
-       </NumbersContainer>
+        </div>
 
        <div className="flex justify-around m-auto">
-        <Button 
-          variantSize="large"
-          labelButton="Comprar números"
-          buttonFunction={abrirModal}
-        />
+          <BuyNumbers 
+            numbers={selectedNumber} 
+            resetNumbers={() => setSelectedNumber([])}
+            refetch={refetch}
+          />
 
         {isAuthenticated && (
           <Link to='/compradores'>
@@ -202,11 +173,9 @@ export function Home() {
           </Link>          
         )}
        </div>
-
-        <ObservationContainer className="text-white">
-          <h3 className="">Observação</h3>
-          <p>Números disponiveis: {100 - numbers.length}</p>
-        </ObservationContainer>
+       
+          <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
+        <Toaster />
     </div>
   )
 }

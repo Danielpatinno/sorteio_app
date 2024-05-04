@@ -1,13 +1,15 @@
 import { Button } from "@/components/Button";
+import { Toaster, toast } from "sonner"
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import  Input from "../../components/Input/Input";
 
-import { Message } from "../../components/Message";
+import { useError } from "@/hooks/useError";
 import { useAuth } from "../../hooks/useAuth";
-import { useError } from "../../hooks/useError";
+import { useEffect } from "react";
 
 
 const validationSchema = z.object({
@@ -32,7 +34,7 @@ export function Login() {
   })
 
   const { signIn, isAuthenticated } = useAuth()
-  const { error, handleError, clearError } = useError()
+  const { error, handleErrorEdit, clearError } = useError()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -46,9 +48,15 @@ export function Login() {
       navigate(from)
 
     } catch (error) {
-      handleError(error)
+      handleErrorEdit(error)
     }
   }
+
+  useEffect(() => {
+    if(error) {
+      toast.error(error)
+    }
+  }, [error])
 
   if(isAuthenticated) {
     return <Navigate to='/' />
@@ -101,9 +109,7 @@ export function Login() {
             type="submit"
           />  
         </div>
-          
-        {error && <Message msg={error} type="error"/> }
-
+        <Toaster />
       </form>
     </div>
     </div>

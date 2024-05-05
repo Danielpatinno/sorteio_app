@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter basename="/">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <div className="bg-black min-h-screen flex justify-center items-start">
+          <div className="bg-black min-h-screen flex ">
           <Routes>
             <Route 
               path='/' 

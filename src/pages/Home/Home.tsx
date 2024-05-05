@@ -63,17 +63,7 @@ export function Home() {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  // const abrirModal = () => {
-  //   if(!selectedNumber.length) {
-  //     toast.error('Selecione um número por favor')
-
-  //   } else {
-  //     setOpenModal(true)
-  //   }
-  // }
-  
+  }  
 
   return (
     <div className="m-auto w-10/12">
@@ -174,7 +164,7 @@ export function Home() {
         )}
        </div>
        
-          <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
+        <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
         <Toaster />
     </div>
   )

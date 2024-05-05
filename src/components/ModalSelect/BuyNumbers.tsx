@@ -16,6 +16,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogFooter,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
 
@@ -94,7 +95,13 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
       </AlertDialogTrigger>
       <AlertDialogContent>
 
-      {numbers.length ? (<h3 className="flex m-auto mt-0 text-white">Números selecionados</h3>) :(<h3 className="flex m-auto mt-0 text-white">Nenhum número selecionado</h3>)}
+      {numbers.length ? 
+        (
+          <h3 className="flex m-auto mt-0 text-white">Números selecionados</h3>
+        ) :
+        (
+          <h3 className="flex m-auto mt-0 text-white">Nenhum número selecionado</h3>
+        )}
  
       {numbers.length > 5 ? (
         <div className="grid grid-cols-5 overflow-y-auto h-16 scrollbar-thin">
@@ -111,7 +118,7 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
       )}
 
 
-      <form className="flex flex-col h-130 w-full items-center bg-black m-auto z-1 justify-center text-white rounded-2xl top-1/2 " onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col h-130 items-center bg-black m-auto justify-center text-white rounded-2xl top-1/2 " onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col">
           <p className="text-center">Preencha os dados abaixo</p>
             <InputContainer>
@@ -138,7 +145,8 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
               /> 
             </InputContainer>
             
-            <div className="flex m-auto">
+            {/* <div className="flex m-auto"> */}
+            <AlertDialogFooter>
               <AlertDialogAction 
                 disabled={!isValid} 
                 type='submit'>
@@ -148,9 +156,11 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
                 className="text-black">
                 Cancelar
               </AlertDialogCancel>
-            </div>    
+            </AlertDialogFooter>
+            {/* </div>     */}
           </div>
         </form>
+        
     </AlertDialogContent>
     <Toaster />
     </AlertDialog>

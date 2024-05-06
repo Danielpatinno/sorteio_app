@@ -1,15 +1,13 @@
-import { InputContainer } from "./ModalSelect.styles";
-
 import { useAddClient } from "../../hooks/useAddClient";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useError } from "@/hooks/useError";
+
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Input from "../Input/Input";
 import { Button } from "../Button";
-import { Toaster, toast } from 'sonner'
-import { useError } from "@/hooks/useError";
 
 import {
   AlertDialog,
@@ -19,6 +17,7 @@ import {
   AlertDialogFooter,
   AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
+import { Toaster, toast } from 'sonner'
 
 export interface DataClientProps {
   nameP: string
@@ -117,23 +116,20 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
          </div>
       )}
 
+      <p className="text-center text-white">Preencha os dados abaixo</p>
+      <form 
+        className="flex flex-col w-72 h-130 items-center bg-black m-auto justify-center text-white rounded-2xl top-1/2 " 
+        onSubmit={handleSubmit(onSubmit)}>
+              <Input 
+                id='name'
+                mask=""
+                placeholder="Digite o nome do cliente"
+                type='text'
+                error={errors.name?.message}
+                label="Nome"
+                {...register('name')}
+              />
 
-      <form className="flex flex-col h-130 items-center bg-black m-auto justify-center text-white rounded-2xl top-1/2 " onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col">
-          <p className="text-center">Preencha os dados abaixo</p>
-            <InputContainer>
-                <Input 
-                  id='name'
-                  mask=""
-                  placeholder="Digite o nome do cliente"
-                  type='text'
-                  error={errors.name?.message}
-                  label="Nome"
-                  {...register('name')}
-                />
-            </InputContainer>
-
-            <InputContainer>
               <Input 
                 id='phone'
                 mask="(99) 99999-9999"
@@ -143,9 +139,7 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
                 label="Telefone"
                 {...register('phone')}
               /> 
-            </InputContainer>
-            
-            {/* <div className="flex m-auto"> */}
+
             <AlertDialogFooter>
               <AlertDialogAction 
                 disabled={!isValid} 
@@ -157,10 +151,8 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
                 Cancelar
               </AlertDialogCancel>
             </AlertDialogFooter>
-            {/* </div>     */}
-          </div>
         </form>
-        
+  
     </AlertDialogContent>
     <Toaster />
     </AlertDialog>

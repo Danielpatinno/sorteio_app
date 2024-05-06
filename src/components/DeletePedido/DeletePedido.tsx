@@ -9,7 +9,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { useDeleteClient } from "@/hooks/useDeleteClients"
 
 import { MdDeleteOutline } from "react-icons/md"
 
@@ -18,10 +17,7 @@ interface DeletePedidoProps {
   handleDelete: (clientId:string) => Promise<void>
 }
 
-export function DeletePedido(
-  {clientId, handleDelete }:DeletePedidoProps) 
-{
-
+export function DeletePedido({clientId, handleDelete }:DeletePedidoProps) {
 return (
     <AlertDialog>
       <AlertDialogTrigger>

@@ -35,10 +35,7 @@ export function ReiniciarSorteio({handleReiniciar }: ReiniciarSorteioProps) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={handleReiniciar}>Reiniciar</AlertDialogAction>
         </AlertDialogFooter>
-        
       </AlertDialogContent>
-
-
     </AlertDialog>
   )
 }

@@ -1,6 +1,5 @@
 import {
     AlertDialog,
-    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
@@ -9,14 +8,14 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-
-import { useAuth } from "@/hooks/useAuth"
-
+import { Toaster, toast } from "sonner"
 import { Button } from "../Button"
 import { Input } from "../Input"
 
+import { useAuth } from "@/hooks/useAuth"
 import { useUpdateAdm } from "@/hooks/useUpdateAdm"
 import { useEffect, useState } from "react"
+import { useError } from "@/hooks/useError"
 
 interface dataEditProps {
   password: string
@@ -24,25 +23,21 @@ interface dataEditProps {
   idAdm: string | undefined
 }
 
-import { Toaster, toast } from "sonner"
-import { useError } from "@/hooks/useError"
-
 export function EditPassword() {
   const { admId } = useAuth()
   const editPassword = useUpdateAdm()
+  const { error, handleErrorEdit, clearError } = useError()
 
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [username, setUsername] = useState<string>('')
-
-  const { error, handleErrorEdit, clearError } = useError()
 
   const handleEditPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       clearError()
       e.preventDefault();
   
-      const dataEdit = {
+      const dataEdit:dataEditProps = {
         password,
         confirmPassword,
         idAdm: admId
@@ -115,7 +110,9 @@ export function EditPassword() {
                   />    
                 </div>   
                 <button
-                  className="text-white text-center w-20 h-8 m-auto flex justify-center  items-center rounded bg-blackSec" type="submit">Enviar</button>
+                  className="text-white text-center w-20 h-8 m-auto flex justify-center  items-center rounded bg-blackSec" type="submit">
+                  Enviar
+                </button>
               </form>
               
             </AlertDialogDescription>

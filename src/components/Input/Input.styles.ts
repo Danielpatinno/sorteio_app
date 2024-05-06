@@ -35,6 +35,5 @@ export const Container = styled.div<ContainerProps>`
       margin-top: 0.1rem;
       color: #d74544 !important;
     }
-  
 `}
 `

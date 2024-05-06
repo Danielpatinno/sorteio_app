@@ -1,11 +1,9 @@
-// Hooks
 import { useEffect, useState } from "react";
 import { useClientsQuery } from '../../hooks/useClientsQuery'
 import { useDeleteClient } from '../../hooks/useDeleteClients'
 import { useDeleteAllClients } from "../../hooks/useDeleteAllClients";
 import { useError } from "@/hooks/useError";
 
-// Components
 import { EditPedido } from "@/components/EditPedido";
 import { DeletePedido } from "@/components/DeletePedido";
 import { useEditClient } from "@/hooks/useEditClient";

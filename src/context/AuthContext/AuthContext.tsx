@@ -48,7 +48,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
     return null
   })
 
-  
   useEffect(() => {
     const _idLocalStorage = localStorage.getItem(SORTEIO_SESSION_KEY)
     
@@ -58,7 +57,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
   }, [])
-
 
   const signIn = async (adm: SignInAdm): Promise<void> => {
     await signInMutation.mutateAsync(adm, {
@@ -82,7 +80,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
       console.log('Erro ao fazer logout:' + error)
     }
   }
-
 
   return (
     <AuthContext.Provider

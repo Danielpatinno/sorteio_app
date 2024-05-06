@@ -12,7 +12,9 @@ import {
 
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai"
+
 import { useEffect, useState } from "react";
+
 import { editPedidoProps } from "@/pages/Compradores/Compradores";
 
 interface EditProductProps {
@@ -21,27 +23,26 @@ interface EditProductProps {
   handleEdit: (data: editPedidoProps) => Promise<void>
 }
 
-
 export function EditPedido({numbersComprado, clientId, handleEdit}:EditProductProps) {
-const [numeros, setNumeros] = useState<number[]>([])
+  const [numeros, setNumeros] = useState<number[]>([])
 
-useEffect(() => {
-  setNumeros(numbersComprado)
-}, [])
+  useEffect(() => {
+    setNumeros(numbersComprado)
+  }, [])
 
-const removeOneNumber = (index:number) => {    
-  const novosNumeros = [...numeros]
-  novosNumeros.splice(index, 1)
-  setNumeros(novosNumeros)
-}
+  const removeOneNumber = (index:number) => {    
+    const novosNumeros = [...numeros]
+    novosNumeros.splice(index, 1)
+    setNumeros(novosNumeros)
+  }
 
-const data = {
-  clientId: clientId,
-  numbers: numeros
-}
+  const data = {
+    clientId: clientId,
+    numbers: numeros
+  }
 
-return (
-<AlertDialog>
+  return (
+  <AlertDialog>
     <AlertDialogTrigger>
     <FaRegEdit title="Editar compra" size={25}/>
     </AlertDialogTrigger>
@@ -76,6 +77,6 @@ return (
         </AlertDialogAction>
     </AlertDialogFooter>
     </AlertDialogContent>
-</AlertDialog>
-)
+  </AlertDialog>
+ )
 }

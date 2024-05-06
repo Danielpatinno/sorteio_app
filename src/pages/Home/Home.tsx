@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
+
 import { Link } from "react-router-dom";
-import { BuyNumbers } from "../../components/ModalSelect";
 
-import { NumberContainer } from "./Home.styles";
-
+import { BuyNumbers } from "../../components/BuyNumbers";
 import { StyleSheetManager } from 'styled-components';
 import isPropValid from '@emotion/is-prop-valid';
+import { Button } from "../../components/Button";
 
+import { NumberContainer } from "./Home.styles";
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
 import { Toaster, toast } from "sonner"
 
-import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
-import { useAuth } from "../../hooks/useAuth";
-import { Button } from "../../components/Button";
-
 export function Home() {
-  // const [openModal, setOpenModal] = useState<boolean>(false)
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>()
   const [numbers, setNumbers] = useState<number[]>([])
@@ -66,7 +64,7 @@ export function Home() {
   }  
 
   return (
-    <div className="m-auto w-10/12 mt-4">
+    <div className="m-auto w-10/12 bg-black h-screen">
       <div className="flex justify-center ">
         <h1 
           className="text-white text-center text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl mt-2"

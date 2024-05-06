@@ -12,7 +12,6 @@ async function updateClient({ password,confirmPassword, idAdm }: updateAdmProps)
       password,
       confirmPassword
     });
-    
     return data;
 }
 
@@ -20,5 +19,4 @@ export function useUpdateAdm() {
   return useMutation({
     mutationFn: (data:updateAdmProps) => updateClient(data)
   })
-
 }

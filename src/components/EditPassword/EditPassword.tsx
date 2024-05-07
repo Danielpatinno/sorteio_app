@@ -1,16 +1,18 @@
 import {
-    AlertDialog,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Toaster, toast } from "sonner"
-import { Button } from "../Button"
-import { Input } from "../Input"
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+import { toast } from "sonner"
 
 import { useAuth } from "@/hooks/useAuth"
 import { useUpdateAdm } from "@/hooks/useUpdateAdm"
@@ -30,7 +32,6 @@ export function EditPassword() {
 
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
-  const [username, setUsername] = useState<string>('')
 
   const handleEditPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -60,71 +61,55 @@ export function EditPassword() {
   }, [error])
 
   return (
-    <AlertDialog>
-        <AlertDialogTrigger>
-          <Button 
-            labelButton="Nova Senha" 
-            variantSize="large"
-          />
-        </AlertDialogTrigger>
-    
-        <AlertDialogContent>
-        <AlertDialogHeader>
-            <AlertDialogTitle>Criar nova senha</AlertDialogTitle>
-    
-            <AlertDialogDescription>
-              <form onSubmit={handleEditPassword} className="m-auto w-80">
-              <div className="sr-only">
-                <label htmlFor="username">Nome de usuário:</label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  autoComplete="username"
-                />
-              </div>
-
-                <div className="h-20 text-white">
-                  <Input 
-                    type='password' 
-                    label="Nova Senha" 
-                    mask=""
-                    placeholder="Digite uma nova senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="new-password"
-                  />  
-                </div>
-                
-                <div className="h-20 text-white">
-                  <Input
-                    type='password' 
-                    label="Confirmar Senha" 
-                    mask="" 
-                    placeholder="Digite a confirmação"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    autoComplete="new-password"
-                  />    
-                </div>   
-                <button
-                  className="text-white text-center w-20 h-8 m-auto flex justify-center  items-center rounded bg-blackSec" type="submit">
-                  Enviar
-                </button>
-              </form>
-              
-            </AlertDialogDescription>
-    
-        </AlertDialogHeader>
-        
-        <AlertDialogFooter>
-            <AlertDialogCancel>Voltar</AlertDialogCancel>
-        </AlertDialogFooter>
-        </AlertDialogContent>
-        <Toaster />
-        
-    </AlertDialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="default">Alterar minha senha</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={handleEditPassword}>
+        <DialogHeader>
+          <DialogTitle>Alterar Senha</DialogTitle>
+          <DialogDescription>
+            Digite a nova senha abaixo.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="password" className="text-right">
+              Nova Senha
+            </Label>
+            <Input
+              id="novaSenha"
+              defaultValue=""
+              type="password"
+              className="col-span-3"
+              placeholder="Digite uma nova senha" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="confirmPassword" className="text-right">
+              Confirmar Senha
+            </Label>
+            <Input
+              id="confirmPassword"
+              defaultValue=""
+              type='password'
+              className="col-span-3"
+              placeholder="Digite a confirmação"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              autoComplete="new-password"
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button type="submit">Salvar</Button>
+        </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }

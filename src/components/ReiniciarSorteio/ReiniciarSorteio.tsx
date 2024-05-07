@@ -9,7 +9,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button } from "../Button"
+import { Button } from "../ui/button"
 
 interface ReiniciarSorteioProps {
   handleReiniciar: () => void
@@ -19,10 +19,7 @@ export function ReiniciarSorteio({handleReiniciar }: ReiniciarSorteioProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button
-          labelButton='Reiniciar Sorteio'
-          variantSize="large"
-        /> 
+        <Button>Reiniciar Sorteio</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

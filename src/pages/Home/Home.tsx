@@ -99,7 +99,7 @@ export function Home() {
         <div>
 
           {seeName ? (
-            <p className="verNome text-white">
+            <p className="cursor-pointer text-white">
               <IoIosEye 
                 size={25} 
                 onClick={() => setSeeName(false)}
@@ -107,7 +107,7 @@ export function Home() {
               Ver nomes
             </p>
           ) : (
-            <p className="verNome text-white">
+            <p className="cursor-pointer text-white">
               <IoIosEyeOff 
                 size={25} 
                 onClick={() => setSeeName(true)}

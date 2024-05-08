@@ -147,11 +147,11 @@ export function Compradores() {
                   <td className="text-left w-2/6 border-l border-r border-b">{cliente.phone}</td>
                   <td className="text-left w-2/6 border-l border-b">{cliente.numbers.join(', ')}</td>
                   <td className="flex">
-                    <EditPedido 
+                    {cliente.numbers.length > 1 && (<EditPedido 
                       clientId={cliente._id} 
                       numbersComprado={cliente.numbers}
                       handleEdit={handleEdit}
-                    />
+                    />)}
 
                     <DeletePedido 
                       clientId={cliente._id} 
@@ -162,6 +162,7 @@ export function Compradores() {
                 ))} 
             </tbody>
           </table>
+          
           </div>
           <Toaster />
       </div>

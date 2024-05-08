@@ -60,20 +60,19 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
 
   const onSubmit: SubmitHandler<SignInForm> = async (data:SignInForm) => {
     try {
-      clearError()
-
       const clientData = {
         name: data.name,
-        phone:data.phone,
+        phone: data.phone,
         numbers: numbers
-      }
-      
-      await addClient.mutateAsync(clientData)
-      
-      toast.success('Comprado com sucesso')
-      resetNumbers()
-      reset()
-      refetch()
+      };
+  
+      await addClient.mutateAsync(clientData);
+  
+      toast.success('Comprado com sucesso');
+      resetNumbers();
+      reset();
+      refetch();
+
     } catch (error) {
       handleErrorEdit(error)
       console.log(`Erro ao fazer o POST: ${error}`)

@@ -145,7 +145,7 @@ export function Home() {
         )}
         </div>
 
-       <div className="flex justify-around m-auto">
+       <div className="flex justify-center mx-auto">
           <BuyNumbers 
             numbers={selectedNumber} 
             resetNumbers={() => setSelectedNumber([])}
@@ -161,9 +161,12 @@ export function Home() {
           </Link>          
         )}
        </div>
-       
-        <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
-        <Toaster />
+        
+        <div className="absolute">
+         <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
+        <Toaster /> 
+        </div>
+        
     </div>
   )
 }

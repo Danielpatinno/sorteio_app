@@ -101,7 +101,7 @@ export function Compradores() {
   const [openOption, setOpenMotion] = useState<boolean>(false)
 
   return ( 
-      <div className="m-auto w-10/12 text-center text-white h-screen">
+      <div className="m-auto w-10/12 text-center text-white h-screen bg-black">
 
         <h1>Administração</h1>
 
@@ -146,7 +146,7 @@ export function Compradores() {
                   <td className="text-left w-2/6 border-r border-b">{cliente.name}</td>
                   <td className="text-left w-2/6 border-l border-r border-b">{cliente.phone}</td>
                   <td className="text-left w-2/6 border-l border-b">{cliente.numbers.join(', ')}</td>
-                  <td className="flex">
+                  <td className="flex ">
                     {cliente.numbers.length > 1 && (<EditPedido 
                       clientId={cliente._id} 
                       numbersComprado={cliente.numbers}

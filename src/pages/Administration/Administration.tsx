@@ -127,26 +127,24 @@ export function Administration() {
         )}
       </header>
  
-          <div className="flex flex-col align-center mt-2 w-full">
+          <div className="flex overflow-auto flex-col align-center mt-2">
             <h3 className="">Lista de compradores</h3>
-          <table>
+          <table className="">
             <thead className="bg-blackSec text-left">
-              <tr>
-                <th className="text-center">N</th>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Números</th>
-                <th className="action"></th>
+              <tr className="sticky">
+                <th className="sticky w-80 p-2">Nome</th>
+                <th className="sticky w-80 p-2">Telefone</th>
+                <th className="sticky w-80 p-2">Números</th>
+                <th className="w-2"></th>
               </tr>
             </thead>
-            <tbody>     
+            <tbody className="overflow-x-auto">     
               {dataItems?.map((cliente, i) => (      
                  <tr key={cliente._id}>
-                  <td className="border-r border-b">{i+1}</td>
-                  <td className="text-left w-2/6 border-r border-b">{cliente.name}</td>
-                  <td className="text-left w-2/6 border-l border-r border-b">{cliente.phone}</td>
-                  <td className="text-left w-2/6 border-l border-b">{cliente.numbers.join(', ')}</td>
-                  <td className="flex ">
+                  <td className="text-left border-r border-b w-80 p-2">{cliente.name}</td>
+                  <td className="text-left border-l border-r border-b w-80 p-2">{cliente.phone}</td>
+                  <td className="text-left border-l border-b w-80 p-2">{cliente.numbers.join(', ')}</td>
+                  <td className="flex w-20">
                     {cliente.numbers.length > 1 && (<EditPedido 
                       clientId={cliente._id} 
                       numbersComprado={cliente.numbers}

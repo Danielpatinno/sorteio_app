@@ -27,7 +27,7 @@ export interface editPedidoProps {
   numbers: number[]
 }
 
-export function Compradores() {
+export function Administration() {
   const { data } = useClientsQuery();
   const [dataItems, setDataItems] = useState<Client[] | undefined>([])
 

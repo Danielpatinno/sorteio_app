@@ -15,7 +15,7 @@ import { AiFillDelete } from "react-icons/ai"
 
 import { useEffect, useState } from "react";
 
-import { editPedidoProps } from "@/pages/Compradores/Compradores";
+import { editPedidoProps } from "@/pages/Administration/Administration";
 
 interface EditProductProps {
   numbersComprado: number[],

@@ -1,1 +1,0 @@
-export { Compradores } from './Compradores'

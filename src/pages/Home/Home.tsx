@@ -64,11 +64,11 @@ export function Home() {
   }  
 
   return (
-    <div className="m-auto w-10/12 bg-black h-screen">
-      <div className="flex justify-center ">
+    <div className="flex flex-col items-center justify-center h-screen m-auto w-10/12">
+      <div className="flex justify-center">
         <h1 
-          className="text-white text-center text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl mt-2"
-          style={{ 
+          className="text-white text-center text-5xl sm:text-5xl mt-2 md:text-6xl lg:text-7xl xl:text-7xl "
+          style={{
             textShadow: '0px 3px 6px #0AFFEF',
             fontFamily: 'Great Vibes'
           }} 
@@ -77,7 +77,7 @@ export function Home() {
         </h1>
       </div>
 
-      <div className="flex justify-between w-full items-center">
+      <div className="flex justify-between w-full items-center mt-0">
         <div>
           {isAuthenticated ? 
             (
@@ -117,9 +117,9 @@ export function Home() {
           )
           }          
         </div>
-        </div>
+      </div>
 
-       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto h-500">
+       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto ">
         {Array.from({ length: 100 }, (_, i) => i + 1).map((n) => (
           <div className="flex flex-col items-center h-32">
             <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
@@ -144,7 +144,8 @@ export function Home() {
         )
         )}
         </div>
-
+      
+      <div className="flex w-full flex-col h-16">
        <div className="flex justify-center mx-auto">
           <BuyNumbers 
             numbers={selectedNumber} 
@@ -153,7 +154,7 @@ export function Home() {
           />
 
         {isAuthenticated && (
-          <Link to='/compradores'>
+          <Link to='/administration'>
             <Button 
               variantSize="large"
               labelButton="Administração"
@@ -162,11 +163,11 @@ export function Home() {
         )}
        </div>
         
-        <div className="absolute">
+        <div className="justify-left">
          <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
         <Toaster /> 
         </div>
-        
+      </div>
     </div>
   )
 }

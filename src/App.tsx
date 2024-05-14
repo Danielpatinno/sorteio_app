@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { Compradores } from './pages/Compradores'
+import { Administration } from './pages/Administration'
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 
@@ -16,7 +16,6 @@ function App() {
     <BrowserRouter basename="/">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <div className="bg-black ">
           <Routes>
             <Route 
               path='/' 
@@ -24,10 +23,10 @@ function App() {
             />
 
             <Route 
-              path='/compradores' 
+              path='/administration' 
               element={
                 <RequireAuth>
-                  <Compradores />
+                  <Administration />
                 </RequireAuth>
               }
             />
@@ -37,7 +36,6 @@ function App() {
               element={<Login />}
             />
           </Routes>                 
-          </div>
         </AuthProvider>
       </QueryClientProvider>
     </BrowserRouter>

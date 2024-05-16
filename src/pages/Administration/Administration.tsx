@@ -126,43 +126,44 @@ export function Administration() {
           </div>
         )}
       </header>
- 
-          <div className="flex overflow-auto flex-col align-center mt-2">
-            <h3 className="">Lista de compradores</h3>
-          <table className="">
+        <h3 className="">Lista de compradores</h3>
+
+        <div className="overflow-auto rounded-lg">
+          <table className="w-full">
             <thead className="bg-blackSec text-left">
-              <tr className="sticky">
-                <th className="sticky w-80 p-2">Nome</th>
-                <th className="sticky w-80 p-2">Telefone</th>
-                <th className="sticky w-80 p-2">Números</th>
-                <th className="w-2"></th>
+              <tr>
+                <th className="w-1/4 p-3 tracking-wide">Nome</th>
+                <th className="w-1/4 p-3 tracking-wide">Telefone</th>
+                <th className="w-2/4 p-3 tracking-wide">Números</th>
+                <th className=""></th>
               </tr>
             </thead>
-            <tbody className="overflow-x-auto">     
-              {dataItems?.map((cliente, i) => (      
-                 <tr key={cliente._id}>
-                  <td className="text-left border-r border-b w-80 p-2">{cliente.name}</td>
-                  <td className="text-left border-l border-r border-b w-80 p-2">{cliente.phone}</td>
-                  <td className="text-left border-l border-b w-80 p-2">{cliente.numbers.join(', ')}</td>
-                  <td className="flex w-20">
-                    {cliente.numbers.length > 1 && (<EditPedido 
-                      clientId={cliente._id} 
-                      numbersComprado={cliente.numbers}
-                      handleEdit={handleEdit}
-                    />)}
-
+            <tbody className="">
+              {dataItems?.map((cliente) => (      
+                <tr key={cliente._id}>
+                  <td className="whitespace-nowrap text-left p-2 border-r border-b">{cliente.name}</td>
+                  <td className="whitespace-nowrap text-left p-2 border-l border-r border-b">{cliente.phone}</td>
+                  <td className="whitespace-nowrap text-left p-2 border-l border-b">{cliente.numbers.join(', ')}</td>
+                  
+                  <td className="flex">
+                    {cliente.numbers.length > 1 && (
+                      <EditPedido 
+                        clientId={cliente._id} 
+                        numbersComprado={cliente.numbers}
+                        handleEdit={handleEdit}
+                      />
+                    )}
                     <DeletePedido 
                       clientId={cliente._id} 
                       handleDelete={handleDeleteClient}
                     />
                   </td>  
                 </tr>    
-                ))} 
+              ))} 
             </tbody>
           </table>
-          
-          </div>
-          <Toaster />
+        </div>
+        <Toaster />
       </div>
   )
 }

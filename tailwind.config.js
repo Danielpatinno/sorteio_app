@@ -23,6 +23,9 @@ module.exports = {
       'blackSec': '#494949'
     },
     extend: {
+      borderRadius: {
+        '10':'10px'
+      },
       spacing: {
         '500':'500px'
       },

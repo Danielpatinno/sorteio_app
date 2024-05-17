@@ -102,7 +102,7 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
         )}
  
       {numbers.length > 5 ? (
-        <div className="grid grid-cols-5 overflow-y-auto h-16 scrollbar-thin">
+        <div className="grid grid-cols-4 lg:grid-cols-5 w-72 overflow-y-auto h-16 scrollbar-thin">
         {numbers.map((n) => (
           <p key={n} className="flex justify-around items-center bg-black w-16 h-16 rounded-full mb-2 border-2 border-black text-greenWater text-2xl shadow-md mr-2">{n}</p>
         ))}

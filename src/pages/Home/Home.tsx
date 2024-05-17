@@ -73,7 +73,7 @@ export function Home() {
             fontFamily: 'Great Vibes'
           }} 
         >
-          Rifas Tupperware
+          Sorteio
         </h1>
       </div>
 

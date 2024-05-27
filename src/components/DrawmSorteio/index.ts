@@ -1,0 +1,1 @@
+export { DrawmSorteio } from './DrawmSorteio'

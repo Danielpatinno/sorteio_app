@@ -1,3 +1,4 @@
+import { useNumberArray } from "@/hooks/useNumberArray"
 import { 
   createContext,
   PropsWithChildren,
@@ -28,6 +29,9 @@ interface AuthContextType {
   adm?: Adm
   isAuthenticated: boolean
   admId: string | undefined
+  arrayLength: number
+  isLoadingNumbers: boolean
+  refetchNumberArray: () => void
   signIn: (adm: SignInAdm) => Promise<void>
   signOut: () => Promise<void>
 }
@@ -37,6 +41,12 @@ export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 export function AuthProvider({ children }: PropsWithChildren) {
   const [ idSession, setIdSession ] = useState<string>()
   const signInMutation = useSignIn()
+
+  const { numberArrayData, isLoading, refetch } = useNumberArray()
+
+  const refetchNumberArray = () => {
+    refetch()
+  }
 
   const [session, setSession] = useState<Session | null>(() => {
     const localSession = localStorage.getItem(SORTEIO_SESSION_KEY)
@@ -86,7 +96,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
       value={{
         isAuthenticated: Boolean(session),
         adm: session?.adm,
+        isLoadingNumbers: Boolean(isLoading),
+        arrayLength: numberArrayData?.numberArray!,
         admId: idSession,
+        refetchNumberArray,
         signIn,
         signOut
       }}

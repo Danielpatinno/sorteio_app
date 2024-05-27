@@ -12,7 +12,7 @@ import { ReiniciarSorteio } from "@/components/ReiniciarSorteio";
 
 import { Toaster, toast } from 'sonner'
 
-interface Client {
+export interface Client {
   _id: string
   name: string
   phone: number
@@ -21,11 +21,18 @@ interface Client {
 
 import { TiThMenu } from "react-icons/ti"
 import { IoMdClose } from "react-icons/io"
+import { DrawmSorteio } from "@/components/DrawmSorteio";
+import { useUpdateNumber } from "@/hooks/useUpNumber";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface editPedidoProps {
   clientId: string
   numbers: number[]
 }
+
+type updateNumberProps = {
+  numberArray: number;
+};
 
 export function Administration() {
   const { data } = useClientsQuery();
@@ -34,11 +41,15 @@ export function Administration() {
   const deleteClient = useDeleteClient();
   const deleteAllClients = useDeleteAllClients()
   const editClient = useEditClient()
+  const { refetchNumberArray } = useAuth()
+
+  const updateNumberArray = useUpdateNumber()
 
   const { handleErrorEdit, error, clearError} = useError()
 
   useEffect(() => {
     setDataItems(data?.clients)
+    refetchNumberArray()
   },[data])
 
   const handleDeleteClient = async (clientId:string) => {
@@ -47,23 +58,41 @@ export function Administration() {
       await deleteClient.mutateAsync({clientId: clientId})
  
       setDataItems(prevData => prevData?.filter(client => client._id !== clientId))
+      refetchNumberArray()
       toast.success("Compra excluida.")
     } catch (error) {
       handleErrorEdit(error)
     }
   }
 
-  const handleDeleteAllClients = async() => {
+  const handleDeleteAllClients = async (numberSelect: number) => {
     try {
-      clearError()
-      await deleteAllClients.mutateAsync()
-
-      setDataItems([])
-      toast.success("Sorteio reiniciado.")
+      if (numberSelect > 100 || numberSelect < 20) {
+        return toast.error("Escolha entre 20 a 100");
+      }
+  
+      const numberProps: updateNumberProps = { numberArray: numberSelect };
+      await updateNumberSorteio(numberProps);
+      clearError();
+      await deleteAllClients.mutateAsync();
+  
+      setDataItems([]);
+      toast.success("Sorteio reiniciado.");
     } catch (error) {
-      console.log(error)
+      console.error("Erro ao deletar todos os clientes:", error);
+      toast.error("Erro ao reiniciar o sorteio. Tente novamente.");
     }
-  }
+  };
+  
+  const updateNumberSorteio = async (numberArray: updateNumberProps) => {
+    try {
+      await updateNumberArray.mutateAsync(numberArray);
+      refetchNumberArray()
+    } catch (error) {
+      console.error("Erro ao atualizar o número do sorteio:", error);
+      toast.error("Erro ao atualizar o número do sorteio. Tente novamente.");
+    }
+  };
 
   const handleEdit = async (dataEdit: editPedidoProps) => {
     try {        
@@ -115,7 +144,9 @@ export function Administration() {
         {openOption && (
           <div className="absolute flex m-2 gap-2 flex-col w-36 bg-black transition-opacity opacity-100">
             <EditPassword />
-            <ReiniciarSorteio handleReiniciar={handleDeleteAllClients} />
+            <ReiniciarSorteio 
+              handleReiniciar={handleDeleteAllClients} />
+            <DrawmSorteio />
           </div>
         )}
 
@@ -123,6 +154,7 @@ export function Administration() {
           <div className="absolute flex flex-col gap-2 w-36 bg-black transition-opacity opacity-0 pointer-events-none">
             <EditPassword />
             <ReiniciarSorteio handleReiniciar={handleDeleteAllClients} />
+            <DrawmSorteio />
           </div>
         )}
       </header>
@@ -133,8 +165,8 @@ export function Administration() {
             <thead className="bg-blackSec text-left">
               <tr>
                 <th className="w-1/4 p-3 tracking-wide">Nome</th>
-                <th className="w-1/4 p-3 tracking-wide">Telefone</th>
-                <th className="w-2/4 p-3 tracking-wide">Números</th>
+                <th className="border-l w-1/4 p-3 tracking-wide">Telefone</th>
+                <th className="border-l w-2/4 p-3 tracking-wide">Números</th>
                 <th className=""></th>
               </tr>
             </thead>

@@ -18,12 +18,13 @@ export function Home() {
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>()
   const [numbers, setNumbers] = useState<number[]>([])
-  const { isAuthenticated, signOut } = useAuth()
+  const { isAuthenticated, signOut, arrayLength,isLoadingNumbers, refetchNumberArray } = useAuth()
   const { data, refetchClients } = useClientsQuery()
-  const [dataItems, setDataItems] = useState<Client[] | undefined>([])
+  const [dataItems, setDataItems] = useState<Client[] | undefined>([]) 
 
   useEffect(() => {
     refetchClients()
+    refetchNumberArray()
   }, [])
 
   useEffect(() => {
@@ -119,8 +120,8 @@ export function Home() {
         </div>
       </div>
 
-       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto ">
-        {Array.from({ length: 100 }, (_, i) => i + 1).map((n) => (
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto ">
+        {Array.from({ length: arrayLength }, (_, i) => i + 1).map((n) => (
           <div className="flex flex-col items-center h-32">
             <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
               <NumberContainer
@@ -164,7 +165,13 @@ export function Home() {
        </div>
         
         <div className="justify-left">
-         <p className="text-white">Números disponiveis: {100 - numbers.length}</p>
+         {arrayLength - numbers.length === 0 ? (
+          <p className="text-white">Nenhum número disponivel</p>
+          
+         ):(        
+          <p className="text-white">Números disponiveis: {arrayLength - numbers.length}</p>
+         )}
+         
         <Toaster /> 
         </div>
       </div>

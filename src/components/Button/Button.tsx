@@ -11,7 +11,7 @@ export function Button({
   labelButton,
   variantSize,
   buttonFunction,
-  type
+  type,
 }:ButtonProps) {
   return (
     <ButtonContainer 

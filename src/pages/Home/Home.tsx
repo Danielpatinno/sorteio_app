@@ -18,7 +18,7 @@ export function Home() {
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>()
   const [numbers, setNumbers] = useState<number[]>([])
-  const { isAuthenticated, signOut, arrayLength,isLoadingNumbers, refetchNumberArray } = useAuth()
+  const { isAuthenticated, signOut, arrayLength, refetchNumberArray } = useAuth()
   const { data, refetchClients } = useClientsQuery()
   const [dataItems, setDataItems] = useState<Client[] | undefined>([]) 
 
@@ -148,11 +148,20 @@ export function Home() {
       
       <div className="flex w-full flex-col h-16">
        <div className="flex justify-center mx-auto">
+          {selectedNumber.length ? 
+          (
           <BuyNumbers 
             numbers={selectedNumber} 
             resetNumbers={() => setSelectedNumber([])}
             refetch={refetch}
           />
+          ):(
+            <Button 
+              variantSize="large"
+              labelButton="Comprar números"
+              buttonFunction={() => {toast.error('Selecione algúm número')}}
+            />
+          )}
 
         {isAuthenticated && (
           <Link to='/administration'>

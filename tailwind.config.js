@@ -20,11 +20,19 @@ module.exports = {
       'greenWater': '#0AFFEF',
       'black': '#273846',
       'white': '#FFFFFF',
-      'blackSec': '#494949'
+      'blackSec': '#494949',
+      'numberColor': '#7C858D',
+      'numberSelect': '#0AFFEF'
     },
     extend: {
       borderRadius: {
         '10':'10px'
+      },
+      boxShadow: {
+        'selected': '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;',
+        'notPurshased':'5px 5px 8px #0e151a,-3px -3px 8px #3a5368;',
+        'purshased': 'inset 5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;',
+        'hoverShadow': '5px 5px 8px #0e151a,-3px -3px 2px #0AFFEF;'
       },
       spacing: {
         '500':'500px'

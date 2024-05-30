@@ -9,7 +9,6 @@ import { StyleSheetManager } from 'styled-components';
 import isPropValid from '@emotion/is-prop-valid';
 import { Button } from "../../components/Button";
 
-import { NumberContainer } from "./Home.styles";
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
 
 import { Toaster, toast } from "sonner"
@@ -123,17 +122,15 @@ export function Home() {
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto ">
         {Array.from({ length: arrayLength }, (_, i) => i + 1).map((n) => (
           <div className="flex flex-col items-center h-32">
-            <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
-              <NumberContainer
-                key={n} 
-                ispurchased={
-                  numbers.includes(n)
-                }
-                isselected={selectedNumber.includes(n)}
-                onClick={() => select(n)}>
-                  <p className='bg-color-black flex' >{n}</p>
-              </NumberContainer>              
-            </StyleSheetManager>
+            <button
+              key={n}
+              onClick={() => select(n)}
+              data-select={selectedNumber.includes(n) && 'select'}
+              data-purshased={numbers.includes(n) && 'purshased'}
+              className="font-bold items-center justify-center shadow-notPurshased text-numberColor rounded-full hover:shadow-hoverShadow hover:text-white hover:data-[purshased=purshased]:shadow-purshased hover:data-[purshased=purshased]:text-numberSelect hover:data-[select=select]:text-numberSelect  m-2 data-[purshased=purshased]:shadow-purshased data-[purshased=purshased]:text-numberSelect data-[select=select]:shadow-selected data-[select=select]:text-numberSelect"
+            >  
+              <p className="flex w-20 h-20 lg:h-24 lg:w-24 rounded-full bg-color-black text-bold text-3xl items-center justify-center">{n}</p>
+            </button>
 
             {seeName && dataItems?.map((cliente) => {
               if (cliente.numbers.includes(n)){

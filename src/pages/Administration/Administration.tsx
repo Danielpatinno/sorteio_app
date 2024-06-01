@@ -130,7 +130,7 @@ export function Administration() {
   const [openOption, setOpenMotion] = useState<boolean>(false)
 
   return ( 
-      <div className="m-auto w-10/12 text-center text-white h-screen bg-black">
+      <div className="m-auto w-11/12 text-center text-white h-screen bg-black">
 
         <h1>Administração</h1>
 

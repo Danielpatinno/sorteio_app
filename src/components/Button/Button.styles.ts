@@ -3,7 +3,7 @@ import { css, styled } from "styled-components";
 export type variantSizes = 'normal' | 'small' | 'large'
 
 interface ButtonContainerProps {
-  variantSize: variantSizes
+  variantsize: variantSizes
 }
 
 const buttonVariants = {
@@ -23,7 +23,7 @@ const buttonVariants = {
 }
 
 export const ButtonContainer = styled.button<ButtonContainerProps>`
-  ${({ variantSize }) => css`
+  ${({ variantsize }) => css`
     cursor: pointer;
     color: #0AFFEF;
     border-radius: 10px;
@@ -33,7 +33,7 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
     box-shadow:  1px 1px 1px #101010,
           -2px -2px 2px #383838;
 
-    ${buttonVariants[variantSize]}
+    ${buttonVariants[variantsize]}
 
     a {
       text-decoration: none;

@@ -104,7 +104,7 @@ export function Login() {
         
         <div className="flex justify-center">
           <Button 
-            variantSize="normal" 
+            variantsize="normal" 
             labelButton="Entrar"
             type="submit"
           />  

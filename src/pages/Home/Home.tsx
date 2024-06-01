@@ -5,8 +5,6 @@ import { Client, useClientsQuery } from "../../hooks/useClientsQuery";
 import { Link } from "react-router-dom";
 
 import { BuyNumbers } from "../../components/BuyNumbers";
-import { StyleSheetManager } from 'styled-components';
-import isPropValid from '@emotion/is-prop-valid';
 import { Button } from "../../components/Button";
 
 import { IoIosEye, IoIosEyeOff  } from "react-icons/io";
@@ -17,7 +15,7 @@ export function Home() {
   const [selectedNumber, setSelectedNumber] = useState<number[]>([]);
   const [seeName, setSeeName] = useState<boolean>()
   const [numbers, setNumbers] = useState<number[]>([])
-  const { isAuthenticated, signOut, arrayLength, refetchNumberArray } = useAuth()
+  const { isAuthenticated, signOut, isLoadingNumbers, arrayLength, refetchNumberArray } = useAuth()
   const { data, refetchClients } = useClientsQuery()
   const [dataItems, setDataItems] = useState<Client[] | undefined>([]) 
 
@@ -64,7 +62,7 @@ export function Home() {
   }  
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen m-auto w-10/12">
+    <div className="flex flex-col items-center justify-center h-screen m-auto w-11/12">
       <div className="flex justify-center">
         <h1 
           className="text-white text-center text-5xl sm:text-5xl mt-2 md:text-6xl lg:text-7xl xl:text-7xl "
@@ -76,20 +74,22 @@ export function Home() {
           Sorteio
         </h1>
       </div>
-
+    
+     {!isLoadingNumbers && 
+      (
       <div className="flex justify-between w-full items-center mt-0">
         <div>
           {isAuthenticated ? 
             (
               <Button
-                variantSize="normal"
+                variantsize="normal"
                 labelButton="Sair"
                 buttonFunction={handleLogout}
               />
             ) : (
               <Link to='/loginAdm'>
                 <Button 
-                  variantSize="normal"
+                  variantsize="normal"
                   labelButton="LOGIN"
                 />
               </Link>
@@ -118,10 +118,12 @@ export function Home() {
           }          
         </div>
       </div>
+      )}
+
 
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-12 overflow-y-auto ">
         {Array.from({ length: arrayLength }, (_, i) => i + 1).map((n) => (
-          <div className="flex flex-col items-center h-32">
+          <div key={n} className="flex flex-col items-center h-32">
             <button
               key={n}
               onClick={() => select(n)}
@@ -143,7 +145,8 @@ export function Home() {
         )}
         </div>
       
-      <div className="flex w-full flex-col h-16">
+      {!isLoadingNumbers && (
+     <div className="flex w-full flex-col h-16">
        <div className="flex justify-center mx-auto">
           {selectedNumber.length ? 
           (
@@ -154,7 +157,7 @@ export function Home() {
           />
           ):(
             <Button 
-              variantSize="large"
+              variantsize="large"
               labelButton="Comprar números"
               buttonFunction={() => {toast.error('Selecione algúm número')}}
             />
@@ -163,7 +166,7 @@ export function Home() {
         {isAuthenticated && (
           <Link to='/administration'>
             <Button 
-              variantSize="large"
+              variantsize="large"
               labelButton="Administração"
             />
           </Link>          
@@ -173,14 +176,15 @@ export function Home() {
         <div className="justify-left">
          {arrayLength - numbers.length === 0 ? (
           <p className="text-white">Nenhum número disponivel</p>
-          
          ):(        
           <p className="text-white">Números disponiveis: {arrayLength - numbers.length}</p>
          )}
          
         <Toaster /> 
         </div>
-      </div>
+      </div>   
+      )}
+      
     </div>
   )
 }

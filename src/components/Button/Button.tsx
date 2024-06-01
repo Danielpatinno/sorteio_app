@@ -3,19 +3,19 @@ import { ButtonContainer, variantSizes } from "./Button.styles"
 interface ButtonProps {
   labelButton: string
   buttonFunction?: () => void
-  variantSize: variantSizes
+  variantsize: variantSizes
   type?: "button" | "submit" | "reset";
 }
 
 export function Button({
   labelButton,
-  variantSize,
+  variantsize,
   buttonFunction,
   type,
 }:ButtonProps) {
   return (
     <ButtonContainer 
-      variantSize={variantSize}
+      variantsize={variantsize}
       onClick={buttonFunction}
       type={type}
     >

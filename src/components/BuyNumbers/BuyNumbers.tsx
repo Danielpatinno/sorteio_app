@@ -89,7 +89,7 @@ export function BuyNumbers({numbers, resetNumbers, refetch}:ModalSelectProps) {
     <AlertDialog>
       <AlertDialogTrigger>
         <Button 
-          variantSize="large"
+          variantsize="large"
           labelButton="Comprar números"/>
       </AlertDialogTrigger>
       <AlertDialogContent>

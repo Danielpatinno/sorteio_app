@@ -3,17 +3,30 @@
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
 import { formatPrice } from "@/lib/utils";
-import { CreditCard, ShoppingCart } from "lucide-react";
+import { CreditCard, ShoppingCart, TriangleAlert  } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useToast } from "../ui/use-toast";
 import { CartItem } from "./cart-item";
 
 export function Cart() {
   const { products, total, updateProduct, removeProduct } = useCart()
+  const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const router = useRouter()
 
   const handleGoToCheckout = () => {
+    if(!products.length) {
+      setOpen(false)
+      return toast({
+        action: (
+            <div className="flex w-full items-center gap-6">
+              <TriangleAlert className="text-red-500"/>
+              <span>Carrinho vazio</span>
+            </div>
+        )
+    })
+    }
     router.push('/checkout')
     setOpen(false)
   }
@@ -29,7 +42,7 @@ export function Cart() {
       </div>
 
       {open && (
-        <div className="absolute right-0 top-full z-20 mt-2 w-96 rounded-lg border border-gray-200 bg-white shadow-lg">
+        <div className="absolute right-0 top-full z-20 mt-2 w-80 sm:w-96 rounded-lg border border-gray-200 bg-white shadow-lg">
           <div className="p-4">
             <div className="mb-2 flex items-center justify-between">
               <h3 className="text-lg font-semibold">Seu Carrinho</h3>

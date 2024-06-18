@@ -9,7 +9,7 @@ export function OrderSumary() {
   const shippingTax = 500
 
   return (
-    <div className="w-1/2 self-start rounded-lg border border p-6">
+    <div className="w-full self-start rounded-lg border border p-6">
       <h2 className="mb-8 flex items-center gap-2 text-xl font-semibold">
         <ShoppingCart />
         Resumo do Pedido

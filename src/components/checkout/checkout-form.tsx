@@ -50,7 +50,7 @@ export function CheckoutForm () {
     })
 
     if(error) {
-        console.log(error)
+      console.log(error)
     }
 
     setLoading(false)
@@ -64,8 +64,10 @@ export function CheckoutForm () {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex gap-8">
-          <div className="flex w-1/2 flex-col gap-8">  
+        <div className="flex flex-col sm:flex-row-reverse gap-8 w-full">
+          <OrderSumary />
+
+          <div className="flex w-full lg:w-1/2 flex-col gap-8">  
             <div className="w-full self-start rounded-lg border border p-6">
               <h2 className="mb-8 flex items-center gap-2 font-semibold">
                 <MapPin size={20} />
@@ -92,7 +94,7 @@ export function CheckoutForm () {
             </div>
           </div>
 
-          <OrderSumary />
+          
         </div>
       </form>
     </main>

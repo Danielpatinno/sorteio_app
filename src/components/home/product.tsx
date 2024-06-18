@@ -16,7 +16,7 @@ export function Product({ product }: ProductProps) {
   const price = formatPrice(product.price / 100)
 
   return (
-    <div className="flex flex-col items-cente gap-2">
+    <div className="flex flex-col items-center gap-2">
       <div className="relative h-72 w-72">
         <Image 
           src={product.image}

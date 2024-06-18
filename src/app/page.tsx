@@ -12,9 +12,9 @@ export default async function Home() {
   return (
     <main>
       <section className="border-b">
-        <div className="container flex">
+        <div className="container flex flex-col sm:flex-row">
           <div className="flex flex-col justify-center">
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-5xl sm:text-6xl font-bold">
               A <span className="text-red-500">Melhor</span> pizza da cidade
             </h1>
             <p className="mt-4 text-2xl">Faça seu pedido agora e experimente o sabor autêntico da Itália entregue na sua porta.</p>
@@ -28,7 +28,7 @@ export default async function Home() {
         <div className="container py-14">
           <h2 className="mb-4 text-3xl font-semibold">Nosso Cardápio</h2>
 
-          <ul className="grid grid-cols-4 gap-8">
+          <ul className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
             {products.map(product => (
               <Product key={product.id} product={product}/>
             ))}

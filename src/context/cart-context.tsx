@@ -47,7 +47,7 @@ export function CartProvider({ children }: PropsWithChildren) {
   }
 
   const removeProduct = (productId: string) => {
-    const newProducts = products.filter(product => product.id === productId)
+    const newProducts = products.filter(product => product.id !== productId)
 
     setProducts([...newProducts])
   }

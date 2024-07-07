@@ -1,12 +1,20 @@
+"use client"
+
 import { CreditCard, LockKeyhole, MapPin } from "lucide-react";
 import { AddressElement, PaymentElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import { Button } from "@/components/ui/button";
 import { OrderSumary } from "./order-sumary";
 import { FormEventHandler, useState } from "react";
 import { createClientSecret } from "./actions";
-import { Product, useCart } from "@/context/cart-context";
-import { off } from "process";
+import { useCart } from "@/context/cart-context";
 
+export interface Product {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity?: number;
+}
 
 export function CheckoutForm () {
   const stripe = useStripe()
@@ -42,7 +50,7 @@ export function CheckoutForm () {
     const clientSecret = await createClientSecret(total, products)
 
     const { error } = await stripe.confirmPayment({
-      elements, 
+      elements,
       clientSecret,
       confirmParams: {
         return_url: 'http://localhost:3000/confirmation'
@@ -65,7 +73,9 @@ export function CheckoutForm () {
 
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row-reverse gap-8 w-full">
+
           <OrderSumary />
+
 
           <div className="flex w-full lg:w-1/2 flex-col gap-8">  
             <div className="w-full self-start rounded-lg border border p-6">
@@ -93,8 +103,6 @@ export function CheckoutForm () {
               </Button>                
             </div>
           </div>
-
-          
         </div>
       </form>
     </main>

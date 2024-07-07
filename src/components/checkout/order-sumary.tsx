@@ -1,10 +1,23 @@
+"use client"
+
 import { useCart } from "@/context/cart-context";
 import { formatPrice } from "@/lib/utils";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Plus  } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import Products from "../ProductList/Products";
 
 export function OrderSumary() {
   const { products, total } = useCart()
+  const [includeCoca, setIncludeCoca] = useState<boolean>()
+
+  useEffect(() => {
+    const foundCoca = products.some((produto) => {
+      return produto.categoria && produto.categoria.categoria === 'coca';
+    });
+    
+    setIncludeCoca(foundCoca);
+  }, [products]);
 
   const shippingTax = 500
 
@@ -59,6 +72,10 @@ export function OrderSumary() {
         </div>
       </div>
 
+      {!includeCoca && (
+        <Products />
+      )}
+ 
     </div>
   )
 }

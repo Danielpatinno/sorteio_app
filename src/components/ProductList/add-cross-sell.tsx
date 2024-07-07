@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
-import { Check, ShoppingCart } from "lucide-react";
+import { Check, Plus, ShoppingCart } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 export interface AddToCardButtonProp {
@@ -14,7 +14,7 @@ export interface AddToCardButtonProp {
   }
 }
 
-export function AddToCardButton({ product }: AddToCardButtonProp) {
+export function AddToCrossSells({ product }: AddToCardButtonProp) {
   const { addProduct, products } = useCart()
   const { toast } = useToast()
 
@@ -36,8 +36,7 @@ export function AddToCardButton({ product }: AddToCardButtonProp) {
 
   return (
     <Button onClick={handleAddProduct}>
-      <ShoppingCart className="mr-2" size={20}/>
-      Adicionar ao Carrinho
+      <Plus className="" size={20}/>
     </Button>
   )
 }

@@ -1,5 +1,6 @@
 import { formatPrice } from "@/lib/utils";
 import Image from "next/image";
+import Stripe from "stripe";
 
 import { AddToCardButton } from "./add-to-card-button";
 
@@ -9,6 +10,7 @@ interface ProductProps {
     name: string;
     price: number;
     image: string;
+    categoria: Stripe.Metadata
   }
 }
 
@@ -18,7 +20,7 @@ export function Product({ product }: ProductProps) {
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="relative h-72 w-72">
-        <Image 
+        <Image
           src={product.image}
           alt={product.name}
           fill
@@ -27,7 +29,6 @@ export function Product({ product }: ProductProps) {
       </div>
 
       <h3 className="m-0 text-xl font-semibold">{product.name}</h3>
-
       <p className="text-lg">{price}</p>
       <AddToCardButton key={product.id} product={product} />
     </div>

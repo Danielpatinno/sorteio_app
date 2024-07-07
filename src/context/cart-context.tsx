@@ -1,7 +1,8 @@
 "use client";
 
 import { Product } from "@/components/home/product"
-import { createContext, PropsWithChildren, useContext, useState } from "react"
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react"
+import Stripe from "stripe";
 
 export interface Product {
   id: string
@@ -9,6 +10,7 @@ export interface Product {
   image: string
   price: number
   quantity: number
+  categoria?: Stripe.Metadata
 }
 
 interface CartContextProps {
@@ -70,8 +72,6 @@ export function CartProvider({ children }: PropsWithChildren) {
       });
 
       setProducts([...newProducts ])
-
-
   }
 
   const total = products.reduce((acc, product) => {
@@ -100,3 +100,4 @@ export function useCart(){
 
   return cart
 }
+

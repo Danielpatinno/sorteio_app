@@ -34,7 +34,6 @@ const appearance = {
 
 export default function Checkout() {
   const { total } = useCart()
-
   return (
     <Elements stripe={stripe} options={{
       appearance,
@@ -48,3 +47,4 @@ export default function Checkout() {
     </Elements>
   )
 }
+

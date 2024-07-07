@@ -38,6 +38,13 @@ export function Cart() {
       <div>
         <Button variant='outline' size='icon' onClick={() => setOpen(!open)}>
             <ShoppingCart className="text-zinc-500" size={24}/>
+            {products.length >= 1 && 
+              <p 
+                className="flex rounded-3xl bg-red-500 text-white h-6 w-6 border-2 text-xs top-6 right-8 absolute items-center justify-center"
+              >
+                {products.length}
+              </p>
+            }
         </Button>
       </div>
 
@@ -54,7 +61,7 @@ export function Cart() {
             {products.map((product) => (
               <li 
                 key={product.id}
-                className="flex w-full items-center justify-between py-4"
+                className="flex w-full items-center justify-between border-t border-b py-4"
               >
                 <CartItem 
                   product={product} 
@@ -65,18 +72,16 @@ export function Cart() {
             ))}
           </ul>
 
-          <div className="mt-4">
-            <Button className="w-full" onClick={handleGoToCheckout}>
+          <div >
+            <Button className="w-full" 
+            onClick={handleGoToCheckout}
+            >
               <CreditCard />
               Finalizar Pedido
             </Button>
           </div>
         </div>
-
-
       )}
-
-
     </div>
   )
 }

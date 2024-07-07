@@ -1,18 +1,22 @@
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!,{
+  apiVersion: '2024-04-10'
+})
 
 interface Product {
   id: string
   name: string
   price: number
   image: string
+  categoria: Stripe.Metadata
 }
 
 export interface lineItems {
   name: string
   quantity: number
 }
+
 
 export async function getProducts(): Promise<Product[]> {
   const response = await stripe.products.list({
@@ -26,7 +30,8 @@ export async function getProducts(): Promise<Product[]> {
         id: product.id,
         name: product.name,
         image: product.images[0],
-        price: price.unit_amount ? price.unit_amount : 0,
+        price: price ? price.unit_amount || 0 : 0,
+        categoria: product.metadata
     };
   });
 

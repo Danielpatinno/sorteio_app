@@ -78,39 +78,6 @@ export function Cart() {
            </div>
          </div>
        </div>
-
-        // <div className="absolute right-0 top-full z-20 mt-2 w-80 sm:w-96 rounded-lg border border-gray-200 bg-white shadow-lg">
-        //   <div className="p-4">
-        //     <div className="mb-2 flex items-center justify-between">
-        //       <h3 className="text-lg font-semibold">Seu Carrinho</h3>
-        //       <span className="text-gray text-sm">Total: {totalPrice}</span>
-        //     </div>
-        //   </div>
-
-        //   <ul>
-        //     {products.map((product) => (
-        //       <li 
-        //         key={product.id}
-        //         className="flex w-full items-center justify-between border-t border-b py-4"
-        //       >
-        //         <CartItem 
-        //           product={product} 
-        //           updateProduct={updateProduct}
-        //           removeProduct={removeProduct}
-        //         />
-        //       </li>
-        //     ))}
-        //   </ul>
-
-        //   <div >
-        //     <Button className="w-full" 
-        //     onClick={handleGoToCheckout}
-        //     >
-        //       <CreditCard />
-        //       Finalizar Pedido
-        //     </Button>
-        //   </div>
-        // </div>
       )}
     </div>
   )
